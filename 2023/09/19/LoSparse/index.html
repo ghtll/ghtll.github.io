@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="LoSparse, code">
-    <meta name="description" content="文献阅读Structured Compression of Large Language Models based on Low-Rank and Sparse Approximation ∗">
+    <meta name="description" content="Structured Compression of Large Language Models based on Low-Rank and Sparse Approximation ∗">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -367,7 +367,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    7 分
                 </div>
                 
 
@@ -431,6 +431,26 @@
 <p><img src="/../images/image-20230919001321431.png"></p>
 <p>因此，原始的前向传递（$Y&#x3D;XW$）可替换为更高效的形式:</p>
 <p><img src="/../images/image-20230919001529751.png"></p>
+<p>作者将上面这种分解应用到了每一个权重矩阵并且将$S&#x3D;{S_m}_{m&#x3D;1}^{M}$表示为所有稀疏矩阵的集合。初始化$S$之后，对所有$S$进行迭代剪枝。</p>
+<p><strong>具体方法：</strong></p>
+<p>在第t次迭代时，首先采取随机梯度下降步骤来更新$U^{(t)}$,$V^{(t)}$和$S^{(t)}$。对于$S^{(t)}$，</p>
+<p><img src="/../images/1695089652536.jpg"></p>
+<p>这是损失函数 $L$ 对于变量 $S^{(t)}$的梯度。梯度是一个向量，它包含了损失函数相对于每个分量（或维度）的偏导数。</p>
+<p>然后在公式(4)的基础上对$S^{(t)}$进行重要性评分，$\widetilde{S}^{(t)}$剪枝公式如下：</p>
+<p>![](..&#x2F;images&#x2F;屏幕截图 2023-09-19 102506.png)</p>
+<p>$\tau( {\widetilde{S}^{(t)}},\Gamma({S}^{(t)}))$的第$i$列定义如下：</p>
+<p><img src="/../images/1695090856116.jpg"></p>
+<p>在每个迭代中，选择性地保留了权重矩阵 $S^{(t)}$中具有高重要性分数的一部分神经元，而剔除了贡献较低的神经元。这个策略通过逐渐减小 $p_t$ 的值来控制保留的神经元数量，以达到对模型进行剪枝（pruning）或精简的目的,$p_t$减小公式如下：</p>
+<p><img src="/../images/1695091453574.jpg"></p>
+<p>具体算法如下：</p>
+<p><img src="/../images/1695091607438.jpg" alt="算法"></p>
+<h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><p>作者在自然语言理解、问答任务、自然语言生成任务与其他模型做了对比，显示出模型的优越性。</p>
+<h3 id="稀疏逼近的有效性"><a href="#稀疏逼近的有效性" class="headerlink" title="稀疏逼近的有效性"></a>稀疏逼近的有效性</h3><p>作者将LoSparse与两种变体进行比较:(1)丢弃稀疏矩阵$S$，只微调低秩矩阵$UV$$(Low-rank \ I)$；(2)遵循(8)的初始化，但逐渐将初始化的$S$修剪为零$(Low-rank  \ II)$。</p>
+<p><img src="/../images/1695092292904.jpg" alt="不同任务比较结果"></p>
+<p>从图中可见，$(Low-rank  \ II)$的性能要比$(Low-rank \ I)$好得多。也就是说，修剪掉所有的稀疏矩阵比微调一个由奇异值阈值得到的低秩矩阵更有效，因此LoSeparse可以增强低秩近似。</p>
+<p><strong>解释：</strong>这是因为$Low-rank  \ I$的初始化与预训练的权重不同，因此它可能会从预训练的权重中丢失太多的知识。因此，下游任务的性能会严重下降。另一方面，LoSeparse弥补了低秩初始化与预训练权值之间的差距，从而保留了存储在预训练权值中的原始知识。这表明，尽管单独的低秩近似更有效和简洁，但我们应该利用稀疏近似来指导其训练过程。</p>
+<h3 id="稀疏分配"><a href="#稀疏分配" class="headerlink" title="稀疏分配"></a>稀疏分配</h3><p>主要探究低秩近似和稀疏近似如何互相分配，主要方法是给定一个固定的剩余比例，改变低秩矩阵的比例，并相应改变稀疏矩阵的比例。不同分配条件下的结果如下图，可以看到低秩近似和稀疏近似对NLU任务的性能贡献几乎相等，因为当改变分配时性能保持稳定。</p>
+<p><img src="/../images/786cac11a7d27a4dadbb82d0082e95a.png" alt="关于稀疏分配的结果"></p>
 
                 
             </div>
@@ -563,7 +583,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            文献阅读Structured Compression of Large Language Models based on Low-Rank and Sparse Approximation ∗
+                            Structured Compression of Large Language Models based on Low-Rank and Sparse Approximation ∗
                         
                     </div>
                     <div class="publish-info">
@@ -617,7 +637,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            文献阅读Structured Compression of Large Language Models based on Low-Rank and Sparse Approximation ∗
+                            Structured Compression of Large Language Models based on Low-Rank and Sparse Approximation ∗
                         
                     </div>
                     <div class="publish-info">
