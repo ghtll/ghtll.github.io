@@ -31,48 +31,7 @@
 
 
 
-    <!-- index cover -->
-    <!-- <link rel="stylesheet preload" type="text/css" href="/css/indexcover.css"> -->
-    <style>
-        .carousel-control {
-            width: 45px;
-            height: 45px;
-            line-height: 55px;
-            border-radius: 45px;
-            background: transparent;
-            cursor: pointer;
-            z-index: 100;
-        }
-        
-        #prev-cover {
-            position: absolute;
-            top: 48%;
-            left: 8px;
-        }
-        
-        #next-cover {
-            position: absolute;
-            top: 48%;
-            right: 8px;;
-        }
-        
-        #prev-cover i {
-            margin-right: 3px;
-        }
-        
-        #next-cover i {
-            margin-left: 3px;
-        }
-        
-        .carousel-control:hover {
-            background-color: rgba(0, 0, 0, .4);
-        }
-        
-        .carousel-control i {
-            color: #fff;
-            font-size: 2.4rem;
-        }
-    </style>
+    <!-- bg-cover style     -->
 
 
 
@@ -93,6 +52,8 @@
 
 
 
+
+    
 
 
 
@@ -335,273 +296,454 @@
     
 
 
-<div class="carousel carousel-slider center index-cover" data-indicators="true" style="margin-top: -64px;">
-    
 
-    <div class="carousel-item  white-text bg-cover about-cover">
-        <div class="container">
-            <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                    subtitle
-                
-            </div>
-
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="/libs/typed/typed.js"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: [ 
-                            
-                                "从来没有真正的绝境, 只有心灵的迷途",
-                            
-                                "Never really desperate, only the lost of the soul",
-                            
-                        ],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title"></h1>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 
-<script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
-    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
-</script>
-<script>
+
+
+<main class="post-container content">
+
     
-      var bannerUrl = "/medias/featureimages/" + Math.floor(Math.random() * 24) + '.jpg';
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-09-19
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-09-19
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    4 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="文章题目：LoSparse"><a href="#文章题目：LoSparse" class="headerlink" title="文章题目：LoSparse"></a>文章题目：LoSparse</h1><p><strong>文章链接：</strong><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2306.11222.pdf">https://arxiv.org/pdf/2306.11222.pdf</a></p>
+<p><strong>代码链接：</strong><a target="_blank" rel="noopener" href="https://github.com/yxli2123/LoSparse">https://github.com/yxli2123/LoSparse</a></p>
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>transform模型需要大量的计算资源，出于模型压缩的目的，作者提出了<strong>LoSparse</strong> (Low-Rank and Sparse approximation)模型，它通过一个<strong>低秩矩阵</strong>和一个<strong>稀疏矩阵</strong>的和来逼近一个权重矩阵。该方法结合了低秩近似和剪枝的优点，同时避免了它们的限制。剪枝增强了低秩近似的多样性，低秩近似可以防止剪枝损失太多的表达神经元</p>
+<ul>
+<li>低秩近似：压缩了神经元中的一致和表达丰富的部分</li>
+<li>剪枝：去除了神经元中的不一致和非表达丰富的部分</li>
+</ul>
+<p>低秩可以压缩权重中相关性大的部分，但是完全忽略了相关性较小的部分（这些相关性小的部分在神经元之间可能是独特的，具有表达能力，并且对于模型的性能来说可能非常关键），结合剪枝，可以继续减少相关性小的那部分但是不至于全部去除导致网络多样性下降。</p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>目前模型压缩常用的是剪枝,分为结构性剪枝和非结构性剪枝。结构性剪枝一种方式为ITP，即迭代剪枝，可以同时训练和剪枝，本文用到的剪枝方法就是迭代剪枝。</p>
+<p>为什么只用剪枝不行：</p>
+<p><img src="C:\Users\gaohaotian\Desktop\img\image-20230918230903444.png" alt="神经元重要性得分直方图"></p>
+<p>(b)为理想情况，大多数神经元是冗余的，对于网络来说不重要，只有小部分神经元是重要的，但是现实情况为(a)，很大一部分神经元是可表达的，因此大量剪枝可能导致重要的神经元会被减去。</p>
+<p>低秩近似可以提取相关性大的权重的公共基。但是transform模型的秩很高，它们包含许多参数，这使得简单地应用低秩近似来压缩这些矩阵可能会损害模型的性能。这是因为这种情况下忽略了神经元的多样性。</p>
+<p>因此提出了低秩近似和稀疏近似的结合：低秩近似防止了修剪过度去除表达神经元，而稀疏近似增强了低秩近似的多样性。</p>
+<p>同时该方法与知识蒸馏是正交关系，很容易再集成知识蒸馏手段，提高模型性能。</p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>介绍了transform模型和权重敏感性评分公式：</p>
+<p><img src="C:\Users\gaohaotian\Desktop\img\image-20230918232543247.png"></p>
+<p>为了减少随机抽样导致的可变性，本文使用平滑公式，</p>
+<p><img src="C:\Users\gaohaotian\Desktop\img\image-20230918232355166.png"></p>
+<p>结构性剪枝神经元的重要性评分公式：</p>
+<p><img src="C:\Users\gaohaotian\Desktop\img\image-20230918232819344.png"></p>
+<p>​	</p>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>通过一个低秩矩阵和一个稀疏矩阵的和来近似一个权矩阵：</p>
+<p><img src="C:\Users\gaohaotian\Desktop\img\image-20230918233005983.png" alt=" LoSparse 在单个线性投影矩阵的示意图"></p>
+<h3 id="低秩矩阵和稀疏矩阵的近似"><a href="#低秩矩阵和稀疏矩阵的近似" class="headerlink" title="低秩矩阵和稀疏矩阵的近似"></a>低秩矩阵和稀疏矩阵的近似</h3><p>给定一个权重矩阵$W\in R^{d_1×d_2}$,通常采用结构化剪枝稀疏矩阵$S\in R^{d_1×d_2}$来近似$W$以进行压缩。然而稀疏矩阵近似导致性能不佳，尤其是当压缩比率较高时。因此，本文引入了一个低秩矩阵来改进近似。具体来说，权重矩阵可以表示为：</p>
+<p><img src="C:\Users\gaohaotian\Desktop\img\image-20230918233726382.png"></p>
+<p>其中$U\in R^{d_1×d_2}$和$R\in R^{d_1×d_2}$的乘积表示秩为$r$的低秩矩阵。</p>
+<h5 id="为什么需要低秩矩阵？"><a href="#为什么需要低秩矩阵？" class="headerlink" title="为什么需要低秩矩阵？"></a><strong>为什么需要低秩矩阵？</strong></h5><p><img src="C:\Users\gaohaotian\Desktop\img\image-20230918234337880.png" alt="语言模型的奇异值"></p>
+<p>首先，<strong>它可以有效地逼近神经元的相干部分</strong>，我们可以看到语言模型中权重矩阵的频谱在开始时迅速下降。<strong>频谱下降反映模型中特征之间的相关性。较大的特征值通常对应于具有更高相关性的特征。因此，快速下降的频谱表示模型中存在一些高度相关的特征，即一致部分</strong>，因此可以通过低秩来压缩公共部分。</p>
+<p>其次<strong>低秩矩阵和稀疏矩阵的解耦使得剪枝变得容易</strong>。<strong>频谱的趋于平稳表示模型的权重矩阵中的特征或模式已经相对稳定地学习和表示。这也可能表明在训练过程中，神经元之间的相关性逐渐减弱，即神经元对不同的特征或模式变得更加独立</strong>而低秩矩阵无法捕获这些信息，但是低秩矩阵能够将相干部分与神经元的非相干部分解耦。因此可以添加一个矩阵$S$来近似剩余的不连贯部分，然后修剪非表达不连贯的部分。</p>
+<p><img src="C:\Users\gaohaotian\Desktop\img\image-20230918235748209.png" alt="线性投影的神经元的重要性得分分布情况"></p>
+<p>上图表示，大多数不连贯的部分在解耦之后具有较低的重要性分数，因此可用剪枝删除冗余参数。LoSparse算法成功地分离了神经元中不连贯的部分，并简化了非表达成分的修剪。(和ideal的图逼近)。</p>
+<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>给定一个预训练的权重矩阵$W^{(0)}$，首先基于$W^{(0)}$的奇异值分解（SVD）初始化秩 $r$的低秩矩阵。具体来说，本文选择：</p>
+<p><img src="C:\Users\gaohaotian\Desktop\img\image-20230919000424683.png"></p>
+<p>$u_1,u_2,…,u_r\in R^{d_1}$是左奇异向量，$v_1,v_2,…,v_r\in R^{d_1}$是左奇异向量，关于上面的$r$个奇异值$\sigma_1 \geq \sigma_2 \geq …\geq\sigma_3$在$W^{(0)}$的SVD中。</p>
+<p>因此初始化$S^{(0)}$为：</p>
+<p><img src="C:\Users\gaohaotian\Desktop\img\image-20230919001321431.png"></p>
+<p>因此，原始的前向传递（$Y&#x3D;XW$）可替换为更高效的形式:</p>
+<p><img src="C:\Users\gaohaotian\Desktop\img\image-20230919001529751.png"></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">gaohaotian</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://ghtll.github.io/images/1.html">https://ghtll.github.io/images/1.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">gaohaotian</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
     
-    $('.bg-cover.about-cover').css('background-image', 'url(' + bannerUrl + ')');
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
 
-</script>
+    
 
+</div>
 
+                </div>
+            </div>
+            
+        </div>
+    </div>
 
-            <div class="cover-btns">
-                <a href="#indexCard" class="waves-effect waves-light btn">
-                    <i class="fa fa-angle-double-down"></i>开始阅读
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/images/1.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        
+                        <span class="card-title"></span>
+                    </div>
                 </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-19
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            gaohaotian
+                            
+                        </span>
+                    </div>
+                </div>
 
-                
-                    <a href="https://github.com/ghtll/ghtll.github.io" class="waves-effect waves-light btn" target="_blank">
-                        <i class="fab fa-github-alt"></i>Github
-                    </a>
                 
             </div>
-            <div class="cover-social-link">
-    <a href="https://github.com/ghtll" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
-
-
-
-    <a href="mailto:260878610@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=260878610" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 260878610" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
-
-
-
-
-
-
-
-</div>
         </div>
-    </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
+            </div>
+            <div class="card">
+                <a href="/images/1.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        
+                        <span class="card-title"></span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-19
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            gaohaotian
+                            
+                        </span>
+                    </div>
+                </div>
 
-    
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
 </div>
+
 
 <script>
-    $(function () {
-        let coverSlider = $('.carousel');
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
 
-        //用户触摸轮播自动 restartPlay 是否生效
-        let initUserPressedOrDraggedActive = false
-
-        //用户触摸轮播自动 restartPlay
-        function initUserPressedOrDragged(instance) {
-            setInterval(() => {
-                if (instance.pressed || instance.dragged) {
-                    // console.log('initUserPressedOrDragged: ',instance.pressed,instance.dragged)
-                    restartPlay()
-                }
-            }, 1000)
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
         }
 
-        coverSlider.carousel({
-            duration: Number('120'),
-            fullWidth: true,
-            indicators: 'true' === 'true',
-            onCycleTo() {
-                if (!initUserPressedOrDraggedActive) {
-                    // console.log('initUserPressedOrDraggedActive')
-                    initUserPressedOrDragged(this)
-                    initUserPressedOrDraggedActive = true
-                }
-            },
-        })
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
 
-        let carouselIntervalId;
-        
-        // Loop to call the next cover article picture.
-        let autoCarousel = function () {
-            carouselIntervalId = setInterval(function () {
-                coverSlider.carousel('next');
-            }, 5000);
-        };
-        autoCarousel();
-        
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
 
-        function restartPlay() {
-            
-            clearInterval(carouselIntervalId);
-            autoCarousel();
-            
-        };
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: code<br />'
+            + '文章作者: gaohaotian<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
 
-        
-        // prev and next cover post.
-        $('#prev-cover').click(function () {
-            coverSlider.carousel('prev');
-            restartPlay();
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+
+<!-- 代码块收缩 -->
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
         });
-        $('#next-cover').click(function () {
-            coverSlider.carousel('next');
-            restartPlay();
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
         });
         
     });
 </script>
 
-
-
-<main class="content">
-
     
-    <div id="indexCard" class="index-card">
-        <div class="container ">
-            <div class="card">
-                <div class="card-content">
-                    
-                        <div class="dream">
-    
-    <div class="title center-align">
-        <i class="far fa-lightbulb"></i>&nbsp;&nbsp;我的梦想
-    </div>
-    
-    <div class="row">
-        <div class="col l8 offset-l2 m10 offset-m1 s10 offset-s1 center-align text">
-            不是每个人都应该像我这样去建造一座水晶大教堂，但是每个人都应该拥有自己的梦想，设计自己的梦想，追求自己的梦想，实现自己的梦想。梦想是生命的灵魂，是心灵的灯塔，是引导人走向成功的信仰。有了崇高的梦想，只要矢志不渝地追求，梦想就会成为现实，奋斗就会变成壮举，生命就会创造奇迹。——罗伯·舒乐
-        </div>
-    </div>
-</div>
-
-                    
-
-                    
-
-                    
-
-                    
-                    <div id="recommend-sections" class="recommend">
-                        
-
-
-
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-    
-
-    
-
-    <!-- 所有文章卡片 -->
-    <article id="articles" class="container articles">
-        <div class="row article-row">
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/09/19/LoSparse/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="LoSparse">
-                            
-                            <span class="card-title">LoSparse</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                文献阅读Structured Compression of Large Language Models based on Low-Rank and Sparse Approximation ∗
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-19
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/" class="post-category">
-                                    文献阅读
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/">
-                            <span class="chip bg-color">文献阅读</span>
-                        </a>
-                        
-                        <a href="/tags/%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9/">
-                            <span class="chip bg-color">模型压缩</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-        </div>
-    </article>
 
 </main>
 
