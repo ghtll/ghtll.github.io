@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>SVD</title>
+      <link href="/2023/09/20/SVD/"/>
+      <url>/2023/09/20/SVD/</url>
+      
+        <content type="html"><![CDATA[<h1 id="奇异值分解SVD"><a href="#奇异值分解SVD" class="headerlink" title="奇异值分解SVD"></a>奇异值分解SVD</h1><h3 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h3><p>奇异值分解$(Value Decomposition$，简称$SVD)$是一种在线性代数和矩阵分析中非常重要的数学技术，它可以将一个矩阵分解为三个矩阵的乘积，具体来说，将一个矩阵$A$分解为以下形式：<br>$$<br>A &#x3D; UΣV^T<br>$$<br>$SVD$的关键性质和应用包括：</p><ol><li>数据降维：$SVD$可用于将高维数据降维到低维，通过保留最重要的奇异值和对应的奇异向量，可以实现数据压缩和特征选择。</li><li>矩阵逆：$SVD$可用于计算矩阵的伪逆，对于非方阵或奇异矩阵尤其有用。</li><li>奇异值阈值截断：通过保留前k个最大的奇异值和相应的奇异向量，可以实现矩阵的低秩近似，用于图像压缩、推荐系统等。</li><li>主成分分析$(PCA)$：$SVD$可以用于$PCA$，通过对数据协方差矩阵进行$SVD$分解，可以找到数据的主成分。</li><li>推荐系统：$SVD$在协同过滤中有广泛应用，用于推荐用户可能感兴趣的物品。</li><li>图像压缩：$SVD$可用于图像压缩和去噪，通过保留奇异值较大的部分，可以减小图像尺寸并去除一些噪声。</li></ol><h3 id="2-矩阵"><a href="#2-矩阵" class="headerlink" title="2 矩阵"></a>2 矩阵</h3><p>矩阵的意义：<a href="https://www.cnblogs.com/marsggbo/p/10144060.html">【转载】理解矩阵（三） - marsggbo - 博客园 (cnblogs.com)</a></p><p>以$Ma&#x3D;b$为例介绍矩阵$M$的含义：</p><ul><li>从变换的角度来说，矩阵$M$可以理解为对向量$ a$做变换得到了 $b$。</li><li>坐标系的角度来说，$M$可以理解成是一个坐标系（常用的坐标是笛卡尔坐标系，即 $I$），向量$a$就是在$M$这个坐标系下的坐标，$a$对应到$I$坐标系下的坐标是向量 $b$。</li></ul><h3 id="2-特征值分解"><a href="#2-特征值分解" class="headerlink" title="2 特征值分解"></a>2 特征值分解</h3><p><a href="https://blog.csdn.net/zpalyq110/article/details/86751064">奇异值分解(SVD)原理及实例分析_Freeman_zxp的博客-CSDN博客</a></p><h3 id="2-1-特征值和特征向量"><a href="#2-1-特征值和特征向量" class="headerlink" title="2.1 特征值和特征向量"></a>2.1 特征值和特征向量</h3><h5 id="特征值（Eigenvalues）："><a href="#特征值（Eigenvalues）：" class="headerlink" title="特征值（Eigenvalues）："></a>特征值（Eigenvalues）：</h5><ol><li><p>特征值是一个矩阵的标量性质，通常用λ表示。</p></li><li><p>特征值告诉我们矩阵在某个方向上的缩放因子或拉伸因子。</p></li><li><p>特征值的数目等于矩阵的维度。</p></li><li><p>特征值可以是实数或复数。</p></li></ol><p><strong>对于2：</strong>考虑一个二维平面上的线性变换，由一个矩阵A表示。我们有一个单位向量v（长度为1），它表示一个在该平面上的方向。当我们将这个向量v乘以矩阵A时，我们得到另一个向量Av。如果Av与v的方向相同（可能只是相反方向），那么这意味着矩阵A并没有改变该方向，只是对向量进行了缩放或拉伸。特征值就是用来表示这个缩放或拉伸的因子。具体来说，如果λ是矩阵A的一个特征值，而v是对应的特征向量，那么当我们将向量v乘以矩阵A时，结果是λv。这意味着矩阵A对向量v的作用只是将它缩放为原来的长度的λ倍。如果λ大于1，那么矩阵A在v的方向上对向量进行了拉伸；如果0 &lt; λ &lt; 1，那么矩阵A在v的方向上对向量进行了压缩；如果λ为负数，那么矩阵A对向量进行了反转，并改变了它的方向。所以，特征值λ告诉我们在特定方向v上矩阵A的作用是如何改变向量的大小或方向的。</p><h5 id="特征向量（Eigenvectors）："><a href="#特征向量（Eigenvectors）：" class="headerlink" title="特征向量（Eigenvectors）："></a>特征向量（Eigenvectors）：</h5><ol><li><p>特征向量是与特征值相关联的向量，通常用v表示。</p></li><li><p>特征向量表示在矩阵变换下不改变方向的向量。</p></li><li><p>特征向量描述了矩阵的变换性质，即它们定义了矩阵的主要方向。</p></li><li><p>特征向量通常标准化为单位向量。</p></li></ol><h3 id="2-2-特征值分解"><a href="#2-2-特征值分解" class="headerlink" title="2.2 特征值分解"></a>2.2 特征值分解</h3><p>特征值分解的实质是求解给定矩阵的特征值和 特征向盘，提取出矩阵最重要的特征。<br>既然我们知道一个矩阵是可以通过特征值和特征向量来表示，那假设存在一个$n×n$的满秩对称矩阵$A$，我们便可以通过特征值将$A$分解。首先求出$A$的$n$个特征值：$\lambda_1,\lambda_2,…,\lambda_n$,以及对应的特征向量(标准化处理后的):$x_1,x_2,…,x_n$。于是：<br>$$<br>Ax_1&#x3D;\lambda_1x_1 \Ax_2&#x3D;\lambda_2x_2 \……\Ax_n&#x3D;\lambda_nx_n<br>$$<br>令$U&#x3D;[x_1,x_2,…,x_n]$,$\Lambda&#x3D;\begin{bmatrix} \lambda_1 &amp; 0 &amp; 0 \ 0 &amp; \lambda_2 &amp; 0 \ 0 &amp; 0 &amp; \lambda_n \end{bmatrix}$化简公式为：$AU&#x3D;U\Lambda$。$U$是正交阵，有$U^T&#x3D;U^{-1}$。最终：<br>$$<br>A&#x3D;U\Lambda U^{-1}&#x3D;U\Lambda U^T<br>$$</p><h3 id="3-奇异值分解"><a href="#3-奇异值分解" class="headerlink" title="3 奇异值分解"></a>3 奇异值分解</h3><p><a href="https://zhuanlan.zhihu.com/p/29846048">奇异值分解（SVD） - 知乎 (zhihu.com)</a></p><p>对于满秩对称矩阵，可以简单的通过计算特征值进行分解，对于$m×n$的一般矩阵，需要使用奇异值分解$SVD$。已知对于任意矩阵都满足$A^TA,AA^T$，为对称矩阵，因此可以对$A^TA,AA^T$进行分解。</p><p>定义矩阵$A$的$SVD$为：<br>$$<br>A&#x3D;U\Sigma V^T<br>$$<br>其中$U$是$m×m$的矩阵，$\Sigma$是$m×n$的矩阵，除了主对角线上的元素以外全为0，主对角线上的每个元素都称为奇异值。$V$是$m×m$的矩阵,$U$和$V$都是酉矩阵，满足$U^TU&#x3D;I,V^TV&#x3D;I$。</p><p><strong>计算：</strong></p><p>首先得到$n×n$的方阵$A^TA$。然后进行特征值分解，得到的特征值和特征向量满足下式：<br>$$<br>(A^TA)v_i&#x3D;\lambda_iv_i<br>$$<br>这样我们就可以得到矩阵 $A^TA$的$n$个特征值和对应的$n$个特征向量$v$了。将  $A^TA$ 的所有特征向量张成一个$n×n$的矩阵$V$,即$SVD$公式中的矩阵$V$,一般我们将$V$中的每个特征向量叫做A的右奇异向量。</p><p>然后得到$m×m$的方阵$AA^T$。然后进行特征值分解，得到的特征值和特征向量满足下式：<br>$$<br>(AA^T)u_i&#x3D;\lambda_iu_i<br>$$<br>这样我们就可以得到矩阵 $AA^T$的$n$个特征值和对应的$n$个特征向量$u$了。将  $AA^T$ 的所有特征向量张成一个$m×m$的矩阵$U$,即$SVD$公式中的矩阵$U$,一般我们将$U$中的每个特征向量叫做A的左奇异向量。</p><p>对于$\Sigma$,除了对角线上是奇异值其他位置都是0,因此只需要求出每个奇异值$\sigma$即可。注意到：<br>$$<br>A&#x3D;U\Sigma V^T\Rightarrow AV&#x3D;U\Sigma V^TV\Rightarrow AV&#x3D;U\Sigma\Rightarrow Av_i&#x3D;\sigma_iu_i\Rightarrow \sigma_i&#x3D;Av_i&#x2F;u_i<br>$$<br>可以求出奇异值矩阵$\Sigma$。</p><p>证明$A^TA$的特征向量组成的就是$SVD$中的$V$矩阵：<br>$$<br>A&#x3D;U\Sigma V^T\Rightarrow A^T&#x3D;V\Sigma U^T\Rightarrow A^TA&#x3D;V\Sigma U^TU\Sigma V^T&#x3D;V\Sigma^2V^T\ (U^TU&#x3D;I)<br>$$<br>进一步可以看到特征值矩阵等于奇异值矩阵的平方，也就是说特征值和奇异值满足如下关系：<br>$$<br>\sigma_i&#x3D;\sqrt{\lambda_i}<br>$$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 线性代数 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 线性代数 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>LoSparse</title>
       <link href="/2023/09/19/LoSparse/"/>
       <url>/2023/09/19/LoSparse/</url>
