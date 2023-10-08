@@ -13,16 +13,16 @@
       
       <categories>
           
-          <category> 模型压缩 </category>
+          <category> 文献阅读 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 文献阅读 </tag>
+            <tag> 剪枝 </tag>
             
-            <tag> 模型压缩 </tag>
+            <tag> 二阶近似 </tag>
             
         </tags>
       
@@ -71,8 +71,6 @@
       
       
         <tags>
-            
-            <tag> 模型压缩 </tag>
             
             <tag> 剪枝 </tag>
             
@@ -126,9 +124,9 @@
       
         <tags>
             
-            <tag> 文献阅读 </tag>
+            <tag> 剪枝 </tag>
             
-            <tag> 模型压缩 </tag>
+            <tag> 低秩近似 </tag>
             
         </tags>
       
