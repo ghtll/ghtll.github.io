@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="关于, ヾ(≧∪≦*)ノ〃">
-    <meta name="description" content="ヾ(≧∪≦*)ノ〃">
+    <meta name="keywords" content="PruneOnceforAll, ヾ(≧∪≦*)ノ〃">
+    <meta name="description" content="Prune Once for AllPrune Once for All: Sparse Pre-Trained Language Models：
+通过整合权重剪枝和模型蒸馏来训练稀疏的预训练Transformer语言模型。这些稀疏的预训练">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>关于 | ヾ(≧∪≦*)ノ〃</title>
+    <title>PruneOnceforAll | ヾ(≧∪≦*)ノ〃</title>
     <link rel="icon" type="image/png" href="/ght.png">
     
     <style>
@@ -47,9 +48,7 @@
 
 
 
-    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
     <link rel="stylesheet" href="/css/post.css">
-
 
 
 
@@ -293,378 +292,434 @@
 
 </header>
 
-    <style type="text/css">
-    /* don't remove. */
-    .about-cover {
-        height: 75vh;
-    }
-</style>
+    
 
-<div class="bg-cover pd-header about-cover">
-    <div class="container">
-    <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                    subtitle
-                
-            </div>
 
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="/libs/typed/typed.js"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: [ 
-                            
-                                "从来没有真正的绝境, 只有心灵的迷途",
-                            
-                                "Never really desperate, only the lost of the soul",
-                            
-                        ],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">PruneOnceforAll</h1>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 
-<script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
-    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
-</script>
-<script>
+
+
+<main class="container content">
+
     
-      var bannerUrl = "/medias/featureimages/" + Math.floor(Math.random() * 24) + '.jpg';
-    
-    $('.bg-cover.about-cover').css('background-image', 'url(' + bannerUrl + ')');
-
-</script>
-
-
-    </div>
-</div>
-
-<main class="content">
-
-    <div id="aboutme" class="container about-container">
-        <div class="card">
-            <div class="card-content">
-                <div class="row">
-                    <div class="post-statis col l4 hide-on-med-and-down" data-aos="zoom-in-right">
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
                         
-<div class="statis">
-    <span class="count"><a href="/">6</a></span>
-    <span class="name">文章</span>
-</div>
-
-
-
-<div class="statis">
-    <span class="count"><a href="/categories">3</a></span>
-    <span class="name">分类</span>
-</div>
-
-
-
-<div class="statis">
-    <span class="count"><a href="/tags">6</a></span>
-    <span class="name">标签</span>
-</div>
-
-
+                            <a href="/tags/%E5%89%AA%E6%9E%9D/">
+                                <span class="chip bg-color">剪枝</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%92%B8%E9%A6%8F/">
+                                <span class="chip bg-color">蒸馏</span>
+                            </a>
+                        
                     </div>
-                    <div class="col s12 m12 l4">
-                        <div class="profile center-align">
-                            <div class="avatar">
-                                <img src="/medias/myght.jpg" alt="gaohaotian"
-                                     class="circle responsive-img avatar-img">
-                            </div>
-                            <div class="author">
-                                <div class="post-statis hide-on-large-only" data-aos="zoom-in-right">
-                                    
-<div class="statis">
-    <span class="count"><a href="/">6</a></span>
-    <span class="name">文章</span>
-</div>
-
-
-
-<div class="statis">
-    <span class="count"><a href="/categories">3</a></span>
-    <span class="name">分类</span>
-</div>
-
-
-
-<div class="statis">
-    <span class="count"><a href="/tags">6</a></span>
-    <span class="name">标签</span>
-</div>
-
-
-                                </div>
-                                <div class="title">gaohaotian</div>
-                                <div class="career">dlut</div>
-                                <div class="social-link hide-on-large-only" data-aos="zoom-in-left">
-                                    
-    <a href="https://github.com/ghtll" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
-
-
-
-    <a href="mailto:260878610@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=260878610" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 260878610" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
-
-
-
-
-
-
-
-
-                                </div>
-                            </div>
-                        </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/" class="post-category">
+                                文献阅读
+                            </a>
+                        
                     </div>
-                    <div class="col l4 hide-on-med-and-down" data-aos="zoom-in-left">
-                        <div class="social-link">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-10-09
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-10-09
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    5 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Prune-Once-for-All"><a href="#Prune-Once-for-All" class="headerlink" title="Prune Once for All"></a>Prune Once for All</h1><p>Prune Once for All: Sparse Pre-Trained Language Models：</p>
+<p>通过整合权重剪枝和模型蒸馏来训练稀疏的预训练Transformer语言模型。这些稀疏的预训练模型可以用于迁移学习，适用于各种任务，同时保持它们的稀疏模式。</p>
+<h1 id="Introduce"><a href="#Introduce" class="headerlink" title="Introduce"></a>Introduce</h1><p>就准确性而言，BERT是在训练前阶段还是在迁移学习阶段被修剪并不重要。这表明，LM可以在训练前修剪一次，然后微调到任何下游任务，而不需要特定于任务的调整。</p>
+<p>在本文中，提出了一种新的方法，为(Prune OFA），利用<strong>权重剪枝</strong>和<strong>模型蒸馏</strong>来产生预先训练的基于变压器的语言模型与高稀疏比。将方法应用于BERT-Base、BERT-Large和DistilBERT ，为这些模型架构生成稀疏的预训练模型。然后，展示了如何对这些稀疏模型进行微调，以生成四个特定任务的稀疏模型。文章还表明，可以使用量化感知训练进一步压缩模型，以在压缩-精度比方面实现最先进的结果。</p>
+<p>本文方法不需要对每个任务的特殊剪枝超参数进行调整，因为本文对所有任务的模型进行一次修剪。</p>
+<h1 id="Weight-pruning"><a href="#Weight-pruning" class="headerlink" title="Weight pruning"></a>Weight pruning</h1><p>在本文中，主要关注非结构化的权值剪枝。2018年提出了一种渐进幅度修剪（GMP）的方法，在训练过程中逐步以低幅度修剪权重。在训练过程中，每一个f步修剪最小幅度的权值，直到达到时间步$t$的时间稀疏比$s_t$，定义为：</p>
+<p><img src="/../images/PruneOFA_imgs/1.png"></p>
+<p>其中$s_i$和$s_f$是初始和最终的稀疏度比，$t_s$和$t_e$是剪枝的开始和结束的时间步长。</p>
+<p>在最近的一篇论文中，提出了一种基于IMP（迭代幅度剪枝）和学习率退卷（LRR）的剪枝算法。IMP包括两个步骤：修剪模型的一部分，并继续对其进行微调，以从诱导的剪枝错误中恢复。重复这两个步骤，直到达到期望的稀疏度比。在LRR中，学习速率调度器被恢复到它在微调步骤开始时的剪枝步骤之前的状态。文中建议将学习速率重绕原理合并到GMP中，即每f步在时间$t_s$时重绕到其状态。在测试之后，调度程序继续执行其原始设置，直到训练结束。</p>
+<h1 id="Knowledge-distillation"><a href="#Knowledge-distillation" class="headerlink" title="Knowledge distillation"></a>Knowledge distillation</h1><p>在本文中，作者提出了利用模型蒸馏的方法来进行剪枝过程。作者关注的方法是，教师和学生共享相同的架构，但他们的稀疏比不同。在这种情况下，教师是一个在目标任务上进行训练的密集模型，而学生是一个具有固定稀疏性或正在进行修剪的模型。在训练前和微调阶段，可以在蒸馏阶段应用于语言模型。在训练前阶段，教师是一个预先训练过的语言模型，而在微调阶段，教师是一个针对目标任务进行微调的语言模型。</p>
+<h1 id="Prune-Once-for-All-1"><a href="#Prune-Once-for-All-1" class="headerlink" title="Prune Once for All"></a>Prune Once for All</h1><p>该方法由两个步骤组成，即教师模型准备和学生模型剪枝。我们训练的稀疏预训练模型是我们用于迁移学习的模型，同时保持其稀疏模式。我们将这个方法称为“一次剪枝，用于所有”，因为我们展示了如何仅对预训练模型进行一次剪枝，然后对稀疏的预训练模型进行多个语言任务的微调。</p>
+<p><img src="/../images/PruneOFA_imgs/2.png" alt="Prune OFA method"></p>
+<p><strong>Teacher preparation</strong></p>
+<p>Prune OFA的第一步是获得一个在预训练任务中针对目标$L_{PT}$经过优化的模型，如图所示。相同的数据集将用于下一步对学生模型进行剪枝。这个模型将在学生模型剪枝步骤中初始化学生模型和教师模型。</p>
+<p><strong>Student pruning</strong></p>
+<p>学生模型是从在教师准备步骤中准备的教师模型中初始化的。然后，在来自教师准备步骤的预训练任务和知识蒸馏目标$L_{kd}$的线性组合上对学生模型进行微调：</p>
+<p><img src="/../images/PruneOFA_imgs/3.png"></p>
+<p>同时使用$GMP + LRR$方法进行修剪。该过程的输出模型是一个稀疏预训练的LM，可以在不需要额外修剪的情况下用于迁移学习，从而为特定的下游任务生成稀疏模型。</p>
+<p>在学生模型的微调过程中，使用了两个不同的目标来进行训练，这两个目标是从教师准备步骤中获得的：</p>
+<ol>
+<li>第一个目标是来自教师准备步骤的预训练任务，也就是在准备教师模型时使用的任务。这个任务的知识和经验被用来指导学生模型的微调。</li>
+<li>第二个目标是知识蒸馏目标，通常表示为$L_{kd}$。知识蒸馏是一种训练方法，其中学生模型试图模拟教师模型的输出，以获取其知识和泛化能力。这个目标也被用于微调学生模型。</li>
+</ol>
+<p>这两个目标的线性组合意味着它们以某种权重的加权方式结合在一起，用来微调学生模型。这个组合可以帮助学生模型在微调过程中综合利用来自不同目标的信息，以提高性能。</p>
+<p><strong>Pattern-lock</strong></p>
+<p>作者希望在微调过程中保持由Prune OFA创建的稀疏预训练模型的稀疏性模式。提出了一种称为模式锁的方法，它可以防止在训练模型时改变模型中发现的零。</p>
+<p>方法：在训练之前，Pattern-lock方法会为每个稀疏层$l$初始化一个掩码$M^l$，该掩码代表了该层的稀疏模式，其权重为$W^l$:</p>
+<p><img src="/../images/PruneOFA_imgs/4.png"></p>
+<p>然后，在训练时，损失$L$梯度$w.r.t$修改为:</p>
+<p><img src="/../images/PruneOFA_imgs/5.png"></p>
+<p>确保最初为0的权重将保持在0到整个微调.</p>
+<h1 id="Experimental"><a href="#Experimental" class="headerlink" title="Experimental"></a>Experimental</h1><p>作者通过在三种不同大小的架构上应用Prune OFA来展示他们的方法；BERT-Base，BERT-Barge和DistilBERT。由于没有用于训练BERT-Base、BERT-Large和DistilBERT的原始处理训练数据，作者运行一个额外的步骤，使用作者准备的处理训练数据来微调预先训练过的模型。接下来，作者执行学生修剪步骤来获得他们的稀疏预训练模型。将BERT-Base和DistilBERT修剪到{85%，90%}，将BERT-Large修剪到90%。修剪应用于变压器编码器中的所有线性层，包括池器层如果存在的话。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">ghtll</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://ghtll.github.io/2023/10/09/PruneOnceforAll/">https://ghtll.github.io/2023/10/09/PruneOnceforAll/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">ghtll</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
                             
-    <a href="https://github.com/ghtll" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
-
-
-
-    <a href="mailto:260878610@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=260878610" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 260878610" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
-
-
-
-
-
-
-
-
+                                <a href="/tags/%E5%89%AA%E6%9E%9D/">
+                                    <span class="chip bg-color">剪枝</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%92%B8%E9%A6%8F/">
+                                    <span class="chip bg-color">蒸馏</span>
+                                </a>
+                            
                         </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/10/09/PruneOnceforAll/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="PruneOnceforAll">
+                        
+                        <span class="card-title">PruneOnceforAll</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/" class="post-category">
+                                    文献阅读
+                                </a>
+                            
+                            
+                        </span>
                     </div>
                 </div>
 
-                <div class="introduction center-align" data-aos="fade-up">If you wish to succeed, you should use persistence as your good friend, experience as your reference, prudence as your brother and hope as your sentry.</div>
-
-                <style type="text/css">
-    #posts-chart,
-    #categories-chart,
-    #tags-chart {
-        width: 100%;
-        height: 300px;
-        margin: 0.5rem auto;
-        padding: 0.5rem;
-    }
-</style>
-
-<div id="postCharts" class="post-charts">
-    <div class="title center-align" data-aos="zoom-in-up">
-        <i class="far fa-bar-chart"></i>&nbsp;&nbsp;文章统计图
-    </div>
-    <div class="row">
-        <div class="chart col s12 m6 l4" data-aos="zoom-in-up">
-            <div id="posts-chart"></div>
-        </div>
-
-        <div class="chart col s12 m6 l4" data-aos="zoom-in-up">
-            <div id="categories-chart"></div>
-        </div>
-
-        <div class="chart col s12 m6 l4" data-aos="zoom-in-up">
-            <div id="tags-chart"></div>
-        </div>
-    </div>
-</div>
-
-<script type="text/javascript" src="/libs/echarts/echarts.min.js"></script>
-<script>
-    let postsChart = echarts.init(document.getElementById('posts-chart'));
-    let categoriesChart = echarts.init(document.getElementById('categories-chart'));
-    let tagsChart = echarts.init(document.getElementById('tags-chart'));
-
-    
-
-    let postsOption = {
-        title: {
-            text: '文章发布统计图',
-            top: -5,
-            x: 'center'
-        },
-        tooltip: {
-            trigger: 'axis'
-        },
-        xAxis: {
-            type: 'category',
-            data: ["2022-10","2022-11","2022-12","2023-01","2023-02","2023-03","2023-04","2023-05","2023-06","2023-07","2023-08","2023-09","2023-10"]
-        },
-        yAxis: {
-            type: 'value',
-        },
-        series: [
-            {
-                name: '文章篇数',
-                type: 'line',
-                color: ['#6772e5'],
-                data: [0,0,0,0,0,0,0,0,0,0,0,3,3],
-                markPoint: {
-                    symbolSize: 45,
-                    color: ['#fa755a','#3ecf8e','#82d3f4'],
-                    data: [{
-                        type: 'max',
-                        itemStyle: {color: ['#3ecf8e']},
-                        name: '最大值'
-                    }, {
-                        type: 'min',
-                        itemStyle: {color: ['#fa755a']},
-                        name: '最小值'
-                    }]
-                },
-                markLine: {
-                    itemStyle: {color: ['#ab47bc']},
-                    data: [
-                        {type: 'average', name: '平均值'}
-                    ]
-                }
-            }
-        ]
-    };
-
-    
-
-    let categoriesOption = {
-        title: {
-            text: '文章分类统计图',
-            top: -4,
-            x: 'center'
-        },
-        tooltip: {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        series: [
-            {
-                name: '分类',
-                type: 'pie',
-                radius: '50%',
-                color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"文献阅读","value":4},{"name":"线性代数","value":1},{"name":"矩阵","value":1}],
-                itemStyle: {
-                    emphasis: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }
-        ]
-    };
-
-    
-
-    let tagsOption = {
-        title: {
-            text: 'TOP10 标签统计图',
-            top: -5,
-            x: 'center'
-        },
-        tooltip: {},
-        xAxis: [
-            {
-                type: 'category',
-                data: ["剪枝","低秩近似","线性代数","线代","二阶近似","蒸馏"]
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value'
-            }
-        ],
-        series: [
-            {
-                type: 'bar',
-                color: ['#82d3f4'],
-                barWidth : 18,
-                data: [4,2,1,1,1,1],
-                markPoint: {
-                    symbolSize: 45,
-                    data: [{
-                        type: 'max',
-                        itemStyle: {color: ['#3ecf8e']},
-                        name: '最大值'
-                    }, {
-                        type: 'min',
-                        itemStyle: {color: ['#fa755a']},
-                        name: '最小值'
-                    }],
-                },
-                markLine: {
-                    itemStyle: {color: ['#ab47bc']},
-                    data: [
-                        {type: 'average', name: '平均值'}
-                    ]
-                }
-            }
-        ]
-    };
-
-    // render the charts
-    postsChart.setOption(postsOption);
-    categoriesChart.setOption(categoriesOption);
-    tagsChart.setOption(tagsOption);
-</script>
-
-
                 
-
-                
-
-                
-                
-                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%89%AA%E6%9E%9D/">
+                        <span class="chip bg-color">剪枝</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%92%B8%E9%A6%8F/">
+                        <span class="chip bg-color">蒸馏</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/10/08/oBert/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="oBert">
+                        
+                        <span class="card-title">oBert</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            二阶Hassian矩阵近似权重
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/" class="post-category">
+                                    文献阅读
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%89%AA%E6%9E%9D/">
+                        <span class="chip bg-color">剪枝</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%BA%8C%E9%98%B6%E8%BF%91%E4%BC%BC/">
+                        <span class="chip bg-color">二阶近似</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
     </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: ヾ(≧∪≦*)ノ〃<br />'
+            + '文章作者: gaohaotian<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+
+<!-- 代码块收缩 -->
+
+
+
+    
+
 </main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
