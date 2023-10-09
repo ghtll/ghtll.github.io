@@ -367,7 +367,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    6 分
                 </div>
                 
 
@@ -422,6 +422,9 @@
 <p><img src="/../images/PruneOFA_imgs/5.png"></p>
 <p>确保最初为0的权重将保持在0到整个微调.</p>
 <h1 id="Experimental"><a href="#Experimental" class="headerlink" title="Experimental"></a>Experimental</h1><p>作者通过在三种不同大小的架构上应用Prune OFA来展示他们的方法；BERT-Base，BERT-Barge和DistilBERT。由于没有用于训练BERT-Base、BERT-Large和DistilBERT的原始处理训练数据，作者运行一个额外的步骤，使用作者准备的处理训练数据来微调预先训练过的模型。接下来，作者执行学生修剪步骤来获得他们的稀疏预训练模型。将BERT-Base和DistilBERT修剪到{85%，90%}，将BERT-Large修剪到90%。修剪应用于变压器编码器中的所有线性层，包括池器层如果存在的话。</p>
+<p><strong>idea</strong></p>
+<p>给预训练模型进行剪枝，然后针对特定任务进行微调。如果微调的时候继续剪枝？</p>
+<p>如果给预训练模型进行低秩近似剪枝，然后微调？</p>
 
                 
             </div>
