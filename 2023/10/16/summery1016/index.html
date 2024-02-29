@@ -354,7 +354,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-11-21
+                    2024-01-20
                 </div>
                 
 
@@ -363,7 +363,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    33 分
+                    35 分
                 </div>
                 
 
@@ -413,7 +413,7 @@
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>将权重近似为(将这种分解应用于模型的每个权重矩阵)：<br>$$<br>W&#x3D;UV+S<br>$$<br><img src="/../images/summery1016_imgs/1.png"></p>
 <p>重要性评分公式方法：</p>
 <p><img src="/../images/summery1016_imgs/2.png" alt="image-20231016142137668"></p>
-<p><img src="/../images/summery1016_imgs/43.png"></p>
+<p><img src="/../images/summery1016_imgs/43.png" alt="	"></p>
 <h2 id="i"><a href="#i" class="headerlink" title="i"></a>i</h2><p>剪枝采用迭代剪枝，在迭代过程中S的重要性评估不稳定，原文采用平滑+大batchsize。由于样本造成的不稳定，这里可以想一个办法。要不让样本更稳定，要不更换一个重要性评估方法。</p>
 <p>初始化$U^0$和$V^0$会丢失很多知识，在文中，矩阵分解占比仅有1-5％，其余都是S的占比。如果在不增加UV的占比情况下提高他的知识，是否可以去除更多的S？考虑加权分解。先加权分解UV，在迭代剪枝。最后微调？</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p><strong>评估任务：</strong>natural language understanding (NLU)、question answering (QA)、natural language generation (NLG)</p>
@@ -1502,6 +1502,90 @@
 <p>网格搜索：</p>
 <p><img src="/../images/summery1016_imgs/294.png"></p>
 <h2 id="实验-28"><a href="#实验-28" class="headerlink" title="实验"></a>实验</h2><p><img src="/../images/summery1016_imgs/296.png"></p>
+<h1 id="30AdaRound"><a href="#30AdaRound" class="headerlink" title="30AdaRound"></a>30AdaRound</h1><h2 id="简介-29"><a href="#简介-29" class="headerlink" title="简介"></a>简介</h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>Up or Down? Adaptive Rounding for Post-Training Quantization</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>期刊</td>
+<td>ICML</td>
+</tr>
+<tr>
+<td>发表时间</td>
+<td>2020</td>
+</tr>
+<tr>
+<td>代码</td>
+<td></td>
+</tr>
+<tr>
+<td>压缩技术</td>
+<td>训练后量化，非四舍五入近似</td>
+</tr>
+</tbody></table>
+<h2 id="笔记-15"><a href="#笔记-15" class="headerlink" title="笔记"></a>笔记</h2><ol>
+<li>四舍五入量化次优</li>
+</ol>
+<h2 id="方法-29"><a href="#方法-29" class="headerlink" title="方法"></a>方法</h2><p>约束量化范围：</p>
+<p><img src="/../images/summery1016_imgs/301.png"></p>
+<p>目标函数：</p>
+<p><img src="/../images/summery1016_imgs/302.png"></p>
+<p>二阶近似：</p>
+<p><img src="/../images/summery1016_imgs/303.png"></p>
+<p>对角假设和常数假设：</p>
+<p><img src="/../images/summery1016_imgs/304.png"></p>
+<p><img src="/../images/summery1016_imgs/305.png"></p>
+<p>松弛：</p>
+<p><img src="/../images/summery1016_imgs/306.png"></p>
+<p><img src="/../images/summery1016_imgs/307.png"></p>
+<p>为了避免更深层次网络的量化误差的积累，并考虑到激活函数，我们使用了以下非对称重构公式：</p>
+<p><img src="/../images/summery1016_imgs/308.png"></p>
+<h2 id="实验-29"><a href="#实验-29" class="headerlink" title="实验"></a>实验</h2><p><img src="/../images/summery1016_imgs/309.png"></p>
+<h1 id="31SPDY"><a href="#31SPDY" class="headerlink" title="31SPDY"></a>31SPDY</h1><h2 id="简介-30"><a href="#简介-30" class="headerlink" title="简介"></a>简介</h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>SPDY: Accurate Pruning with Speedup Guarantees</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>期刊</td>
+<td>ICML</td>
+</tr>
+<tr>
+<td>发表时间</td>
+<td>2022</td>
+</tr>
+<tr>
+<td>代码</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/IST-DASLab/spdy">https://github.com/IST-DASLab/spdy</a></td>
+</tr>
+<tr>
+<td>压缩技术</td>
+<td>非结构加速，针对推理速度</td>
+</tr>
+</tbody></table>
+<h2 id="笔记-16"><a href="#笔记-16" class="headerlink" title="笔记"></a>笔记</h2><ol>
+<li>大多数现有的修剪方法只最小化剩余权值的数量，即模型的大小，而不是对推理时间进行优化。</li>
+<li>我们首先观察到已知的度量，例如（标准化）权重大小，与得到的非结构化稀疏模型的优越精度不一致相关。</li>
+<li>简单地用随机掩模施加相应的稀疏性，准确地估计这种稀疏性轮廓的运行时间</li>
+<li>针对神经网络剪枝所导致的层次稀疏性的问题，无结构的加速技术并不依赖于在神经网络层中出现的特定模式。具体而言，即使在同一层次和相同稀疏度水平的情况下，无结构的加速技术也能够表现出相似的性能水平。这表明，该加速技术对于不同层次和不同剪枝策略都能够保持一致的效果，而不受到层次稀疏性中特定模式的影响。这种特性使得无结构的加速技术更具灵活性，能够适用于多种剪枝方法，而不受到这些方法所产生的特定稀疏模式的制约。</li>
+</ol>
+<h2 id="方法-30"><a href="#方法-30" class="headerlink" title="方法"></a>方法</h2><p>约束优化公式：</p>
+<p><img src="/../images/summery1016_imgs/3101.png"></p>
+<p>递归公式：</p>
+<p><img src="/../images/summery1016_imgs/312.png"></p>
+<p>计算误差：</p>
+<p><img src="/../images/summery1016_imgs/313.png"></p>
+<p>步骤i:随机选100个$c$向量，找到最好的$c^*$.评估配置的质量：</p>
+<p>该数据库为每个层ℓ和每个稀疏度s存储稀疏度s通过AdaPrune施加后剩余权重的“重建”。</p>
+<p>首先，我们在数据库中查询每一层对应的重构权值，每一层在其目标稀疏度处。其次，我们将重建权重的结果模型“缝合”在一起，并在给定的小验证集上对其进行评估。</p>
+<p><img src="/../images/summery1016_imgs/314.png"></p>
+<h2 id="实验-30"><a href="#实验-30" class="headerlink" title="实验"></a>实验</h2><p><img src="/../images/summery1016_imgs/315.png"></p>
+<p><img src="/../images/summery1016_imgs/316.png"></p>
 
                 
             </div>
@@ -1617,32 +1701,44 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/10/27/CoFi/">
+                <a href="/2024/02/29/emacs/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="CoFi">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="emacs">
                         
-                        <span class="card-title">CoFi</span>
+                        <span class="card-title">emacs</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            Emacs学习历程
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-10-27
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-02-29
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            ghtll
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    学习
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Emacs/">
+                        <span class="chip bg-color">Emacs</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -1787,7 +1883,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2023</span>
+                <span id="year">2023-2024</span>
             
             <a href="/about" target="_blank">gaohaotian</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
