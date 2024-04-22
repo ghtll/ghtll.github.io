@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="oBert, ヾ(≧∪≦*)ノ〃">
+    <meta name="keywords" content="oBert, ght">
     <meta name="description" content="二阶Hassian矩阵近似权重">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>oBert | ヾ(≧∪≦*)ノ〃</title>
+    <title>oBert | ght</title>
     <link rel="icon" type="image/png" href="/ght.png">
     
     <style>
@@ -69,7 +69,7 @@
                     
                     <img src="/medias/logo2.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">ヾ(≧∪≦*)ノ〃</span>
+                    <span class="logo-span">ght</span>
                 </a>
             </div>
             
@@ -151,7 +151,7 @@
         
         <img src="/medias/logo2.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">ヾ(≧∪≦*)ノ〃</div>
+        <div class="logo-name">ght</div>
         <div class="logo-desc">
             
             Never really desperate, only the lost of the soul.
@@ -392,68 +392,71 @@
             <div id="articleContent">
                 <h1 id="obert"><a href="#obert" class="headerlink" title="obert"></a>obert</h1><p><a target="_blank" rel="noopener" href="https://github.com/neuralmagic/sparseml/tree/main/research/optimal_BERT_surgeon_oBERT">github.com</a></p>
 <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>直接看结果：</p>
-<p><img src="/../images/obert_imgs/1.png"></p>
+<p><img src="../images/obert_imgs/1.png" alt=""></p>
 <p>贡献：</p>
 <ul>
 <li>调研了lottery-ticket, movement pruning,magnitude and second-order pruning.</li>
 <li>介绍了一种通用的二阶剪枝方法，称为最优BERT外科医生（oBERT），支持非结构化和块剪枝，是第一种既高精度又可扩展到BERT模型维数的二阶方法</li>
 <li><strong>二阶剪枝方法需要逆黑森的近似，这对于LLM参数计数的存储和计算是昂贵的→未来如何近似逆海森矩阵？</strong></li>
 </ul>
-<h1 id="The-Optimal-BERT-Surgeon-oBERT"><a href="#The-Optimal-BERT-Surgeon-oBERT" class="headerlink" title="The Optimal BERT Surgeon (oBERT)"></a>The Optimal BERT Surgeon (oBERT)</h1><h2 id="Generalized-Second-Order-Block-Pruning"><a href="#Generalized-Second-Order-Block-Pruning" class="headerlink" title="Generalized Second-Order Block Pruning"></a>Generalized Second-Order Block Pruning</h2><p>令$W_M&#x3D;M\odot W^*$其中$W^*\in R^d$是一个密集模型的权重，$d$是全部权重，$M\in {0,1}^d$表示掩码，即剪枝，于是使用泰勒展开式得到：</p>
-<p><img src="/../images/obert_imgs/2.png"></p>
-<p>考虑到$W^*$优化良好，于是假定$\nabla L(W^*)\approx0$,通过修剪权值子集所引起的损失的变化可以表示为:</p>
-<p><img src="/../images/obert_imgs/3.png"></p>
+<h1 id="The-Optimal-BERT-Surgeon-oBERT"><a href="#The-Optimal-BERT-Surgeon-oBERT" class="headerlink" title="The Optimal BERT Surgeon (oBERT)"></a>The Optimal BERT Surgeon (oBERT)</h1><h2 id="Generalized-Second-Order-Block-Pruning"><a href="#Generalized-Second-Order-Block-Pruning" class="headerlink" title="Generalized Second-Order Block Pruning"></a>Generalized Second-Order Block Pruning</h2><p>令$W_M=M\odot W^<em>$其中$W^</em>\in R^d$是一个密集模型的权重，$d$是全部权重，$M\in \{0,1\}^d$表示掩码，即剪枝，于是使用泰勒展开式得到：</p>
+<p><img src="../images/obert_imgs/2.png" alt=""></p>
+<p>考虑到$W^<em>$优化良好，于是假定$\nabla L(W^</em>)\approx0$,通过修剪权值子集所引起的损失的变化可以表示为:</p>
+<p><img src="../images/obert_imgs/3.png" alt=""></p>
 <p><strong>→→→→如果不近似呢?如何推导？</strong></p>
 <p>其中：</p>
-<p><img src="/../images/obert_imgs/4.png"><br>$$<br>\delta W :&#x3D;W_M-W^*<br>$$<br>在$W^*$处近似海森矩阵的方法是通过一个衰减的经验fisher信息矩阵：</p>
-<p><img src="/../images/obert_imgs/5.png"></p>
+<p><img src="../images/obert_imgs/4.png" alt=""></p>
+<script type="math/tex; mode=display">
+\delta W :=W_M-W^*</script><p>在$W^*$处近似海森矩阵的方法是通过一个衰减的经验fisher信息矩阵：</p>
+<p><img src="../images/obert_imgs/5.png" alt=""></p>
 <p>$m$是用于近似黑森的梯度外积的数量</p>
 <p><strong>推导：</strong></p>
 <p>对于一个将输入向量$in\in n_{in}$映射到输出向量$o\in n_0$的网络：</p>
-<p><img src="/../images/obert_imgs/6.png"></p>
+<p><img src="../images/obert_imgs/6.png" alt=""></p>
 <p>与训练集对应的均方误差定义为($P$是样本数，$t^{[k]}$是期望输出，$o^{[k]}$是实际输出)：</p>
-<p><img src="/../images/obert_imgs/7.png"></p>
-<p>关于$W$的一阶导数是($\frac{\partial E}{\partial W}&#x3D;\frac{\partial E}{\partial o}  \frac{\partial o}{\partial W}$)：</p>
-<p><img src="/../images/obert_imgs/8.png"></p>
+<p><img src="../images/obert_imgs/7.png" alt=""></p>
+<p>关于$W$的一阶导数是($\frac{\partial E}{\partial W}=\frac{\partial E}{\partial o}  \frac{\partial o}{\partial W}$)：</p>
+<p><img src="../images/obert_imgs/8.png" alt=""></p>
 <p>海森矩阵是：</p>
-<p><img src="/../images/obert_imgs/9.png"></p>
+<p><img src="../images/obert_imgs/9.png" alt=""></p>
 <p>考虑一个完全训练到$W*$的局部最小误差的网络,可以忽略$t^{[k]}-o^{[k]}$：</p>
-<p><img src="/../images/obert_imgs/10.png"></p>
+<p><img src="../images/obert_imgs/10.png" alt=""></p>
 <p>如果输出网络只有一个输出，我们可以将导数的n维数据向量$X^{[k]}$定义为：</p>
-<p><img src="/../images/obert_imgs/11.png"></p>
+<p><img src="../images/obert_imgs/11.png" alt=""></p>
 <p>于是海森矩阵可以写成:</p>
-<p><img src="/../images/obert_imgs/12.png"></p>
+<p><img src="../images/obert_imgs/12.png" alt=""></p>
 <p>如果网络是多元输出，则$X\in n×n_o$:</p>
-<p><img src="/../images/obert_imgs/13.png"></p>
+<p><img src="../images/obert_imgs/13.png" alt=""></p>
 <p>于是海森矩阵可以写成：</p>
-<p><img src="/../images/obert_imgs/14.png"></p>
+<p><img src="../images/obert_imgs/14.png" alt=""></p>
 <p>以上表明，$H$是与梯度变量$X$相关的样本协方差矩阵。对于单个输出情况，可以通过依次添加连续的“分量”计算完整的海森矩阵:</p>
-<p><img src="/../images/obert_imgs/15.png"></p>
+<p><img src="../images/obert_imgs/15.png" alt=""></p>
 <p>然后可以得到在$W^*$处近似海森矩阵的方法是通过一个衰减的经验fisher信息矩阵。</p>
 <p>回到剪枝问题，识别一个给定形状的权重Q块，通过零掩蔽去除将导致最小的损失增加。这将导致以下约束优化问题：</p>
-<p><img src="/../images/obert_imgs/16.png"></p>
+<p><img src="../images/obert_imgs/16.png" alt=""></p>
 <p>一次剪枝一组权重Q，对于这个组中的权重，如果对其进行剪枝，则必须保证增量和原始值相同，如果不对其剪枝，则不用管它。</p>
 <p>由拉格朗日乘数法得到权重更新：</p>
-<p><img src="/../images/obert_imgs/17.png"></p>
+<p><img src="../images/obert_imgs/17.png" alt=""></p>
 <p>Q权重的重要性：</p>
-<p><img src="/../images/obert_imgs/18.png"></p>
+<p><img src="../images/obert_imgs/18.png" alt=""></p>
 <h2 id="高效实现"><a href="#高效实现" class="headerlink" title="高效实现"></a>高效实现</h2><p>由于$\hat F^{-1}(W)$太难计算，文中使用了近似的方法。</p>
 <h3 id="修剪最优的权重集"><a href="#修剪最优的权重集" class="headerlink" title="修剪最优的权重集"></a>修剪最优的权重集</h3><p>在实践中，评估每组Q的显著性得分$\rho_Q$，并修剪得分最低的$\frac{s×d}{|Q|}$组权重，其中$s\in (0,1]$表示稀疏度，$d$是全部权重。</p>
-<h3 id="经验逆fisher矩阵计算"><a href="#经验逆fisher矩阵计算" class="headerlink" title="经验逆fisher矩阵计算"></a>经验逆fisher矩阵计算</h3><p>采用Woodbury&#x2F;Sherman-Morrison(WSM) inversion formula：<br>$$<br>(A+uv^T)^{-1}&#x3D;A^{-1}-\frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}<br>$$<br>得到：</p>
-<p><img src="/../images/obert_imgs/19.png"></p>
-<p><img src="/../images/obert_imgs/20.png"></p>
-<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><p>$N_B&#x3D;\frac{d}{B}$表示总的块数，第一步计算：</p>
-<p><img src="/../images/obert_imgs/21.png"></p>
+<h3 id="经验逆fisher矩阵计算"><a href="#经验逆fisher矩阵计算" class="headerlink" title="经验逆fisher矩阵计算"></a>经验逆fisher矩阵计算</h3><p>采用Woodbury/Sherman-Morrison(WSM) inversion formula：</p>
+<script type="math/tex; mode=display">
+(A+uv^T)^{-1}=A^{-1}-\frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}</script><p>得到：</p>
+<p><img src="../images/obert_imgs/19.png" alt=""></p>
+<p><img src="../images/obert_imgs/20.png" alt=""></p>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><p>$N_B=\frac{d}{B}$表示总的块数，第一步计算：</p>
+<p><img src="../images/obert_imgs/21.png" alt=""></p>
 <p>第二步计算($\in R^{N_B}$)：</p>
-<p><img src="/../images/obert_imgs/22.png"></p>
+<p><img src="../images/obert_imgs/22.png" alt=""></p>
 <p>第三步计算：</p>
-<p><img src="/../images/obert_imgs/23.png"></p>
+<p><img src="../images/obert_imgs/23.png" alt=""></p>
 <h1 id="代码介绍"><a href="#代码介绍" class="headerlink" title="代码介绍"></a>代码介绍</h1><p>更新每组权重得分$\rho_Q$：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">scores<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>
     <span class="token punctuation">(</span>self<span class="token punctuation">.</span>_params<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>data<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">**</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>self<span class="token punctuation">.</span>_devices<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
     <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">2.0</span> <span class="token operator">*</span> finv<span class="token punctuation">.</span>diag<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> self<span class="token punctuation">.</span>_eps<span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>self<span class="token punctuation">.</span>_params<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>shape<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>更新$W^*$</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">obs_updates<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>
     self<span class="token punctuation">.</span>_finvs<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
@@ -465,7 +468,6 @@
     <span class="token punctuation">)</span>
     <span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>param<span class="token punctuation">.</span>data<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>计算逆经验$Fisher$矩阵</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">add_grad</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> g<span class="token punctuation">:</span> Tensor<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token triple-quoted-string string">"""
@@ -490,7 +492,6 @@
 
     <span class="token comment"># update f_inv with new outer product: (batch, B) x (batch, B) -> (batch, B, B)</span>
     self<span class="token punctuation">.</span>f_inv<span class="token punctuation">.</span>baddbmm_<span class="token punctuation">(</span>finv_g<span class="token punctuation">.</span>unsqueeze<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> finv_g<span class="token punctuation">.</span>unsqueeze<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> alpha<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 
                 
             </div>
@@ -739,7 +740,7 @@
 
         var url = document.location.href;
         newdiv.innerHTML += '<br />'
-            + '来源: ヾ(≧∪≦*)ノ〃<br />'
+            + '来源: ght<br />'
             + '文章作者: gaohaotian<br />'
             + '文章链接: <a href="' + url + '">' + url + '</a><br />'
             + '本文章著作权归作者所有，任何形式的转载都请注明出处。';

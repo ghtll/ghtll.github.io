@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="软件精英挑战赛, ヾ(≧∪≦*)ノ〃">
+    <meta name="keywords" content="软件精英挑战赛, ght">
     <meta name="description" content="智慧港口运输">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>软件精英挑战赛 | ヾ(≧∪≦*)ノ〃</title>
+    <title>软件精英挑战赛 | ght</title>
     <link rel="icon" type="image/png" href="/ght.png">
     
     <style>
@@ -69,7 +69,7 @@
                     
                     <img src="/medias/logo2.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">ヾ(≧∪≦*)ノ〃</span>
+                    <span class="logo-span">ght</span>
                 </a>
             </div>
             
@@ -151,7 +151,7 @@
         
         <img src="/medias/logo2.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">ヾ(≧∪≦*)ノ〃</div>
+        <div class="logo-name">ght</div>
         <div class="logo-desc">
             
             Never really desperate, only the lost of the soul.
@@ -395,7 +395,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="华为软件精英挑战赛——普朗克计划"><a href="#华为软件精英挑战赛——普朗克计划" class="headerlink" title="华为软件精英挑战赛——普朗克计划"></a>华为软件精英挑战赛——普朗克计划</h1><p>2024华为软件精英挑战赛——普朗克计划</p>
-<p><img src="/../images/%E8%BD%AF%E4%BB%B6%E7%B2%BE%E8%8B%B1%E6%8C%91%E6%88%98%E8%B5%9B/1.png"></p>
+<p><img src="../images/软件精英挑战赛/1.png" alt=""></p>
 <p>赛题：<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/forum/thread-0209145106256505005-1-1.html">https://bbs.huaweicloud.com/forum/thread-0209145106256505005-1-1.html</a></p>
 <h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>题目概括：地图随机生成价值不等的货物，控制10个机器人收集货物到港口；地图中会有10个固定港口存储机器人的货物，控制5艘轮船前往港口搬运货物到销售处获得金额。</p>
 <p>我们队伍的思路是设计多个模块，<strong>运动模块</strong>控制机器人运动，包括上下左右、搬运、放等动作；<strong>目标选择模块</strong>帮助机器人选择目标货物和目标港口；<strong>路径规划模块</strong>帮助机器人进行路径查找；<strong>初始化模块</strong>获取初始化地图信息，预先查找部分路径和获取机器人状态；<strong>运输模块</strong>控制船收集买卖货物；<strong>防碰撞模块</strong>避免多个机器人之间互相碰撞与撞死；</p>
@@ -454,12 +454,10 @@
         obstacles_set<span class="token punctuation">.</span>add<span class="token punctuation">(</span>Node<span class="token punctuation">(</span>obstacle<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>obstacle<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
     <span class="token keyword">return</span> obstacles <span class="token punctuation">,</span>boat_capacity<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="二、目标选择模块"><a href="#二、目标选择模块" class="headerlink" title="二、目标选择模块"></a>二、目标选择模块</h2><h4 id="2-1-定义状态表"><a href="#2-1-定义状态表" class="headerlink" title="2.1 定义状态表"></a>2.1 定义状态表</h4><p>总共10个机器人，每个机器人有7个信息需要存储：**<u>目标货物的x坐标</u><strong>、</strong><u>目标货物的y坐标</u><strong>、<u><strong>目标港口的id</strong></u>、<u><strong>机器人此时的状态位</strong></u>（0表示闲置、1表示确定目标货物，需要寻找路径、2表示正在前往目标货物、3表示已经取到货物，需要搜索目标港口的路径、4表示正在前往目标港口）、</strong><u>目标货物的价格</u><strong>、</strong><u>该机器人是否是初始的机器人</u><strong>、</strong><u>上一次的目标港口</u>**。</p>
+<h2 id="二、目标选择模块"><a href="#二、目标选择模块" class="headerlink" title="二、目标选择模块"></a>二、目标选择模块</h2><h4 id="2-1-定义状态表"><a href="#2-1-定义状态表" class="headerlink" title="2.1 定义状态表"></a>2.1 定义状态表</h4><p>总共10个机器人，每个机器人有7个信息需要存储：<strong><u>目标货物的x坐标</u></strong>、<strong><u>目标货物的y坐标</u></strong>、<u><strong>目标港口的id</strong></u>、<u><strong>机器人此时的状态位</strong></u>（0表示闲置、1表示确定目标货物，需要寻找路径、2表示正在前往目标货物、3表示已经取到货物，需要搜索目标港口的路径、4表示正在前往目标港口）、<strong><u>目标货物的价格</u></strong>、<strong><u>该机器人是否是初始的机器人</u></strong>、<strong><u>上一次的目标港口</u></strong>。</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">target_table <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">,</span>dtype<span class="token operator">=</span><span class="token builtin">int</span><span class="token punctuation">)</span>
 target_table<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>  <span class="token comment">#最初所有机器人都是初始机器人，当机器人完成第一次寻路之后即不是初始机器人</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h4 id="2-2-定义策略"><a href="#2-2-定义策略" class="headerlink" title="2.2 定义策略"></a>2.2 定义策略</h4><p>选择货物的衡量标准是单位时间获得的金额大小即：$p&#x3D;\frac{货物价值}{初始点到货物的距离+货物到港口的距离}$</p>
+<h4 id="2-2-定义策略"><a href="#2-2-定义策略" class="headerlink" title="2.2 定义策略"></a>2.2 定义策略</h4><p>选择货物的衡量标准是单位时间获得的金额大小即：$p=\frac{货物价值}{初始点到货物的距离+货物到港口的距离}$</p>
 <p>公式中的距离我们采用真实距离，即真实路径的长度。但是如果是初始化的机器人，我们不采用真实路径长短，初始的货物很少，只要是机器人可达货物，即可前往。<strong>需要注意的是，如果某一个货物已经成为机器人的目标，则其他机器热无法选择该货物，我们将该货物到其他机器人的距离设置成99999</strong></p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">robot2goods</span><span class="token punctuation">(</span>goods<span class="token punctuation">,</span>robots<span class="token punctuation">,</span>berths<span class="token punctuation">,</span>paths<span class="token punctuation">,</span>now_frame<span class="token punctuation">,</span>robot_to_init_goods<span class="token punctuation">,</span>boat_capacity<span class="token punctuation">,</span>berth_final<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">global</span> target_table
@@ -552,9 +550,9 @@ target_table<span class="token punctuation">[</span><span class="token punctuati
                 target_table<span class="token punctuation">[</span>index_robot<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> available_goods<span class="token punctuation">[</span>Choose_good_id<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
 
     <span class="token keyword">return</span> index_good_choosen<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="三、路径规划模块"><a href="#三、路径规划模块" class="headerlink" title="三、路径规划模块"></a>三、路径规划模块</h2><h4 id="3-1-A-算法寻找路径"><a href="#3-1-A-算法寻找路径" class="headerlink" title="3.1 A*算法寻找路径"></a>3.1 A*算法寻找路径</h4><p>机器人路径规划问题中，我们采用常见的A*算法来实现对机器人路径优化。在算法中，我们采用欧氏距离作为启发式函数：<br>$$<br>   h&#x3D;\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}<br>$$</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># A*算法</span>
+<h2 id="三、路径规划模块"><a href="#三、路径规划模块" class="headerlink" title="三、路径规划模块"></a>三、路径规划模块</h2><h4 id="3-1-A-算法寻找路径"><a href="#3-1-A-算法寻找路径" class="headerlink" title="3.1 A*算法寻找路径"></a>3.1 A*算法寻找路径</h4><p>机器人路径规划问题中，我们采用常见的A*算法来实现对机器人路径优化。在算法中，我们采用欧氏距离作为启发式函数：</p>
+<script type="math/tex; mode=display">
+   h=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}</script><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># A*算法</span>
 <span class="token keyword">def</span> <span class="token function">astar</span><span class="token punctuation">(</span>start<span class="token punctuation">,</span> goal<span class="token punctuation">,</span> obstacles<span class="token punctuation">)</span><span class="token punctuation">:</span>
     open_set <span class="token operator">=</span> <span class="token builtin">set</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     closed_set <span class="token operator">=</span> <span class="token builtin">set</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -615,11 +613,10 @@ target_table<span class="token punctuation">[</span><span class="token punctuati
 <span class="token keyword">def</span> <span class="token function">get_manhadundis</span><span class="token punctuation">(</span>node1<span class="token punctuation">,</span> node2<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">return</span> <span class="token builtin">abs</span><span class="token punctuation">(</span>node1<span class="token punctuation">.</span>x <span class="token operator">-</span> node2<span class="token punctuation">.</span>x<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token builtin">abs</span><span class="token punctuation">(</span>node1<span class="token punctuation">.</span>y <span class="token operator">-</span> node2<span class="token punctuation">.</span>y<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>A*算法查找路径效果如下：</p>
-<p><img src="/../images/%E8%BD%AF%E4%BB%B6%E7%B2%BE%E8%8B%B1%E6%8C%91%E6%88%98%E8%B5%9B/2.png" alt="A*"></p>
-<p>A*可以很好的动态找到路径，但是经过多次优化，A*查找一次路径的时间还是很长：</p>
-<p><img src="/../images/%E8%BD%AF%E4%BB%B6%E7%B2%BE%E8%8B%B1%E6%8C%91%E6%88%98%E8%B5%9B/3.png"></p>
+<p><img src="../images/软件精英挑战赛/2.png" alt="A*"></p>
+<p>A<em>可以很好的动态找到路径，但是经过多次优化，A\</em>查找一次路径的时间还是很长：</p>
+<p><img src="../images/软件精英挑战赛/3.png" alt=""></p>
 <p>考虑到机器人与判题器交互时间上限是15ms，如果多个机器人同时查找路径，那时间显然是不够的。考虑到除了初始化的机器人，即机器人在初始化之后每次运货都是从某个港口出发，再回到某个港口。因此很自然的想到，我们可以存储每个港口到所有位置的所有路径，机器人每次寻找路径只需要查表即可，于是改变思路，我们只在初始化阶段使用A*寻找路径。</p>
 <h4 id="3-2-广度优先搜索遍历，查找港口到所有点的路径。"><a href="#3-2-广度优先搜索遍历，查找港口到所有点的路径。" class="headerlink" title="3.2 广度优先搜索遍历，查找港口到所有点的路径。"></a>3.2 广度优先搜索遍历，查找港口到所有点的路径。</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">is_valid</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> rows<span class="token punctuation">,</span> cols<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">return</span> <span class="token number">0</span> <span class="token operator">&lt;=</span> x <span class="token operator">&lt;</span> rows <span class="token keyword">and</span> <span class="token number">0</span> <span class="token operator">&lt;=</span> y <span class="token operator">&lt;</span> cols
@@ -649,16 +646,15 @@ target_table<span class="token punctuation">[</span><span class="token punctuati
                             queue<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>new_x<span class="token punctuation">,</span> new_y<span class="token punctuation">,</span> current_path<span class="token punctuation">)</span><span class="token punctuation">)</span>
 
     <span class="token keyword">return</span> paths<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>这样我们只需要在初始化阶段遍历10次地图（因为每个港口都需要遍历一次地图）即可查找10个港口到所有点的路径表。经过我们的计算，在200*200的地图中，可达点大约有25000，也就是每个港口我们要存储25000个路径，每个路径是一个长度平局为100的列表，经过我们的计算，这个路径表会占用存储将近<strong>3GB</strong>。担心比赛的提交系统有存储上限，因此这个方案我们没有使用。</p>
+<p>这样我们只需要在初始化阶段遍历10次地图（因为每个港口都需要遍历一次地图）即可查找10个港口到所有点的路径表。经过我们的计算，在200<em>200的地图中，可达点大约有25000，也就是每个港口我们要存储25000个路径，每个路径是一个长度平局为100的列表，经过我们的计算，这个路径表会占用存储将近<em>*3GB</em></em>。担心比赛的提交系统有存储上限，因此这个方案我们没有使用。</p>
 <h4 id="3-2-路径表转换方向表"><a href="#3-2-路径表转换方向表" class="headerlink" title="3.2 路径表转换方向表"></a>3.2 路径表转换方向表</h4><p>我们为每一个港口存储一个200*200的方向表，每个位置存储01234、0表示该位置无法到达该港口，1表示该位置到达港口则需要机器人向下移动，以此类推如下图：绿色表示港口，黑色表示障碍物：</p>
-<p><img src="/../images/%E8%BD%AF%E4%BB%B6%E7%B2%BE%E8%8B%B1%E6%8C%91%E6%88%98%E8%B5%9B/4.png"></p>
+<p><img src="../images/软件精英挑战赛/4.png" alt=""></p>
 <p>这样我们只需要存储10个200*200的表格，然后需要路径时，根据方向表格遍历提取路径，这样存储仅为：</p>
-<p><img src="/../images/%E8%BD%AF%E4%BB%B6%E7%B2%BE%E8%8B%B1%E6%8C%91%E6%88%98%E8%B5%9B/5.png"></p>
+<p><img src="../images/软件精英挑战赛/5.png" alt=""></p>
 <p>在表格中提取路径时间为：</p>
-<p><img src="/../images/%E8%BD%AF%E4%BB%B6%E7%B2%BE%E8%8B%B1%E6%8C%91%E6%88%98%E8%B5%9B/6.png" alt="image-20240329150928478"></p>
+<p><img src="../images/软件精英挑战赛/6.png" alt="image-20240329150928478"></p>
 <p>同时，在广搜过程中，我们记录方向表和单通道。方向表为查找路径，单通道为防止机器人在单通道撞死。效果如下，红色表示从目标港口到目标货物提取的路径，黄色表示地图中的单通道：</p>
-<p><img src="/../images/%E8%BD%AF%E4%BB%B6%E7%B2%BE%E8%8B%B1%E6%8C%91%E6%88%98%E8%B5%9B/7.png"></p>
+<p><img src="../images/软件精英挑战赛/7.png" alt=""></p>
 <h2 id="四、运动模块"><a href="#四、运动模块" class="headerlink" title="四、运动模块"></a>四、运动模块</h2><p>简单通过标准输出控制机器人和船运动：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">robots_movation</span><span class="token punctuation">(</span>robot_num<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>robot_num<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -687,7 +683,6 @@ target_table<span class="token punctuation">[</span><span class="token punctuati
 
 <span class="token keyword">def</span> <span class="token function">boat_go_virtual</span><span class="token punctuation">(</span>boat_id<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"go"</span><span class="token punctuation">,</span>boat_id<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <h2 id="五、防碰撞模块"><a href="#五、防碰撞模块" class="headerlink" title="五、防碰撞模块"></a>五、防碰撞模块</h2><p>防碰撞策略为：单通道进行锁死，非单通道采用优先停止，其次左右最后后退的策略防止机器人碰撞：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">detect_collision_1</span><span class="token punctuation">(</span>paths <span class="token punctuation">,</span> robots <span class="token punctuation">,</span> track_index<span class="token punctuation">,</span> connected_points <span class="token punctuation">,</span> connected_locks<span class="token punctuation">)</span><span class="token punctuation">:</span>
     
@@ -842,13 +837,11 @@ target_table<span class="token punctuation">[</span><span class="token punctuati
                     robot_next_pos<span class="token punctuation">[</span>target_robot<span class="token punctuation">]</span> <span class="token operator">=</span> Node<span class="token punctuation">(</span>paths<span class="token punctuation">[</span>target_robot<span class="token punctuation">]</span><span class="token punctuation">[</span>track_index<span class="token punctuation">[</span>target_robot<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token punctuation">,</span> paths<span class="token punctuation">[</span>target_robot<span class="token punctuation">]</span><span class="token punctuation">[</span>track_index<span class="token punctuation">[</span>target_robot<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
                     robot_next_pos_1 <span class="token operator">=</span> <span class="token builtin">set</span><span class="token punctuation">(</span>robot_next_pos<span class="token punctuation">)</span>
     <span class="token keyword">return</span> track_index<span class="token punctuation">,</span>paths<span class="token punctuation">,</span>connected_locks<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="六、运输模块"><a href="#六、运输模块" class="headerlink" title="六、运输模块"></a>六、运输模块</h2><p>五艘船选取港口的指标为：$p&#x3D;\frac{船可以装的货物价值}{买卖点到港口的时间+装货时间+离开时间}$，五艘船轮流选择目标港口，到达港口之后如果可以装满，则装满离开，如果无法装满，则根据$p$考虑是否前往下一个港口继续装。</p>
-<p>设置轮船的状态表，分别表示:**<u>目的港口id</u>、<u>轮船状态位</u><strong>（0表示闲置，1表示确定好港口，2表示在去港口的路上，3表示正在装货，4表示准备离开港口，5表示正在回买卖点）、<u><strong>轮次</strong></u>、</strong><u>船的转折次数</u>**：</p>
+<h2 id="六、运输模块"><a href="#六、运输模块" class="headerlink" title="六、运输模块"></a>六、运输模块</h2><p>五艘船选取港口的指标为：$p=\frac{船可以装的货物价值}{买卖点到港口的时间+装货时间+离开时间}$，五艘船轮流选择目标港口，到达港口之后如果可以装满，则装满离开，如果无法装满，则根据$p$考虑是否前往下一个港口继续装。</p>
+<p>设置轮船的状态表，分别表示:<strong><u>目的港口id</u>、<u>轮船状态位</u></strong>（0表示闲置，1表示确定好港口，2表示在去港口的路上，3表示正在装货，4表示准备离开港口，5表示正在回买卖点）、<u><strong>轮次</strong></u>、<strong><u>船的转折次数</u></strong>：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">target_table_boat_berth <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>dtype<span class="token operator">=</span><span class="token builtin">int</span><span class="token punctuation">)</span>
 target_table_boat_berth<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>运输选择：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">update_BoatStatus</span><span class="token punctuation">(</span>boats<span class="token punctuation">,</span>berths<span class="token punctuation">,</span>capacity<span class="token punctuation">,</span>now_frame<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">global</span> target_table_boat_berth
@@ -994,7 +987,6 @@ target_table_boat_berth<span class="token punctuation">[</span><span class="toke
                                     <span class="token comment">#最多为4因此应该小于9，这样最后加完应该为9</span>
                                     <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>berth_final<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">9</span><span class="token punctuation">:</span>
                                         berth_final<span class="token punctuation">.</span>append<span class="token punctuation">(</span>target_table_boat_berth<span class="token punctuation">[</span>index_boat<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <h2 id="七、总结"><a href="#七、总结" class="headerlink" title="七、总结"></a>七、总结</h2><ul>
 <li><p>采用静态和贪心的策略进行货物的选择，可能导致机器人运货量达不到最优；、</p>
 </li>
@@ -1251,7 +1243,7 @@ target_table_boat_berth<span class="token punctuation">[</span><span class="toke
 
         var url = document.location.href;
         newdiv.innerHTML += '<br />'
-            + '来源: ヾ(≧∪≦*)ノ〃<br />'
+            + '来源: ght<br />'
             + '文章作者: gaohaotian<br />'
             + '文章链接: <a href="' + url + '">' + url + '</a><br />'
             + '本文章著作权归作者所有，任何形式的转载都请注明出处。';

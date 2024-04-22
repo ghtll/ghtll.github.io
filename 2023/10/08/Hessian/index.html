@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="矩阵导数, ヾ(≧∪≦*)ノ〃">
+    <meta name="keywords" content="矩阵导数, ght">
     <meta name="description" content="矩阵导数介绍">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>矩阵导数 | ヾ(≧∪≦*)ノ〃</title>
+    <title>矩阵导数 | ght</title>
     <link rel="icon" type="image/png" href="/ght.png">
     
     <style>
@@ -69,7 +69,7 @@
                     
                     <img src="/medias/logo2.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">ヾ(≧∪≦*)ノ〃</span>
+                    <span class="logo-span">ght</span>
                 </a>
             </div>
             
@@ -151,7 +151,7 @@
         
         <img src="/medias/logo2.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">ヾ(≧∪≦*)ノ〃</div>
+        <div class="logo-name">ght</div>
         <div class="logo-desc">
             
             Never really desperate, only the lost of the soul.
@@ -392,44 +392,52 @@
 <li>向量函数：$f:R^n \rightarrow R^m$</li>
 </ul>
 <h1 id="导数"><a href="#导数" class="headerlink" title="导数"></a>导数</h1><p>导数针对一元函数$f:R \rightarrow R$，$f(x) \approx  f(x_0)+f^1(x_0)(x-x_0)$</p>
-<h1 id="梯度"><a href="#梯度" class="headerlink" title="梯度"></a>梯度</h1><p>梯度针对多元函数$f:R^n \rightarrow R$，梯度是一个向量：$\nabla f&#x3D;\begin{bmatrix} \frac{\partial f}{\partial x_1} \ \frac{\partial f}{\partial x_2} \ \frac{\partial f}{\partial x_3}\end{bmatrix}$,也可以写作：函数相对于$\vec {x}$的梯度算子为$\nabla_x$。<br>$$<br>f{(\vec x)}\approx f(\vec{x_0})+\nabla f(\vec{x_0})\cdot (\vec x- \vec{x_0})<br>$$</p>
-<h2 id="Jacobian-矩阵"><a href="#Jacobian-矩阵" class="headerlink" title="$Jacobian$矩阵"></a>$Jacobian$矩阵</h2><p>针对向量函数：$f:R^n \rightarrow R^m$</p>
-<p><img src="/../images/hessian_imgs/1.png"></p>
-<p>矩阵分量：<br>$$<br>\textbf{J}_{ij}&#x3D;\frac{\partial f_i}{\partial x_j}<br>$$<br>其他常用的符号：<br>$$<br>Df、\textbf{Df}、\textbf{J}_f(x_1,…,x_n),\frac{\partial(f_1,…,f_m)}{\partial (x_1,…,x_n)}<br>$$<br>近似：<br>$$<br>f{(\vec x)}\approx f(\vec{x_k})+J (\vec{x_k})\cdot (\vec x- \vec{x_k})<br>$$</p>
-<h1 id="Hessian-矩阵"><a href="#Hessian-矩阵" class="headerlink" title="$Hessian$矩阵"></a>$Hessian$矩阵</h1><p>使用于：$f:R^n \rightarrow R$，是函数的二阶矩阵：</p>
-<p><img src="/../images/hessian_imgs/2.png"></p>
-<p>这是一个$n×n$的方阵，可以写成：<br>$$<br>\textbf{H}_{ij}&#x3D;\frac{\partial ^2f}{\partial x_i \partial x_j}<br>$$<br>近似：</p>
-<p><img src="/../images/hessian_imgs/3.png"></p>
-<p><img src="/../images/hessian_imgs/4.png"></p>
-<p><img src="/../images/hessian_imgs/5.png"></p>
+<h1 id="梯度"><a href="#梯度" class="headerlink" title="梯度"></a>梯度</h1><p>梯度针对多元函数$f:R^n \rightarrow R$，梯度是一个向量：$\nabla f=\begin{bmatrix} \frac{\partial f}{\partial x_1} \\ \frac{\partial f}{\partial x_2} \\ \frac{\partial f}{\partial x_3}\end{bmatrix}$,也可以写作：函数相对于$\vec {x}$的梯度算子为$\nabla_x$。</p>
+<script type="math/tex; mode=display">
+f{(\vec x)}\approx f(\vec{x_0})+\nabla f(\vec{x_0})\cdot (\vec x- \vec{x_0})</script><h2 id="Jacobian-矩阵"><a href="#Jacobian-矩阵" class="headerlink" title="$Jacobian$矩阵"></a>$Jacobian$矩阵</h2><p>针对向量函数：$f:R^n \rightarrow R^m$</p>
+<p><img src="../images/hessian_imgs/1.png" alt=""></p>
+<p>矩阵分量：</p>
+<script type="math/tex; mode=display">
+\textbf{J}_{ij}=\frac{\partial f_i}{\partial x_j}</script><p>其他常用的符号：</p>
+<script type="math/tex; mode=display">
+Df、\textbf{Df}、\textbf{J}_f(x_1,...,x_n),\frac{\partial(f_1,...,f_m)}{\partial (x_1,...,x_n)}</script><p>近似：</p>
+<script type="math/tex; mode=display">
+f{(\vec x)}\approx f(\vec{x_k})+J (\vec{x_k})\cdot (\vec x- \vec{x_k})</script><h1 id="Hessian-矩阵"><a href="#Hessian-矩阵" class="headerlink" title="$Hessian$矩阵"></a>$Hessian$矩阵</h1><p>使用于：$f:R^n \rightarrow R$，是函数的二阶矩阵：</p>
+<p><img src="../images/hessian_imgs/2.png" alt=""></p>
+<p>这是一个$n×n$的方阵，可以写成：</p>
+<script type="math/tex; mode=display">
+\textbf{H}_{ij}=\frac{\partial ^2f}{\partial x_i \partial x_j}</script><p>近似：</p>
+<p><img src="../images/hessian_imgs/3.png" alt=""></p>
+<p><img src="../images/hessian_imgs/4.png" alt=""></p>
+<p><img src="../images/hessian_imgs/5.png" alt=""></p>
 <h1 id="Fisher-矩阵"><a href="#Fisher-矩阵" class="headerlink" title="$Fisher$矩阵"></a>$Fisher$矩阵</h1><p>$Fisher \ information$:假设观察到的数据$X_1,X2,…,X_n$服从一个概率分布$f(X;\theta)$,$\theta$是目标参数，那么似然函数$likelihood$：</p>
-<p><img src="/../images/hessian_imgs/6.png"></p>
+<p><img src="../images/hessian_imgs/6.png" alt=""></p>
 <p>为了解开方程，需要$\log(likelihood)$的一阶导数为0，其一阶导数$Score\ function$：</p>
-<p><img src="/../images/hessian_imgs/7.png"></p>
+<p><img src="../images/hessian_imgs/7.png" alt=""></p>
 <p>那么$Fisher\ information$用$I(\theta)$表示，定义即$Score\ function$的二阶矩：</p>
-<p><img src="/../images/hessian_imgs/8.png"></p>
-<p>现证明$E[S(X;\theta)]&#x3D;0$：</p>
-<p><img src="/../images/hessian_imgs/9.png"></p>
+<p><img src="../images/hessian_imgs/8.png" alt=""></p>
+<p>现证明$E[S(X;\theta)]=0$：</p>
+<p><img src="../images/hessian_imgs/9.png" alt=""></p>
 <p>从而得到：</p>
-<p><img src="/../images/hessian_imgs/10.png"></p>
+<p><img src="../images/hessian_imgs/10.png" alt=""></p>
 <p>于是得到$Fisher \ information$的第一条数学意义：用来估计$Maximum\ Likelihood \ Estimate$方程的方差。即收集到的数据越多，象征着得到的信息越多。</p>
 <p>对于$\theta$有多大把握，可以围绕估计值的期望，根据模型评分的协方差定义一个不确定性度量：</p>
-<p><img src="/../images/hessian_imgs/11.png"></p>
+<p><img src="../images/hessian_imgs/11.png" alt=""></p>
 <p>上面评分函数的协方差即$Fisher $信息的定义，一般$\theta $ 是一个向量，即$Fisher $信息是以矩阵形式存在，称为$Fisher$信息矩阵$FIM$：</p>
-<p><img src="/../images/hessian_imgs/12.png"></p>
-<p>一般情况下似然函数是复杂的，很难计算期望值，因此可以使用经验分布来近似$F$中的期望值。它由训练数据$X&#x3D;{X_1,X_2,…,X_N}$给出，即：</p>
-<p><img src="/../images/hessian_imgs/13.png"></p>
+<p><img src="../images/hessian_imgs/12.png" alt=""></p>
+<p>一般情况下似然函数是复杂的，很难计算期望值，因此可以使用经验分布来近似$F$中的期望值。它由训练数据$X={X_1,X_2,…,X_N}$给出，即：</p>
+<p><img src="../images/hessian_imgs/13.png" alt=""></p>
 <h1 id="Fisher-和-Hessian"><a href="#Fisher-和-Hessian" class="headerlink" title="$Fisher$和$Hessian$"></a>$Fisher$和$Hessian$</h1><p>对数似然的负期望$Hessian$，等于$Fisher$信息矩阵。</p>
 <p>对数似然的$Hessian$为：</p>
-<p><img src="/../images/hessian_imgs/14.png"></p>
+<p><img src="../images/hessian_imgs/14.png" alt=""></p>
 <p>期望：</p>
-<p><img src="/../images/hessian_imgs/15.png"></p>
+<p><img src="../images/hessian_imgs/15.png" alt=""></p>
 <p>因此：</p>
-<p><img src="/../images/hessian_imgs/16.png"></p>
+<p><img src="../images/hessian_imgs/16.png" alt=""></p>
 <p>费舍尔信息矩阵被定义为评分函数的协方差，它是一个曲率矩阵，可以理解为对数似然函数的黑森负期望。因此，F的直接应用，是在二阶优化方法中替换H </p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/26561604">(4 封私信) 费雪信息 (Fisher information) 的直观意义是什么？ - 知乎 (zhihu.com)</a></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/228099600">费舍尔信息矩阵及自然梯度法 - 知乎 (zhihu.com)</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV17B4y1y7wX/?spm_id_from=333.788.recommend_more_video.-1&vd_source=50e29aacf23dfe7179edd1b5d8ece200">【TRPO系列讲解】（二）Hessian矩阵、Fisher信息矩阵、KL散度_哔哩哔哩_bilibili</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV17B4y1y7wX/?spm_id_from=333.788.recommend_more_video.-1&amp;vd_source=50e29aacf23dfe7179edd1b5d8ece200">【TRPO系列讲解】（二）Hessian矩阵、Fisher信息矩阵、KL散度_哔哩哔哩_bilibili</a></p>
 
                 
             </div>
@@ -678,7 +686,7 @@
 
         var url = document.location.href;
         newdiv.innerHTML += '<br />'
-            + '来源: ヾ(≧∪≦*)ノ〃<br />'
+            + '来源: ght<br />'
             + '文章作者: gaohaotian<br />'
             + '文章链接: <a href="' + url + '">' + url + '</a><br />'
             + '本文章著作权归作者所有，任何形式的转载都请注明出处。';

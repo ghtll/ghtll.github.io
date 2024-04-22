@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="emacs, ヾ(≧∪≦*)ノ〃">
+    <meta name="keywords" content="emacs, ght">
     <meta name="description" content="Emacs学习历程">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>emacs | ヾ(≧∪≦*)ノ〃</title>
+    <title>emacs | ght</title>
     <link rel="icon" type="image/png" href="/ght.png">
     
     <style>
@@ -69,7 +69,7 @@
                     
                     <img src="/medias/logo2.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">ヾ(≧∪≦*)ノ〃</span>
+                    <span class="logo-span">ght</span>
                 </a>
             </div>
             
@@ -151,7 +151,7 @@
         
         <img src="/medias/logo2.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">ヾ(≧∪≦*)ノ〃</div>
+        <div class="logo-name">ght</div>
         <div class="logo-desc">
             
             Never really desperate, only the lost of the soul.
@@ -387,8 +387,8 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>最近了解了一个强大的编辑器Emacs，被它方便快捷的功能深深吸引，经过几天的琢磨，对Emacs有了一个初步的了解，记录一下自己的学习历程</p>
-<h1 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h1><p>初步的学习了解是通过哔哩哔哩学习的，本人看的Emacs高手修炼手册视频（<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV13g4y167Zn/?p=51&spm_id_from=333.880.my_history.page.click">47-LSP+Go语言编程环境配置_哔哩哔哩_bilibili</a>），觉得视频比较简单易懂。动手跟着教学配置了一遍Emacs的界面，对其有了初步的了解。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>参考：<a target="_blank" rel="noopener" href="https://github.com/doomemacs/doomemacs/blob/master/docs/getting_started.org#install">doomemacs&#x2F;docs&#x2F;getting_started.org at master · doomemacs&#x2F;doomemacs · GitHub</a></p>
+<h1 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h1><p>初步的学习了解是通过哔哩哔哩学习的，本人看的Emacs高手修炼手册视频（<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV13g4y167Zn/?p=51&amp;spm_id_from=333.880.my_history.page.click">47-LSP+Go语言编程环境配置_哔哩哔哩_bilibili</a>），觉得视频比较简单易懂。动手跟着教学配置了一遍Emacs的界面，对其有了初步的了解。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>参考：<a target="_blank" rel="noopener" href="https://github.com/doomemacs/doomemacs/blob/master/docs/getting_started.org#install">doomemacs/docs/getting_started.org at master · doomemacs/doomemacs · GitHub</a></p>
 <p>我是在windows下安装的Emacs，通过教程的“WSL + Ubuntu 20.04 LTS“进行安装。</p>
 <ol>
 <li><p>安装WSL：打开Powershell，然后输入</p>
@@ -399,7 +399,7 @@
 <li><p>在Microsoft Store安装Ubuntu 20.04L&gt;TS</p>
 </li>
 <li><p>启动Ubuntu，我这里一直报错，于是参考了这篇文章：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/599286889">解决WSL2的 0x800701bc错误 - 知乎 (zhihu.com)</a></p>
-<p><img src="/../images/Emacs/1.png" alt="image-20240229152911205"></p>
+<p><img src="../images/Emacs/1.png" alt="image-20240229152911205"></p>
 </li>
 <li><p>更新升级Ubuntu：</p>
 <pre class="line-numbers language-none"><code class="language-none">sudo apt update &amp;&amp; sudo apt upgrade<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -413,118 +413,123 @@ sudo apt install emacs28<span aria-hidden="true" class="line-numbers-rows"><span
 <pre class="line-numbers language-none"><code class="language-none"># required dependencies
 sudo apt-get install git ripgrep
 # optional dependencies
-sudo apt-get install fd-find<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+sudo apt-get install fd-find<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ol>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>配置文件地址：<a target="_blank" rel="noopener" href="https://github.com/syl20bnr/spacemacs">GitHub - syl20bnr&#x2F;spacemacs: A community-driven Emacs distribution - The best editor is neither Emacs nor Vim, it’s Emacs <em>and</em> Vim!</a></p>
-<p>Spacemacs学习地址：<a target="_blank" rel="noopener" href="https://github.com/liuzhijun-source/spacemacs-14-days">GitHub - liuzhijun-source&#x2F;spacemacs-14-days: 一个 Spacemacs 的入门教程</a></p>
-<h1 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h1><table>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>配置文件地址：<a target="_blank" rel="noopener" href="https://github.com/syl20bnr/spacemacs">GitHub - syl20bnr/spacemacs: A community-driven Emacs distribution - The best editor is neither Emacs nor Vim, it’s Emacs <em>and</em> Vim!</a></p>
+<p>Spacemacs学习地址：<a target="_blank" rel="noopener" href="https://github.com/liuzhijun-source/spacemacs-14-days">GitHub - liuzhijun-source/spacemacs-14-days: 一个 Spacemacs 的入门教程</a></p>
+<h1 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h1><div class="table-container">
+<table>
 <thead>
 <tr>
-<th align="center">快捷键</th>
-<th align="center">描述</th>
+<th style="text-align:center">快捷键</th>
+<th style="text-align:center">描述</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">c-c c-t</td>
-<td align="center">org模式todo</td>
+<tbody>
+<tr>
+<td style="text-align:center">c-c c-t</td>
+<td style="text-align:center">org模式todo</td>
 </tr>
 <tr>
-<td align="center">c-x b</td>
-<td align="center">查找buffer</td>
+<td style="text-align:center">c-x b</td>
+<td style="text-align:center">查找buffer</td>
 </tr>
 <tr>
-<td align="center">SPC x</td>
-<td align="center">查找并跳转到“单词x或者X开头的单词位置”，x是char字符，可以是任意字符</td>
+<td style="text-align:center">SPC x</td>
+<td style="text-align:center">查找并跳转到“单词x或者X开头的单词位置”，x是char字符，可以是任意字符</td>
 </tr>
 <tr>
-<td align="center">!</td>
-<td align="center">执行shell命令</td>
+<td style="text-align:center">!</td>
+<td style="text-align:center">执行shell命令</td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
-<td align="center">*或者&#x2F;</td>
-<td align="center">在project里搜索关键词</td>
+<td style="text-align:center">*或者/</td>
+<td style="text-align:center">在project里搜索关键词</td>
 </tr>
 <tr>
-<td align="center">1 2 3 … 9</td>
-<td align="center">跳转到第n个window窗口</td>
+<td style="text-align:center">1 2 3 … 9</td>
+<td style="text-align:center">跳转到第n个window窗口</td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
-<td align="center">;</td>
-<td align="center">用来注释代码的，这个可以查看一下帮助手册。各种注释操作</td>
+<td style="text-align:center">;</td>
+<td style="text-align:center">用来注释代码的，这个可以查看一下帮助手册。各种注释操作</td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
-<td align="center">a u</td>
-<td align="center">undo作用。可以上下操作，是undo的history列表。</td>
+<td style="text-align:center">a u</td>
+<td style="text-align:center">undo作用。可以上下操作，是undo的history列表。</td>
 </tr>
 <tr>
-<td align="center">b b</td>
-<td align="center">查找并切换到buffer&#x2F;recent-file</td>
+<td style="text-align:center">b b</td>
+<td style="text-align:center">查找并切换到buffer/recent-file</td>
 </tr>
 <tr>
-<td align="center">b d</td>
-<td align="center">删除当前buffer</td>
+<td style="text-align:center">b d</td>
+<td style="text-align:center">删除当前buffer</td>
 </tr>
 <tr>
-<td align="center">f f</td>
-<td align="center">查找文件以及recent-files</td>
+<td style="text-align:center">f f</td>
+<td style="text-align:center">查找文件以及recent-files</td>
 </tr>
 <tr>
-<td align="center">f y</td>
-<td align="center">复制并显示当前buffer文件名。完整路径</td>
+<td style="text-align:center">f y</td>
+<td style="text-align:center">复制并显示当前buffer文件名。完整路径</td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center">layout的保存，输入layout的名称</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">layout的保存，输入layout的名称</td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
-<td align="center">p p</td>
-<td align="center">打开某个project。</td>
+<td style="text-align:center">p p</td>
+<td style="text-align:center">打开某个project。</td>
 </tr>
 <tr>
-<td align="center">s s</td>
-<td align="center">在当前buffer里搜索关键词。</td>
+<td style="text-align:center">s s</td>
+<td style="text-align:center">在当前buffer里搜索关键词。</td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
-<td align="center">w -</td>
-<td align="center">window横切</td>
+<td style="text-align:center">w -</td>
+<td style="text-align:center">window横切</td>
 </tr>
 <tr>
-<td align="center">w &#x2F;</td>
-<td align="center">window竖切</td>
+<td style="text-align:center">w /</td>
+<td style="text-align:center">window竖切</td>
 </tr>
 <tr>
-<td align="center">w c</td>
-<td align="center">window close</td>
+<td style="text-align:center">w c</td>
+<td style="text-align:center">window close</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 
                 
             </div>
@@ -773,7 +778,7 @@ sudo apt-get install fd-find<span aria-hidden="true" class="line-numbers-rows"><
 
         var url = document.location.href;
         newdiv.innerHTML += '<br />'
-            + '来源: ヾ(≧∪≦*)ノ〃<br />'
+            + '来源: ght<br />'
             + '文章作者: gaohaotian<br />'
             + '文章链接: <a href="' + url + '">' + url + '</a><br />'
             + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
