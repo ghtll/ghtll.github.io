@@ -389,9 +389,9 @@
                 <h1 id="Quip-2-Bit-Quantization-of-Large-Language-Models-With-Guarantees"><a href="#Quip-2-Bit-Quantization-of-Large-Language-Models-With-Guarantees" class="headerlink" title="Quip:2-Bit Quantization of Large Language Models With Guarantees"></a>Quip:2-Bit Quantization of Large Language Models With Guarantees</h1><h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 Introduction"></a>1 Introduction</h2><p>作者发现当权重和代理Hessian矩阵不相关时，量化过程更容易进行，因为权重的变化不会受到不同方向上的重要性差异的影响，从而减少了舍入误差的可能性，提高了量化的效率。具体来说，文章引入了不相干处理量化，包含两个步骤：1、自适应舍入过程。2、处理权重矩阵和海森矩阵不相干</p>
 <h2 id="2-Related-Work"><a href="#2-Related-Work" class="headerlink" title="2 Related Work"></a>2 Related Work</h2><p> 略</p>
 <h2 id="3-Quantization-With-Incoherence-Processing-Adaptive-Rounding-Step"><a href="#3-Quantization-With-Incoherence-Processing-Adaptive-Rounding-Step" class="headerlink" title="3 Quantization With Incoherence Processing: Adaptive Rounding Step"></a>3 Quantization With Incoherence Processing: Adaptive Rounding Step</h2><p>自适应舍入目标函数：</p>
-<p><img src="/images/quip/1.png" alt="公式1"></p>
+<p><img src="../images/quip/1.png" alt="公式1"></p>
 <p><strong>推导</strong></p>
-<p><img src="/images/quip/2.png" alt="公式1推导"></p>
+<p><img src="images/quip/2.png" alt="公式1推导"></p>
 <h3 id="3-1-LDLQ-An-Optimal-Adaptive-Rounding-Method"><a href="#3-1-LDLQ-An-Optimal-Adaptive-Rounding-Method" class="headerlink" title="3.1 LDLQ: An Optimal Adaptive Rounding Method"></a>3.1 LDLQ: An Optimal Adaptive Rounding Method</h3><p>对于$k=1,2\dots n:$迭代更新${W}$:</p>
 <p><img src="/images/quip/3.png" alt=""></p>
 <p>$W_k$表示第$k$列，$W_{1:(k-1)}$表示前$k-1$列，$\mathcal{Q}$表示对整数的最近舍入或者标准无偏摄入：$E[\mathcal{Q}(z)]=z$并且$a_k\in R^{k-1}$</p>
