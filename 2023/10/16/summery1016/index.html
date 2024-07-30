@@ -354,7 +354,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-01-20
+                    2024-04-22
                 </div>
                 
 
@@ -416,23 +416,23 @@
 </div>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>将权重近似为(将这种分解应用于模型的每个权重矩阵)：</p>
 <script type="math/tex; mode=display">
-W=UV+S</script><p><img src="../images/summery1016_imgs/1.png" alt=""></p>
+W=UV+S</script><p><img src="/images/summery1016_imgs/1.png" alt=""></p>
 <p>重要性评分公式方法：</p>
-<p><img src="../images/summery1016_imgs/2.png" alt="image-20231016142137668"></p>
-<p><img src="../images/summery1016_imgs/43.png" alt="    "></p>
+<p><img src="/images/summery1016_imgs/2.png" alt="image-20231016142137668"></p>
+<p><img src="/images/summery1016_imgs/43.png" alt="    "></p>
 <h2 id="i"><a href="#i" class="headerlink" title="i"></a>i</h2><p>剪枝采用迭代剪枝，在迭代过程中S的重要性评估不稳定，原文采用平滑+大batchsize。由于样本造成的不稳定，这里可以想一个办法。要不让样本更稳定，要不更换一个重要性评估方法。</p>
 <p>初始化$U^0$和$V^0$会丢失很多知识，在文中，矩阵分解占比仅有1-5％，其余都是S的占比。如果在不增加UV的占比情况下提高他的知识，是否可以去除更多的S？考虑加权分解。先加权分解UV，在迭代剪枝。最后微调？</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p><strong>评估任务：</strong>natural language understanding (NLU)、question answering (QA)、natural language generation (NLG)</p>
 <p><strong>压缩模型：</strong>DeBERTaV3-base、, BERT-base、BART-large</p>
 <p><strong>Baselines:</strong> Full fine-tuning 、Movement pruning、Iterative pruning (ITP)</p>
 <h3 id="Natural-Language-Understanding"><a href="#Natural-Language-Understanding" class="headerlink" title="Natural Language Understanding"></a>Natural Language Understanding</h3><p>在通用语言理解评估（GLUE）基准上修剪DeBERTaV3-base模型：</p>
-<p><img src="../images/summery1016_imgs/3.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/3.png" alt=""></p>
 <p>修剪bert：</p>
-<p><img src="../images/summery1016_imgs/4.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/4.png" alt=""></p>
 <h3 id="Question-Answering"><a href="#Question-Answering" class="headerlink" title="Question Answering"></a>Question Answering</h3><p>在SQuADv1.1上压缩了DeBERTaV3-base和BERT-base:</p>
-<p><img src="../images/summery1016_imgs/5.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/5.png" alt=""></p>
 <h3 id="Natural-Language-Generation"><a href="#Natural-Language-Generation" class="headerlink" title="Natural Language Generation"></a>Natural Language Generation</h3><p>在XSum和CNN/DailyMail数据集上压缩BART-large：</p>
-<p><img src="../images/summery1016_imgs/6.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/6.png" alt=""></p>
 <h1 id="2-LoRAPrune"><a href="#2-LoRAPrune" class="headerlink" title="2 LoRAPrune"></a>2 LoRAPrune</h1><h2 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -461,21 +461,21 @@ W=UV+S</script><p><img src="../images/summery1016_imgs/1.png" alt=""></p>
 </tbody>
 </table>
 </div>
-<h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><p><img src="../images/summery1016_imgs/10.png" alt=""></p>
+<h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><p><img src="/images/summery1016_imgs/10.png" alt=""></p>
 <p>插入lora，用lora的梯度代替权重的梯度。</p>
 <p>使用一阶泰勒展开式来近似的重要性过于复杂，因此改为使用BA的梯度：</p>
-<p><img src="../images/summery1016_imgs/7.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/8.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/7.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/8.png" alt=""></p>
 <p>BA梯度仍然复杂，因此继续近似：</p>
-<p><img src="../images/summery1016_imgs/9.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/44.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/9.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/44.png" alt=""></p>
 <h2 id="i-1"><a href="#i-1" class="headerlink" title="i"></a>i</h2><p>用lora代替w进行计算。前百分之10与后百分之30只涉及参数更新。修剪过程采用“修剪-微调-修剪方法”。</p>
 <h2 id="实验-1"><a href="#实验-1" class="headerlink" title="实验"></a>实验</h2><p><strong>任务</strong>：VTB-1k(19 个图像分类数据集)、FGVC(CUB-200-2011、NABirds、Oxford Flowers、Stanford Cars 和 Stanford Dogs)、GLUE(CoLA、SST-2、MRPC、STS-B、QQP、MNLI、QNLI、RTE 等任务)</p>
 <p>对于CV任务采用ViT-B/16模型，对于NLP任务采用 BERT-base模型（RTX3090）</p>
 <p>对比：幅值修剪（MaP）、带LoRA的幅值修剪（MaP-LoRA）、运动修剪（MvP）、随机修剪（RaP）、参数高效稀疏性（PST）</p>
 <p>结果（<strong>微调和剪枝过程结合在一起是高效</strong>）：</p>
-<p><img src="../images/summery1016_imgs/11.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/12.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/11.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/12.png" alt=""></p>
 <h1 id="3-PruneOFA"><a href="#3-PruneOFA" class="headerlink" title="3 PruneOFA"></a>3 PruneOFA</h1><h2 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -505,14 +505,14 @@ W=UV+S</script><p><img src="../images/summery1016_imgs/1.png" alt=""></p>
 </table>
 </div>
 <h2 id="方法-2"><a href="#方法-2" class="headerlink" title="方法"></a>方法</h2><p>采用渐进幅度修剪：</p>
-<p><img src="../images/summery1016_imgs/13.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/13.png" alt=""></p>
 <p>流程：</p>
-<p><img src="../images/summery1016_imgs/14.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/14.png" alt=""></p>
 <p>提出模式锁的方法，它可以防止在训练模型时改变模型中发现的零</p>
 <h2 id="实验-2"><a href="#实验-2" class="headerlink" title="实验"></a>实验</h2><p>模型：BERT-Base, BERT-Large and DistilBERT</p>
-<p><img src="../images/summery1016_imgs/15.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/16.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/17.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/15.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/16.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/17.png" alt=""></p>
 <h1 id="4-oBert"><a href="#4-oBert" class="headerlink" title="4 oBert"></a>4 oBert</h1><h2 id="简介-3"><a href="#简介-3" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -542,12 +542,12 @@ W=UV+S</script><p><img src="../images/summery1016_imgs/1.png" alt=""></p>
 </table>
 </div>
 <h2 id="方法-3"><a href="#方法-3" class="headerlink" title="方法"></a>方法</h2><p>采用二阶Hassian矩阵近似重要性进行剪枝：</p>
-<p><img src="../images/summery1016_imgs/18.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/18.png" alt=""></p>
 <p>采用经验fisher矩阵近似hassian矩阵：</p>
-<p><img src="../images/summery1016_imgs/19.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/19.png" alt=""></p>
 <h2 id="实验-3"><a href="#实验-3" class="headerlink" title="实验"></a>实验</h2><p>比较方法：Movement Pruning (MvP)、Lottery Ticket (LT-BERT)</p>
-<p><img src="../images/summery1016_imgs/20.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/21.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/20.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/21.png" alt=""></p>
 <h1 id="5-FLOP"><a href="#5-FLOP" class="headerlink" title="5 FLOP"></a>5 FLOP</h1><h2 id="简介-4"><a href="#简介-4" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -577,16 +577,16 @@ W=UV+S</script><p><img src="../images/summery1016_imgs/1.png" alt=""></p>
 </table>
 </div>
 <h3 id="方法-4"><a href="#方法-4" class="headerlink" title="方法"></a>方法</h3><p>端到端的训练方法，优化目标：</p>
-<p><img src="../images/summery1016_imgs/22.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/22.png" alt=""></p>
 <p>重新参数化技巧：</p>
-<p><img src="../images/summery1016_imgs/23.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/23.png" alt=""></p>
 <p>利用低秩因子分解的权重矩阵参数化方法：</p>
-<p><img src="../images/summery1016_imgs/24.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/24.png" alt=""></p>
 <p>增强拉格朗日方法：</p>
-<p><img src="../images/summery1016_imgs/25.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/25.png" alt=""></p>
 <p>优化的最终目标：</p>
-<p><img src="../images/summery1016_imgs/26.png" alt=""></p>
-<h2 id="实验-4"><a href="#实验-4" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/27.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/26.png" alt=""></p>
+<h2 id="实验-4"><a href="#实验-4" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/27.png" alt=""></p>
 <h1 id="6-FWSVD"><a href="#6-FWSVD" class="headerlink" title="6 FWSVD"></a>6 FWSVD</h1><h2 id="简介-5"><a href="#简介-5" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -616,17 +616,17 @@ W=UV+S</script><p><img src="../images/summery1016_imgs/1.png" alt=""></p>
 </table>
 </div>
 <h3 id="方法-5"><a href="#方法-5" class="headerlink" title="方法"></a>方法</h3><p>矩阵分解：</p>
-<p><img src="../images/summery1016_imgs/28.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/28.png" alt=""></p>
 <p>Fisher信息：</p>
-<p><img src="../images/summery1016_imgs/29.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/29.png" alt=""></p>
 <p>费雪加权低秩近似：</p>
-<p><img src="../images/summery1016_imgs/30.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/30.png" alt=""></p>
 <h2 id="i-2"><a href="#i-2" class="headerlink" title="i"></a>i</h2><p>微调lora（保留增量梯度）-&gt;计算重要性-&gt;加权分解SVD-&gt;W=BA+S剪枝（剪枝S，微调BA）</p>
 <p>W每一行相同的权重，否则没有闭环解？如何改进。</p>
 <p><strong>单词嵌入层(非负矩阵分解，考虑人脸识别和数字分解)</strong></p>
 <h2 id="实验-5"><a href="#实验-5" class="headerlink" title="实验"></a>实验</h2><p>压缩路径：</p>
-<p><img src="../images/summery1016_imgs/31.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/32.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/31.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/32.png" alt=""></p>
 <h1 id="7-LLM-Pruner"><a href="#7-LLM-Pruner" class="headerlink" title="7 LLM-Pruner"></a>7 LLM-Pruner</h1><h2 id="简介-6"><a href="#简介-6" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -657,7 +657,7 @@ W=UV+S</script><p><img src="../images/summery1016_imgs/1.png" alt=""></p>
 </div>
 <h2 id="方法-6"><a href="#方法-6" class="headerlink" title="方法"></a>方法</h2><p>发现依赖结构-&gt;评估重要性(采用二阶导数)-&gt;微调恢复</p>
 <h2 id="实验-6"><a href="#实验-6" class="headerlink" title="实验"></a>实验</h2><p>无baselines</p>
-<p><img src="../images/summery1016_imgs/33.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/33.png" alt=""></p>
 <h1 id="8-SHEARED-LLAMA"><a href="#8-SHEARED-LLAMA" class="headerlink" title="8 SHEARED LLAMA"></a>8 SHEARED LLAMA</h1><h2 id="简介-7"><a href="#简介-7" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -688,9 +688,9 @@ W=UV+S</script><p><img src="../images/summery1016_imgs/1.png" alt=""></p>
 </div>
 <h2 id="方法-7"><a href="#方法-7" class="headerlink" title="方法"></a>方法</h2><p>微调对于结构剪枝至关重要</p>
 <p>端到端剪枝</p>
-<p><img src="../images/summery1016_imgs/34.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/34.png" alt=""></p>
 <p>根据训练数据比例动态加载训练数据</p>
-<h2 id="实验-7"><a href="#实验-7" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/35.png" alt=""></p>
+<h2 id="实验-7"><a href="#实验-7" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/35.png" alt=""></p>
 <h1 id="9-ZipLM"><a href="#9-ZipLM" class="headerlink" title="9 ZipLM"></a>9 ZipLM</h1><h2 id="简介-8"><a href="#简介-8" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -721,10 +721,10 @@ W=UV+S</script><p><img src="../images/summery1016_imgs/1.png" alt=""></p>
 </div>
 <h2 id="方法-8"><a href="#方法-8" class="headerlink" title="方法"></a>方法</h2><p>一次剪枝一个结构来解决相关性问题。</p>
 <p>权重更新，二阶导数近似：</p>
-<p><img src="../images/summery1016_imgs/36.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/36.png" alt=""></p>
 <p>蒸馏：</p>
-<p><img src="../images/summery1016_imgs/37.png" alt=""></p>
-<h2 id="实验-8"><a href="#实验-8" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/38.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/37.png" alt=""></p>
+<h2 id="实验-8"><a href="#实验-8" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/38.png" alt=""></p>
 <h1 id="10-Matrix-Decomposition"><a href="#10-Matrix-Decomposition" class="headerlink" title="10 Matrix Decomposition"></a>10 Matrix Decomposition</h1><h2 id="简介-9"><a href="#简介-9" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -758,13 +758,13 @@ W=UV+S</script><p><img src="../images/summery1016_imgs/1.png" alt=""></p>
 </li>
 <li><p>知识蒸馏，训练损失由三部分构成：</p>
 <script type="math/tex; mode=display">
-L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery1016_imgs/39.png" alt=""></p>
+L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="/images/summery1016_imgs/39.png" alt=""></p>
 </li>
 </ol>
-<p><img src="../images/summery1016_imgs/40.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/41.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/40.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/41.png" alt=""></p>
 <p><strong>基础模型(微调模型)用于分解和作为教师模型</strong></p>
-<h2 id="实验-9"><a href="#实验-9" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/42.png" alt=""></p>
+<h2 id="实验-9"><a href="#实验-9" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/42.png" alt=""></p>
 <h1 id="11-Movement-Pruning"><a href="#11-Movement-Pruning" class="headerlink" title="11 Movement Pruning"></a>11 Movement Pruning</h1><h2 id="简介-10"><a href="#简介-10" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -794,13 +794,13 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 </table>
 </div>
 <h2 id="方法-10"><a href="#方法-10" class="headerlink" title="方法"></a>方法</h2><p>考虑到权重值在迁移学习中不是从头开始的，传统的基于幅度的剪枝可能无法充分适应新任务的需求，因为他们的修剪决策是基于原始模型的权重值。公式推导：</p>
-<p><img src="../images/summery1016_imgs/45.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/46.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/112.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/113.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/45.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/46.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/112.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/113.png" alt=""></p>
 <p>从公式可以看出，当W远离0点是，重要性S变大。于是修剪那些逐渐靠近0的权重而幅度修剪的方法修剪离0近的值。</p>
-<p><img src="../images/summery1016_imgs/114.png" alt=""></p>
-<h2 id="实验-10"><a href="#实验-10" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/115.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/114.png" alt=""></p>
+<h2 id="实验-10"><a href="#实验-10" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/115.png" alt=""></p>
 <h1 id="12-ITP"><a href="#12-ITP" class="headerlink" title="12 ITP"></a>12 ITP</h1><h2 id="简介-11"><a href="#简介-11" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -830,9 +830,9 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 </table>
 </div>
 <h2 id="方法-11"><a href="#方法-11" class="headerlink" title="方法"></a>方法</h2><p>计算精确的重要性对于大型网络来说是及其昂贵的，然后采用一阶或二阶近似的方法评估重要性。</p>
-<p><img src="../images/summery1016_imgs/121.png" alt="image-20231026144556225"></p>
-<p><img src="../images/summery1016_imgs/122.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/123.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/121.png" alt="image-20231026144556225"></p>
+<p><img src="/images/summery1016_imgs/122.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/123.png" alt=""></p>
 <p>以一个训练过的网络作为输入，并在一个具有较小学习率的迭代微调过程中对其进行剪枝。在每个时期内，都要重复以下步骤：</p>
 <ol>
 <li>对于每个小批处理，我们计算参数梯度，并通过梯度下降来更新网络权值。我们还计算了每个神经元（或滤波器）的重要性</li>
@@ -867,7 +867,7 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 </tbody>
 </table>
 </div>
-<h2 id="方法-12"><a href="#方法-12" class="headerlink" title="方法"></a>方法</h2><p><img src="../images/summery1016_imgs/131.png" alt=""></p>
+<h2 id="方法-12"><a href="#方法-12" class="headerlink" title="方法"></a>方法</h2><p><img src="/images/summery1016_imgs/131.png" alt=""></p>
 <h2 id="实验-12"><a href="#实验-12" class="headerlink" title="实验"></a>实验</h2><h1 id="14-SPDF"><a href="#14-SPDF" class="headerlink" title="14 SPDF"></a>14 SPDF</h1><h2 id="简介-13"><a href="#简介-13" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -903,8 +903,8 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 <li>稀疏预训练模型的性能与下游任务中数据集的大小和难度相关。</li>
 <li>当我们增加语言模型的规模时，更大的模型在训练前变得更容易接受更高水平的稀疏性。</li>
 </ol>
-<p><img src="../images/summery1016_imgs/141.png" alt=""></p>
-<h2 id="实验-13"><a href="#实验-13" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/142.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/141.png" alt=""></p>
+<h2 id="实验-13"><a href="#实验-13" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/142.png" alt=""></p>
 <h1 id="15-A-Fast-Post-Training-Pruning-Framework-forTransformers"><a href="#15-A-Fast-Post-Training-Pruning-Framework-forTransformers" class="headerlink" title="15 A Fast Post-Training Pruning Framework forTransformers"></a>15 A Fast Post-Training Pruning Framework forTransformers</h1><h2 id="简介-14"><a href="#简介-14" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -938,25 +938,25 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 <li>虽然结构化剪枝方法可以实现高压缩率和加速，但它们通常很难在实践中使用。其中一个原因是在修剪期间或修剪后额外训练的计算成本很高，另一个原因是剪枝管道的高度复杂性，其中每个剪枝阶段通常需要重写训练代码，并引入额外的超参数来进行调优。</li>
 <li></li>
 </ol>
-<h2 id="方法-14"><a href="#方法-14" class="headerlink" title="方法"></a>方法</h2><p><img src="../images/summery1016_imgs/151.png" alt=""></p>
+<h2 id="方法-14"><a href="#方法-14" class="headerlink" title="方法"></a>方法</h2><p><img src="/images/summery1016_imgs/151.png" alt=""></p>
 <p>定义问题：</p>
-<p><img src="../images/summery1016_imgs/152.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/152.png" alt=""></p>
 <p>二阶近似：</p>
-<p><img src="../images/summery1016_imgs/153.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/153.png" alt=""></p>
 <p>海森近似：</p>
-<p><img src="../images/summery1016_imgs/154.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/154.png" alt=""></p>
 <p><strong>掩码搜索：</strong></p>
-<p><img src="../images/summery1016_imgs/155.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/156.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/155.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/156.png" alt=""></p>
 <p><strong>掩码重排</strong>：</p>
 <p>虽然它简化了问题，但仅使用对角线假设可能无法找到最佳的解决方案，因为它没有考虑到不同掩模变量之间的相互作用。例如，如果在一个图层中有两个注意头发挥着相似的作用，那么只修剪其中一个可能不会影响模型的准确性。然而，当它们两者都被修剪时，模型的精度可能会显著降低。这种交互作用被费雪信息矩阵的非对角元素捕获，在前一阶段被忽略。因此，我们可以通过使用对Fisher矩阵的块对角近似来更好地考虑剪枝问题中的相互作用，其中一个块对应于一个MHA层或一个FFN层，如下图所示。</p>
-<p><img src="../images/summery1016_imgs/157.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/157.png" alt=""></p>
 <p>用贪婪算法近似地解决这个问题。在将掩模初始化即热启动）后，为每一轮选择一个具有最高Fisher信息的修剪头（或过滤器），并与当前掩模中的一个未修剪头（或过滤器）交换：</p>
-<p><img src="../images/summery1016_imgs/158.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/158.png" alt=""></p>
 <p><strong>掩码微调：</strong></p>
 <p>非零变量被调优到任何真实值，这样修剪后的模型就可以恢复其精度。通过线性最小二乘法进行分层重建。我们调整掩模变量以使最小化层重构误差，。从第一层到最后一层，我们用修剪模型中剩余的头/滤波器重建原始模型的输出激活。正式形式如下：</p>
-<p><img src="../images/summery1016_imgs/159.png" alt=""></p>
-<h2 id="实验-14"><a href="#实验-14" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/1510.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/159.png" alt=""></p>
+<h2 id="实验-14"><a href="#实验-14" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/1510.png" alt=""></p>
 <h1 id="16-随机森林预测剪枝架构"><a href="#16-随机森林预测剪枝架构" class="headerlink" title="16 随机森林预测剪枝架构"></a>16 随机森林预测剪枝架构</h1><h2 id="简介-15"><a href="#简介-15" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -989,14 +989,14 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 <li>目前，llm压缩的一些工作主要集中在模型量化上</li>
 <li>注意层的重要性远高于MLP：</li>
 </ol>
-<p><img src="../images/summery1016_imgs/163.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/163.png" alt=""></p>
 <h2 id="方法-15"><a href="#方法-15" class="headerlink" title="方法"></a>方法</h2><p>构建架构-精度对：</p>
-<p><img src="../images/summery1016_imgs/161.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/161.png" alt=""></p>
 <p>权重重要性评估：</p>
-<p><img src="../images/summery1016_imgs/162.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/162.png" alt=""></p>
 <p>建立随机森林模型。</p>
 <p>QLoRA微调恢复。</p>
-<h2 id="实验-15"><a href="#实验-15" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/164.png" alt=""></p>
+<h2 id="实验-15"><a href="#实验-15" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/164.png" alt=""></p>
 <h1 id="17-Wanda"><a href="#17-Wanda" class="headerlink" title="17 Wanda"></a>17 Wanda</h1><h2 id="简介-16"><a href="#简介-16" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -1033,17 +1033,17 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 <li>与SparseGPT不同，我们的方法不需要对修剪过的网络进行权值更新，这表明llm具有有效的精确的稀疏子网络，而不是它们仅仅存在于原始权值的邻域中</li>
 <li>选择正确的比较组对于剪枝大型语言模型（LLMs）非常重要，即使在传统的Magnitude剪枝方法中也是如此</li>
 </ol>
-<h2 id="方法-16"><a href="#方法-16" class="headerlink" title="方法"></a>方法</h2><p><img src="../images/summery1016_imgs/171.png" alt=""></p>
+<h2 id="方法-16"><a href="#方法-16" class="headerlink" title="方法"></a>方法</h2><p><img src="/images/summery1016_imgs/171.png" alt=""></p>
 <p><strong>我们在每个输出的基础上（图中的每一行）上比较和删除权重，其中权重重要性分数在每个输出神经元中进行局部比较</strong></p>
 <p>对比SparseGPT：</p>
-<p><img src="../images/summery1016_imgs/172.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/172.png" alt=""></p>
 <p>令$\lambda=0$：</p>
-<p><img src="../images/summery1016_imgs/173.png" alt=""></p>
-<h2 id="实验-16"><a href="#实验-16" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/174.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/173.png" alt=""></p>
+<h2 id="实验-16"><a href="#实验-16" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/174.png" alt=""></p>
 <p>校准数据量：</p>
-<p><img src="../images/summery1016_imgs/175.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/175.png" alt=""></p>
 <p>不同分组结果：</p>
-<p><img src="../images/summery1016_imgs/176.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/176.png" alt=""></p>
 <h1 id="18-SparseBERT"><a href="#18-SparseBERT" class="headerlink" title="18 SparseBERT"></a>18 SparseBERT</h1><h2 id="简介-17"><a href="#简介-17" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -1076,15 +1076,15 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 <li>通过研究知识在训练前、微调和修剪过程中如何传递和丢失来填补这一空白，并提出一个知识感知的稀疏剪枝过程</li>
 <li>最近的研究结果表明，自我注意和前馈层是过度参数化的，是最多计算消耗的部分</li>
 </ol>
-<h2 id="方法-17"><a href="#方法-17" class="headerlink" title="方法"></a>方法</h2><p><img src="../images/summery1016_imgs/181.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/182.png" alt=""></p>
+<h2 id="方法-17"><a href="#方法-17" class="headerlink" title="方法"></a>方法</h2><p><img src="/images/summery1016_imgs/181.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/182.png" alt=""></p>
 <p>SparseBERT使用没有微调的预先训练的BERT作为初始化模型，修剪自注意和前馈层的线性变换.</p>
 <p>为了在剪枝过程中学习特定于任务的任务知识，同时保留通用知识，我们应用了知识蒸馏：采用特定任务的微调BERT作为教师网络，采用预先训练的BERT作为学生。我们将下游任务数据输入师生框架，以训练学生再现教师的行为。</p>
 <p>蒸馏损失：</p>
-<p><img src="../images/summery1016_imgs/183.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/183.png" alt=""></p>
 <p>蒸馏与剪枝并行：</p>
-<p><img src="../images/summery1016_imgs/184.png" alt=""></p>
-<h2 id="实验-17"><a href="#实验-17" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/185.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/184.png" alt=""></p>
+<h2 id="实验-17"><a href="#实验-17" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/185.png" alt=""></p>
 <h1 id="19-Compresso"><a href="#19-Compresso" class="headerlink" title="19 Compresso"></a>19 Compresso</h1><h2 id="简介-18"><a href="#简介-18" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -1121,24 +1121,24 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 </ol>
 <h2 id="方法-18"><a href="#方法-18" class="headerlink" title="方法"></a>方法</h2><p>为了解决基于训练的剪枝中高训练成本和数据收集的挑战，我们将低秩适应（LoRA）纳入L0正则化，并使用指令调优数据集作为训练数据的替代方案。具体来说，我们利用可学习的二进制掩码来决定是否保留或修剪每个子模块（即，头、FFN中间维度和隐藏维度）。</p>
 <p>然后，在指令调整过程中，采用L0正则化方法优化掩模值，同时通过LoRA更新模型参数。此外，与一次性LLM修剪方法相比，通常采用跨所有层的均匀稀疏比，压缩机自动学习改进的层级稀疏比。</p>
-<p><img src="../images/summery1016_imgs/191.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/191.png" alt=""></p>
 <p>数据集：建议使用指令调优数据集作为修剪数据。尽管它们的分布不同于训练前的数据集，但它们已经证明了在微调预训练和收敛的llm以符合人类意图方面的成功</p>
 <p>高效的基于训练的结构化修剪：</p>
 <p>基本思想是： (i)我们引入一组二进制掩模Z∈{0,1}来指示是删除（Z = 0）还是保留（Z = 1）每个掩模子模块，从而表示剩余的模型大小；（ii）我们冻结原始LLM，利用LoRA向LLM的秩分解矩阵注入LLM可训练的每一层。这大大减少了可训练参数的数量和所需的GPU内存；（iii）我们使用增强的L0正则化联合优化这些掩模值和LoRA模块（方法。这确保了修剪后的模型大小满足给定的约束条件。</p>
 <p>剪枝形式（采用Cofi）：</p>
-<p><img src="../images/summery1016_imgs/192.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/192.png" alt=""></p>
 <p>引入Lora：</p>
-<p><img src="../images/summery1016_imgs/193.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/193.png" alt=""></p>
 <p>定义稀疏性函数(无需手动选择剪枝比例)：</p>
-<p><img src="../images/summery1016_imgs/194.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/194.png" alt=""></p>
 <p>$L_0$重参数化：</p>
-<p><img src="../images/summery1016_imgs/195.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/195.png" alt=""></p>
 <p>惩罚项：</p>
-<p><img src="../images/summery1016_imgs/196.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/196.png" alt=""></p>
 <p>训练目标是下一个令牌预测损失和$L_{0{reg}}$损失的组合。</p>
 <p>剪枝过程中，我们将提示符放在输入文本之前。根据指令调优的实践（Taori et al.，2023），我们不计算提示部分的下一代令牌生成损失。协作提示在两个阶段的修剪和推理阶段都被使用:</p>
-<p><img src="../images/summery1016_imgs/197.png" alt=""></p>
-<h2 id="实验-18"><a href="#实验-18" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/198.png" alt="image-20231106160054281"></p>
+<p><img src="/images/summery1016_imgs/197.png" alt=""></p>
+<h2 id="实验-18"><a href="#实验-18" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/198.png" alt="image-20231106160054281"></p>
 <h1 id="20-Cofi"><a href="#20-Cofi" class="headerlink" title="20 Cofi"></a>20 Cofi</h1><h2 id="简介-19"><a href="#简介-19" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -1174,16 +1174,16 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 <li>加速率是我们在整个论文中使用的一个主要度量方法，因为压缩率并不一定反映了推理延迟的实际改进</li>
 <li>我们将这项工作的范围框架为针对特定任务的剪枝。我们希望未来的研究能够继续这一工作，因为与一般蒸馏相比，从大型预训练模型进行的修剪可能会导致更少的计算，并导致更灵活的模型结构</li>
 </ol>
-<h2 id="方法-19"><a href="#方法-19" class="headerlink" title="方法"></a>方法</h2><p><img src="../images/summery1016_imgs/201.png" alt=""></p>
+<h2 id="方法-19"><a href="#方法-19" class="headerlink" title="方法"></a>方法</h2><p><img src="/images/summery1016_imgs/201.png" alt=""></p>
 <p>目标稀疏：</p>
-<p><img src="../images/summery1016_imgs/202.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/202.png" alt=""></p>
 <p>隐层蒸馏损失：</p>
-<p><img src="../images/summery1016_imgs/203.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/203.png" alt=""></p>
 <p>动态映射关系：</p>
-<p><img src="../images/summery1016_imgs/204.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/204.png" alt=""></p>
 <p>蒸馏损失：</p>
-<p><img src="../images/summery1016_imgs/205.png" alt=""></p>
-<h2 id="实验-19"><a href="#实验-19" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/206.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/205.png" alt=""></p>
+<h2 id="实验-19"><a href="#实验-19" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/206.png" alt=""></p>
 <h1 id="21-BIP"><a href="#21-BIP" class="headerlink" title="21 BIP"></a>21 BIP</h1><h2 id="简介-20"><a href="#简介-20" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -1220,28 +1220,28 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 <li>在m上的离散优化：我们遵循“凸松弛+硬阈值”机制。具体地说，我们将二进制掩蔽变量放宽为连续掩蔽分数m∈[0,1]。然后我们得到基于松弛m的后传递损失梯度</li>
 </ol>
 <h2 id="方法-20"><a href="#方法-20" class="headerlink" title="方法"></a>方法</h2><p>将剪枝任务（即❶）和模型再训练任务（即❷）解释为两个优化级别，其中前者被表述为上层优化问题，并依赖于低层次再训练任务的优化。因此，我们将模型剪枝问题转换为以下BLO问题（❷嵌套在❶中）：</p>
-<p><img src="../images/summery1016_imgs/207.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/207.png" alt=""></p>
 <p>BLO可以灵活地在上层和下层的优化级别上分别使用不匹配的修剪和再训练目标。这种灵活性允许我们在(1)中规范底层训练目标函数，并在两个级别上定制已实现的优化方法。更具体地说，我们可以使用一个数据批处理（称为B2）来更新上层修剪掩码m，而不是不同于用于获取底层解决方案θ∗(m)的数据批处理（称为B1）。由此产生的BLO过程可以模拟元学习的想法来改进模型泛化[98]，其中低级问题使用B1对θ进行微调，而上层问题使用B2验证稀疏感知精细模型（m⊙θ∗(m)）的泛化。</p>
 <p>在梯度下降的情况下，公式中的目标函数的梯度产生：</p>
-<p><img src="../images/summery1016_imgs/212.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/212.png" alt=""></p>
 <p>IG：</p>
-<p><img src="../images/summery1016_imgs/213.png" alt="image-20231106190027013"></p>
+<p><img src="/images/summery1016_imgs/213.png" alt="image-20231106190027013"></p>
 <p>由于矩阵反演和二阶偏导数的存在，精确的IG公式(3)仍然难以计算。为了简化它，我们施加了无黑森假设，∇2θℓ=0，它一般是温和的</p>
 <p>近似：</p>
-<p><img src="../images/summery1016_imgs/214.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/214.png" alt=""></p>
 <p>使用一阶近似：</p>
-<p><img src="../images/summery1016_imgs/215.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/215.png" alt=""></p>
 <p>两个步骤：</p>
 <ul>
 <li><p>用于模型再训练的较低级别的SGD：</p>
-<p><img src="../images/summery1016_imgs/216.png" alt="image-20231106190355644"></p>
+<p><img src="/images/summery1016_imgs/216.png" alt="image-20231106190355644"></p>
 </li>
 <li><p>用于修剪的上层SPGD：</p>
-<p><img src="../images/summery1016_imgs/217.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/217.png" alt=""></p>
 </li>
 </ul>
-<p><img src="../images/summery1016_imgs/218.png" alt=""></p>
-<h2 id="实验-20"><a href="#实验-20" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/219.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/218.png" alt=""></p>
+<h2 id="实验-20"><a href="#实验-20" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/219.png" alt=""></p>
 <h1 id="22-Compress-Then-Prompt"><a href="#22-Compress-Then-Prompt" class="headerlink" title="22 Compress,Then Prompt"></a>22 Compress,Then Prompt</h1><h2 id="简介-21"><a href="#简介-21" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -1282,9 +1282,9 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 </ol>
 <h2 id="方法-21"><a href="#方法-21" class="headerlink" title="方法"></a>方法</h2><p>数据驱动的方法来学习软提示：</p>
 <p>剪枝之后，目标函数：</p>
-<p><img src="../images/summery1016_imgs/221.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/221.png" alt=""></p>
 <p>不更新模型参数：需要注意的是，压缩后的模型参数是固定的，不会被更新。唯一可训练的参数是提示标记的嵌入，它们由矩阵E表示，大小为k×d.初始化提示标记嵌入：提示标记的嵌入矩阵E的初始化采用了一种方法，其中每行的向量都是从LLM的标记嵌入矩阵W中随机选择的。</p>
-<h2 id="实验-21"><a href="#实验-21" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/222.png" alt=""></p>
+<h2 id="实验-21"><a href="#实验-21" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/222.png" alt=""></p>
 <h1 id="23-SPARSEGPT"><a href="#23-SPARSEGPT" class="headerlink" title="23 SPARSEGPT"></a>23 SPARSEGPT</h1><h2 id="简介-22"><a href="#简介-22" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -1322,7 +1322,7 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 </ol>
 <h2 id="方法-22"><a href="#方法-22" class="headerlink" title="方法"></a>方法</h2><p>掩码的选择和权重的重建：</p>
 <p>种特别流行的方法是将该问题划分为掩模选择和权重重建[20,27,22]。具体地说，这意味着首先根据一些显著性准则选择一个剪枝掩模M，如权值大小[50]，然后在保持掩模不变的同时优化剩余的未剪枝权值。重要的是，一旦掩模固定，(2)就变成一个线性平方误差问题，它是凸的，因此很容易优化。甚至可以通过对每个矩阵行应用标准的线性回归公式，以封闭的形式求解：</p>
-<p><img src="../images/summery1016_imgs/231.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/231.png" alt=""></p>
 <p>标准线性回归的方程通常表示为：</p>
 <p>Y = X * β + ε</p>
 <p>其中：</p>
@@ -1336,13 +1336,13 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 <p>封闭形式解是指可以通过数学公式直接求解得到的解。对于标准线性回归，封闭形式解是：</p>
 <p>β = (X^T <em> X)^(-1) </em> X^T * Y</p>
 <p><strong>更新权重：</strong></p>
-<p><img src="../images/summery1016_imgs/232.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/232.png" alt=""></p>
 <p><strong>每列迭代更新：</strong></p>
-<p><img src="../images/summery1016_imgs/233.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/233.png" alt=""></p>
 <p>根据误差自适应选择掩码：</p>
-<p><img src="../images/summery1016_imgs/234.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/235.png" alt="image-20231107195956622"></p>
-<h2 id="实验-22"><a href="#实验-22" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/236.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/234.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/235.png" alt="image-20231107195956622"></p>
+<h2 id="实验-22"><a href="#实验-22" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/236.png" alt=""></p>
 <h1 id="24-OCB"><a href="#24-OCB" class="headerlink" title="24 OCB"></a>24 OCB</h1><h2 id="简介-23"><a href="#简介-23" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -1377,20 +1377,20 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 <li>AdaRound、AdaQuant和BRECQ的一个关键步骤是按顺序逐步量化层，这样在早期层中积累的误差就可以通过在后期层中的权重调整来补偿</li>
 </ol>
 <h2 id="方法-23"><a href="#方法-23" class="headerlink" title="方法"></a>方法</h2><p>剪枝目标：</p>
-<p><img src="../images/summery1016_imgs/241.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/241.png" alt=""></p>
 <p>OBS：</p>
-<p><img src="../images/summery1016_imgs/242.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/242.png" alt=""></p>
 <p>处理单行：</p>
 <p>使用高斯分解，迭代海森逆矩阵：</p>
-<p><img src="../images/summery1016_imgs/243.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/243.png" alt=""></p>
 <p>根据剪枝目标函数快速求出权重的海森矩阵：</p>
 <p>在标准的线性回归问题中，目标函数为：</p>
-<p><img src="../images/summery1016_imgs/244.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/245.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/244.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/245.png" alt=""></p>
 <p>所有行处理：</p>
 <p>依次计算每个loss，从而计算全局掩码，之后再进行更新。两种方案：</p>
-<p><img src="../images/summery1016_imgs/246.png" alt=""></p>
-<h2 id="实验-23"><a href="#实验-23" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/247.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/246.png" alt=""></p>
+<h2 id="实验-23"><a href="#实验-23" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/247.png" alt=""></p>
 <h1 id="25-AdaPrune"><a href="#25-AdaPrune" class="headerlink" title="25 AdaPrune"></a>25 AdaPrune</h1><h2 id="简介-24"><a href="#简介-24" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -1423,17 +1423,17 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 <li>由于弗兰克尔和Carbin [12]通过应用密集训练发现了最佳面具（中奖彩票），所以如何在没有训练的情况下找到最佳面具的问题仍然悬而未决</li>
 </ol>
 <h2 id="方法-24"><a href="#方法-24" class="headerlink" title="方法"></a>方法</h2><p>MD：（越大越好）</p>
-<p><img src="../images/summery1016_imgs/252.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/251.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/252.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/251.png" alt=""></p>
 <p>转置掩码目标函数:</p>
-<p><img src="../images/summery1016_imgs/253.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/253.png" alt=""></p>
 <p>转变为最小流问题:</p>
-<p><img src="../images/summery1016_imgs/254.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/254.png" alt=""></p>
 <p>进一步近似算法：</p>
-<p><img src="../images/summery1016_imgs/255.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/255.png" alt=""></p>
 <p>4:8转到2:4，全量微调，1000K校正数据</p>
-<p><img src="../images/summery1016_imgs/256.png" alt=""></p>
-<h2 id="实验-24"><a href="#实验-24" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/257.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/256.png" alt=""></p>
+<h2 id="实验-24"><a href="#实验-24" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/257.png" alt=""></p>
 <h1 id="26-Post-training-4-bit-quantization"><a href="#26-Post-training-4-bit-quantization" class="headerlink" title="26 Post training 4-bit quantization"></a>26 Post training 4-bit quantization</h1><h2 id="简介-25"><a href="#简介-25" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -1468,39 +1468,39 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 </ol>
 <h2 id="方法-25"><a href="#方法-25" class="headerlink" title="方法"></a>方法</h2><p><strong>ACIQ: Analytical Clipping for Integer Quantization</strong>:</p>
 <p>通常，整数张量在张量的最大值和最小值之间被均匀地量化。在下面，我们证明了这是次优的:</p>
-<p><img src="../images/summery1016_imgs/261.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/261.png" alt=""></p>
 <p>位数为M，量化值为：</p>
-<p><img src="../images/summery1016_imgs/262.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/262.png" alt=""></p>
 <p>X与其量化版本Q (X)之间的期望均方误差：</p>
-<p><img src="../images/summery1016_imgs/263.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/264.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/263.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/264.png" alt=""></p>
 <p>量化噪声：</p>
-<p><img src="../images/summery1016_imgs/265.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/265.png" alt=""></p>
 <p>切片噪声：</p>
-<p><img src="../images/summery1016_imgs/266.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/266.png" alt=""></p>
 <p>总误差：</p>
-<p><img src="../images/summery1016_imgs/267.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/267.png" alt=""></p>
 <p>给定M情况下，求出ab关系：</p>
-<p><img src="../images/summery1016_imgs/268.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/268.png" alt=""></p>
 <p><strong>Per-channel bit-allocation</strong>：我们不是限制所有通道值具有相同的4位表示，而是允许一些通道具有更高的位宽，而限制其他通道具有更低的位宽。我们唯一的要求是，写入内存或从内存中读取的位的总数保持不变。</p>
-<p><img src="../images/summery1016_imgs/269.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/269.png" alt=""></p>
 <p>拉格朗日求解：</p>
-<p><img src="../images/summery1016_imgs/2610.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/2611.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/2610.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/2611.png" alt=""></p>
 <p>每个通道的最优解：</p>
-<p><img src="../images/summery1016_imgs/2612.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/2612.png" alt=""></p>
 <p> <strong>Bias-Correction</strong>：量化之后具有固有偏差，在平均值和方差存在误差：</p>
-<p><img src="../images/summery1016_imgs/2613.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/2613.png" alt=""></p>
 <p>于是提出修正：</p>
-<p><img src="../images/summery1016_imgs/2614.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/2615.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/2614.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/2615.png" alt=""></p>
 <p><strong>整合</strong></p>
 <p>Weights and Activations: 对于权重和激活值，作者采用了逐通道的位分配策略。这意味着每个通道（例如，卷积层的不同滤波器）都可以有不同的位宽，而不是整个层都使用相同的位宽。这允许网络根据每个通道的需求来分配位数，从而更灵活地进行量化。</p>
 <p>Reasoning: 作者在权重上没有采用任何形式的剪切操作。这是因为先前的研究（如Migacz, 2017; Zhao et al., 2019）已经指出，在较大的位宽情况下，即使用较多的位数表示权重时，采用权重剪切并没有明显的优势。</p>
 <p>Weights vs. Activations: 作者在量化激活值时采用了ACIQ（Analytical Clipping for Integer Quantization）方法，但没有在权重上使用它。这可能是因为先前的研究或实验证据表明，在某些情况下，对激活值应用剪切可以更有效地减小量化引入的误差，而在权重上使用可能没有相同的优势</p>
 <p>仅对权重进行偏差校正（Bias Correction for Weights Only）：</p>
 <p>Offline vs. Online Bias Correction: 作者提到偏差校正（Bias Correction）的方法可以应用于权重和激活，但由于权重的偏差可以在离线情况下进行，而激活的偏差需要通过运行输入图像进行估计，因此只对权重进行了偏差校正。在线估计激活偏差可能会在运行时引入较大的计算开销。</p>
-<h2 id="实验-25"><a href="#实验-25" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/2616.png" alt=""></p>
+<h2 id="实验-25"><a href="#实验-25" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/2616.png" alt=""></p>
 <h1 id="27-GPTQ"><a href="#27-GPTQ" class="headerlink" title="27 GPTQ"></a>27 GPTQ</h1><h2 id="简介-26"><a href="#简介-26" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -1533,13 +1533,13 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 <li>OBQ以贪婪的顺序量化权值，即它总是选择当前导致的附加量化误差最小的权值。有趣的是，我们发现，虽然这种相当自然的策略似乎确实表现得很好，但它比以任意顺序量化权重的改进通常很小，特别是在大的、高度参数化的层上。最有可能的情况是，这是因为具有较小的量化权值数量被过程结束时被量化的权值所平衡，此时只剩下少数其他可以为补偿调整的未量化权值</li>
 </ol>
 <h2 id="方法-26"><a href="#方法-26" class="headerlink" title="方法"></a>方法</h2><p><strong>Step 1: Arbitrary Order Insight</strong>：以相同的顺序量化所有行的权值</p>
-<p><img src="../images/summery1016_imgs/271.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/271.png" alt=""></p>
 <p><strong>Step 2: Lazy Batch-Updates</strong>：只有一次块已经完全处理，我们执行全局更新整个H−1和W矩阵使用多权重版本的方程(2)和(3)如下：</p>
-<p><img src="../images/summery1016_imgs/272.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/272.png" alt=""></p>
 <p><strong>Step 3: Cholesky Reformulation</strong></p>
 <p>整体算法：</p>
-<p><img src="../images/summery1016_imgs/273.png" alt=""></p>
-<h2 id="实验-26"><a href="#实验-26" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/274.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/273.png" alt=""></p>
+<h2 id="实验-26"><a href="#实验-26" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/274.png" alt=""></p>
 <h1 id="28"><a href="#28" class="headerlink" title="28"></a>28</h1><h2 id="简介-27"><a href="#简介-27" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -1572,12 +1572,12 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 <li>在训练深度神经网络（DNN）之后，网络的权重和激活值通常会呈现出钟形分布的特征而实际硬件在进行量化时使用线性量化网格，这意味着硬件会将连续的范围划分成等间隔的线性步长，将浮点数值映射到离散的量化级别。这样的线性量化网格可以简化硬件实现，但也带来了一个问题，即分布的形状与线性量化网格之间可能存在不匹配，导致一些数值落在量化级别之外，称为异常值。</li>
 </ol>
 <h2 id="方法-27"><a href="#方法-27" class="headerlink" title="方法"></a>方法</h2><p>分割通道，将值变小之后再量化：</p>
-<p><img src="../images/summery1016_imgs/281.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/281.png" alt=""></p>
 <p>分裂量化：</p>
-<p><img src="../images/summery1016_imgs/282.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/282.png" alt=""></p>
 <p>实现了无差量化：</p>
-<p><img src="../images/summery1016_imgs/283.png" alt=""></p>
-<h2 id="实验-27"><a href="#实验-27" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/285.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/283.png" alt=""></p>
+<h2 id="实验-27"><a href="#实验-27" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/285.png" alt=""></p>
 <h1 id="29AWQ"><a href="#29AWQ" class="headerlink" title="29AWQ"></a>29AWQ</h1><h2 id="简介-28"><a href="#简介-28" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -1612,16 +1612,16 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 <li>为了避免硬件效率低下的混合精度实现，我们分析了权重量化的误差，并推导出放大显著通道可以减少它们的相对量化误差。</li>
 <li>局限性：尽管在FP16中保留0.1%的权重可以提高量化性能，而不显著增加模型大小（以总位测量），这种混合精度数据类型将使系统实现变得困难。我们需要提出一种方法来保护重要的重量，而不实际保留它们作为FP16。</li>
 </ol>
-<h2 id="方法-28"><a href="#方法-28" class="headerlink" title="方法"></a>方法</h2><p><img src="../images/summery1016_imgs/291.png" alt=""></p>
+<h2 id="方法-28"><a href="#方法-28" class="headerlink" title="方法"></a>方法</h2><p><img src="/images/summery1016_imgs/291.png" alt=""></p>
 <p>原量化：</p>
-<p><img src="../images/summery1016_imgs/292.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/292.png" alt=""></p>
 <p>缩放：</p>
-<p><img src="../images/summery1016_imgs/293.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/293.png" alt=""></p>
 <p>目标函数：</p>
-<p><img src="../images/summery1016_imgs/295.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/295.png" alt=""></p>
 <p>网格搜索：</p>
-<p><img src="../images/summery1016_imgs/294.png" alt=""></p>
-<h2 id="实验-28"><a href="#实验-28" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/296.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/294.png" alt=""></p>
+<h2 id="实验-28"><a href="#实验-28" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/296.png" alt=""></p>
 <h1 id="30AdaRound"><a href="#30AdaRound" class="headerlink" title="30AdaRound"></a>30AdaRound</h1><h2 id="简介-29"><a href="#简介-29" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -1654,20 +1654,20 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 <li>四舍五入量化次优</li>
 </ol>
 <h2 id="方法-29"><a href="#方法-29" class="headerlink" title="方法"></a>方法</h2><p>约束量化范围：</p>
-<p><img src="../images/summery1016_imgs/301.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/301.png" alt=""></p>
 <p>目标函数：</p>
-<p><img src="../images/summery1016_imgs/302.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/302.png" alt=""></p>
 <p>二阶近似：</p>
-<p><img src="../images/summery1016_imgs/303.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/303.png" alt=""></p>
 <p>对角假设和常数假设：</p>
-<p><img src="../images/summery1016_imgs/304.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/305.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/304.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/305.png" alt=""></p>
 <p>松弛：</p>
-<p><img src="../images/summery1016_imgs/306.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/307.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/306.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/307.png" alt=""></p>
 <p>为了避免更深层次网络的量化误差的积累，并考虑到激活函数，我们使用了以下非对称重构公式：</p>
-<p><img src="../images/summery1016_imgs/308.png" alt=""></p>
-<h2 id="实验-29"><a href="#实验-29" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/309.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/308.png" alt=""></p>
+<h2 id="实验-29"><a href="#实验-29" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/309.png" alt=""></p>
 <h1 id="31SPDY"><a href="#31SPDY" class="headerlink" title="31SPDY"></a>31SPDY</h1><h2 id="简介-30"><a href="#简介-30" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -1703,17 +1703,17 @@ L=\alpha L_{CE}+(1-\alpha)L_{KD}+L_{FD}</script><p><img src="../images/summery10
 <li>针对神经网络剪枝所导致的层次稀疏性的问题，无结构的加速技术并不依赖于在神经网络层中出现的特定模式。具体而言，即使在同一层次和相同稀疏度水平的情况下，无结构的加速技术也能够表现出相似的性能水平。这表明，该加速技术对于不同层次和不同剪枝策略都能够保持一致的效果，而不受到层次稀疏性中特定模式的影响。这种特性使得无结构的加速技术更具灵活性，能够适用于多种剪枝方法，而不受到这些方法所产生的特定稀疏模式的制约。</li>
 </ol>
 <h2 id="方法-30"><a href="#方法-30" class="headerlink" title="方法"></a>方法</h2><p>约束优化公式：</p>
-<p><img src="../images/summery1016_imgs/3101.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/3101.png" alt=""></p>
 <p>递归公式：</p>
-<p><img src="../images/summery1016_imgs/312.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/312.png" alt=""></p>
 <p>计算误差：</p>
-<p><img src="../images/summery1016_imgs/313.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/313.png" alt=""></p>
 <p>步骤i:随机选100个$c$向量，找到最好的$c^*$.评估配置的质量：</p>
 <p>该数据库为每个层ℓ和每个稀疏度s存储稀疏度s通过AdaPrune施加后剩余权重的“重建”。</p>
 <p>首先，我们在数据库中查询每一层对应的重构权值，每一层在其目标稀疏度处。其次，我们将重建权重的结果模型“缝合”在一起，并在给定的小验证集上对其进行评估。</p>
-<p><img src="../images/summery1016_imgs/314.png" alt=""></p>
-<h2 id="实验-30"><a href="#实验-30" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/summery1016_imgs/315.png" alt=""></p>
-<p><img src="../images/summery1016_imgs/316.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/314.png" alt=""></p>
+<h2 id="实验-30"><a href="#实验-30" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/summery1016_imgs/315.png" alt=""></p>
+<p><img src="/images/summery1016_imgs/316.png" alt=""></p>
 
                 
             </div>
