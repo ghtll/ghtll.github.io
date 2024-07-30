@@ -358,7 +358,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-04-22
+                    2024-07-30
                 </div>
                 
 
@@ -396,17 +396,17 @@
 <p>在本文中，提出了一种新的方法，为(Prune OFA），利用<strong>权重剪枝</strong>和<strong>模型蒸馏</strong>来产生预先训练的基于变压器的语言模型与高稀疏比。将方法应用于BERT-Base、BERT-Large和DistilBERT ，为这些模型架构生成稀疏的预训练模型。然后，展示了如何对这些稀疏模型进行微调，以生成四个特定任务的稀疏模型。文章还表明，可以使用量化感知训练进一步压缩模型，以在压缩-精度比方面实现最先进的结果。</p>
 <p>本文方法不需要对每个任务的特殊剪枝超参数进行调整，因为本文对所有任务的模型进行一次修剪。</p>
 <h1 id="Weight-pruning"><a href="#Weight-pruning" class="headerlink" title="Weight pruning"></a>Weight pruning</h1><p>在本文中，主要关注非结构化的权值剪枝。2018年提出了一种渐进幅度修剪（GMP）的方法，在训练过程中逐步以低幅度修剪权重。在训练过程中，每一个f步修剪最小幅度的权值，直到达到时间步$t$的时间稀疏比$s_t$，定义为：</p>
-<p><img src="/images/PruneOFA_imgs/1.png" alt=""></p>
+<p><img src="../images/PruneOFA_imgs/1.png" alt=""></p>
 <p>其中$s_i$和$s_f$是初始和最终的稀疏度比，$t_s$和$t_e$是剪枝的开始和结束的时间步长。</p>
 <p>在最近的一篇论文中，提出了一种基于IMP（迭代幅度剪枝）和学习率退卷（LRR）的剪枝算法。IMP包括两个步骤：修剪模型的一部分，并继续对其进行微调，以从诱导的剪枝错误中恢复。重复这两个步骤，直到达到期望的稀疏度比。在LRR中，学习速率调度器被恢复到它在微调步骤开始时的剪枝步骤之前的状态。文中建议将学习速率重绕原理合并到GMP中，即每f步在时间$t_s$时重绕到其状态。在测试之后，调度程序继续执行其原始设置，直到训练结束。</p>
 <h1 id="Knowledge-distillation"><a href="#Knowledge-distillation" class="headerlink" title="Knowledge distillation"></a>Knowledge distillation</h1><p>在本文中，作者提出了利用模型蒸馏的方法来进行剪枝过程。作者关注的方法是，教师和学生共享相同的架构，但他们的稀疏比不同。在这种情况下，教师是一个在目标任务上进行训练的密集模型，而学生是一个具有固定稀疏性或正在进行修剪的模型。在训练前和微调阶段，可以在蒸馏阶段应用于语言模型。在训练前阶段，教师是一个预先训练过的语言模型，而在微调阶段，教师是一个针对目标任务进行微调的语言模型。</p>
 <h1 id="Prune-Once-for-All-1"><a href="#Prune-Once-for-All-1" class="headerlink" title="Prune Once for All"></a>Prune Once for All</h1><p>该方法由两个步骤组成，即教师模型准备和学生模型剪枝。我们训练的稀疏预训练模型是我们用于迁移学习的模型，同时保持其稀疏模式。我们将这个方法称为“一次剪枝，用于所有”，因为我们展示了如何仅对预训练模型进行一次剪枝，然后对稀疏的预训练模型进行多个语言任务的微调。</p>
-<p><img src="/images/PruneOFA_imgs/2.png" alt="Prune OFA method"></p>
+<p><img src="../images/PruneOFA_imgs/2.png" alt="Prune OFA method"></p>
 <p><strong>Teacher preparation</strong></p>
 <p>Prune OFA的第一步是获得一个在预训练任务中针对目标$L_{PT}$经过优化的模型，如图所示。相同的数据集将用于下一步对学生模型进行剪枝。这个模型将在学生模型剪枝步骤中初始化学生模型和教师模型。</p>
 <p><strong>Student pruning</strong></p>
 <p>学生模型是从在教师准备步骤中准备的教师模型中初始化的。然后，在来自教师准备步骤的预训练任务和知识蒸馏目标$L_{kd}$的线性组合上对学生模型进行微调：</p>
-<p><img src="/images/PruneOFA_imgs/3.png" alt=""></p>
+<p><img src="../images/PruneOFA_imgs/3.png" alt=""></p>
 <p>同时使用$GMP + LRR$方法进行修剪。该过程的输出模型是一个稀疏预训练的LM，可以在不需要额外修剪的情况下用于迁移学习，从而为特定的下游任务生成稀疏模型。</p>
 <p>在学生模型的微调过程中，使用了两个不同的目标来进行训练，这两个目标是从教师准备步骤中获得的：</p>
 <ol>
@@ -417,9 +417,9 @@
 <p><strong>Pattern-lock</strong></p>
 <p>作者希望在微调过程中保持由Prune OFA创建的稀疏预训练模型的稀疏性模式。提出了一种称为模式锁的方法，它可以防止在训练模型时改变模型中发现的零。</p>
 <p>方法：在训练之前，Pattern-lock方法会为每个稀疏层$l$初始化一个掩码$M^l$，该掩码代表了该层的稀疏模式，其权重为$W^l$:</p>
-<p><img src="/images/PruneOFA_imgs/4.png" alt=""></p>
+<p><img src="../images/PruneOFA_imgs/4.png" alt=""></p>
 <p>然后，在训练时，损失$L$梯度$w.r.t$修改为:</p>
-<p><img src="/images/PruneOFA_imgs/5.png" alt=""></p>
+<p><img src="../images/PruneOFA_imgs/5.png" alt=""></p>
 <p>确保最初为0的权重将保持在0到整个微调.</p>
 <h1 id="Experimental"><a href="#Experimental" class="headerlink" title="Experimental"></a>Experimental</h1><p>作者通过在三种不同大小的架构上应用Prune OFA来展示他们的方法；BERT-Base，BERT-Barge和DistilBERT。由于没有用于训练BERT-Base、BERT-Large和DistilBERT的原始处理训练数据，作者运行一个额外的步骤，使用作者准备的处理训练数据来微调预先训练过的模型。接下来，作者执行学生修剪步骤来获得他们的稀疏预训练模型。将BERT-Base和DistilBERT修剪到{85%，90%}，将BERT-Large修剪到90%。修剪应用于变压器编码器中的所有线性层，包括池器层如果存在的话。</p>
 <p><strong>idea</strong></p>

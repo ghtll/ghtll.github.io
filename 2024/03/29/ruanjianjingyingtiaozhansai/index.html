@@ -362,7 +362,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-04-22
+                    2024-07-30
                 </div>
                 
 
@@ -395,7 +395,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="华为软件精英挑战赛——普朗克计划"><a href="#华为软件精英挑战赛——普朗克计划" class="headerlink" title="华为软件精英挑战赛——普朗克计划"></a>华为软件精英挑战赛——普朗克计划</h1><p>2024华为软件精英挑战赛——普朗克计划</p>
-<p><img src="/images/软件精英挑战赛/1.png" alt=""></p>
+<p><img src="../images/软件精英挑战赛/1.png" alt=""></p>
 <p>赛题：<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/forum/thread-0209145106256505005-1-1.html">https://bbs.huaweicloud.com/forum/thread-0209145106256505005-1-1.html</a></p>
 <h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>题目概括：地图随机生成价值不等的货物，控制10个机器人收集货物到港口；地图中会有10个固定港口存储机器人的货物，控制5艘轮船前往港口搬运货物到销售处获得金额。</p>
 <p>我们队伍的思路是设计多个模块，<strong>运动模块</strong>控制机器人运动，包括上下左右、搬运、放等动作；<strong>目标选择模块</strong>帮助机器人选择目标货物和目标港口；<strong>路径规划模块</strong>帮助机器人进行路径查找；<strong>初始化模块</strong>获取初始化地图信息，预先查找部分路径和获取机器人状态；<strong>运输模块</strong>控制船收集买卖货物；<strong>防碰撞模块</strong>避免多个机器人之间互相碰撞与撞死；</p>
@@ -614,9 +614,9 @@ target_table<span class="token punctuation">[</span><span class="token punctuati
     <span class="token keyword">return</span> <span class="token builtin">abs</span><span class="token punctuation">(</span>node1<span class="token punctuation">.</span>x <span class="token operator">-</span> node2<span class="token punctuation">.</span>x<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token builtin">abs</span><span class="token punctuation">(</span>node1<span class="token punctuation">.</span>y <span class="token operator">-</span> node2<span class="token punctuation">.</span>y<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>A*算法查找路径效果如下：</p>
-<p><img src="/images/软件精英挑战赛/2.png" alt="A*"></p>
+<p><img src="../images/软件精英挑战赛/2.png" alt="A*"></p>
 <p>A<em>可以很好的动态找到路径，但是经过多次优化，A\</em>查找一次路径的时间还是很长：</p>
-<p><img src="/images/软件精英挑战赛/3.png" alt=""></p>
+<p><img src="../images/软件精英挑战赛/3.png" alt=""></p>
 <p>考虑到机器人与判题器交互时间上限是15ms，如果多个机器人同时查找路径，那时间显然是不够的。考虑到除了初始化的机器人，即机器人在初始化之后每次运货都是从某个港口出发，再回到某个港口。因此很自然的想到，我们可以存储每个港口到所有位置的所有路径，机器人每次寻找路径只需要查表即可，于是改变思路，我们只在初始化阶段使用A*寻找路径。</p>
 <h4 id="3-2-广度优先搜索遍历，查找港口到所有点的路径。"><a href="#3-2-广度优先搜索遍历，查找港口到所有点的路径。" class="headerlink" title="3.2 广度优先搜索遍历，查找港口到所有点的路径。"></a>3.2 广度优先搜索遍历，查找港口到所有点的路径。</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">is_valid</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> rows<span class="token punctuation">,</span> cols<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">return</span> <span class="token number">0</span> <span class="token operator">&lt;=</span> x <span class="token operator">&lt;</span> rows <span class="token keyword">and</span> <span class="token number">0</span> <span class="token operator">&lt;=</span> y <span class="token operator">&lt;</span> cols
@@ -648,13 +648,13 @@ target_table<span class="token punctuation">[</span><span class="token punctuati
     <span class="token keyword">return</span> paths<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这样我们只需要在初始化阶段遍历10次地图（因为每个港口都需要遍历一次地图）即可查找10个港口到所有点的路径表。经过我们的计算，在200<em>200的地图中，可达点大约有25000，也就是每个港口我们要存储25000个路径，每个路径是一个长度平局为100的列表，经过我们的计算，这个路径表会占用存储将近<em>*3GB</em></em>。担心比赛的提交系统有存储上限，因此这个方案我们没有使用。</p>
 <h4 id="3-2-路径表转换方向表"><a href="#3-2-路径表转换方向表" class="headerlink" title="3.2 路径表转换方向表"></a>3.2 路径表转换方向表</h4><p>我们为每一个港口存储一个200*200的方向表，每个位置存储01234、0表示该位置无法到达该港口，1表示该位置到达港口则需要机器人向下移动，以此类推如下图：绿色表示港口，黑色表示障碍物：</p>
-<p><img src="/images/软件精英挑战赛/4.png" alt=""></p>
+<p><img src="../images/软件精英挑战赛/4.png" alt=""></p>
 <p>这样我们只需要存储10个200*200的表格，然后需要路径时，根据方向表格遍历提取路径，这样存储仅为：</p>
-<p><img src="/images/软件精英挑战赛/5.png" alt=""></p>
+<p><img src="../images/软件精英挑战赛/5.png" alt=""></p>
 <p>在表格中提取路径时间为：</p>
-<p><img src="/images/软件精英挑战赛/6.png" alt="image-20240329150928478"></p>
+<p><img src="../images/软件精英挑战赛/6.png" alt="image-20240329150928478"></p>
 <p>同时，在广搜过程中，我们记录方向表和单通道。方向表为查找路径，单通道为防止机器人在单通道撞死。效果如下，红色表示从目标港口到目标货物提取的路径，黄色表示地图中的单通道：</p>
-<p><img src="/images/软件精英挑战赛/7.png" alt=""></p>
+<p><img src="../images/软件精英挑战赛/7.png" alt=""></p>
 <h2 id="四、运动模块"><a href="#四、运动模块" class="headerlink" title="四、运动模块"></a>四、运动模块</h2><p>简单通过标准输出控制机器人和船运动：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">robots_movation</span><span class="token punctuation">(</span>robot_num<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>robot_num<span class="token punctuation">)</span><span class="token punctuation">:</span>

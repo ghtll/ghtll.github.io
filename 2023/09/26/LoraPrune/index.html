@@ -358,7 +358,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-04-22
+                    2024-07-30
                 </div>
                 
 
@@ -397,7 +397,7 @@
 <p>莫尔查诺夫引入了一种技术，该技术使用泰勒展开来近似由剪枝引起的损失波动，并使用一阶项来评估参数的重要性。同样，Yu 开发了一种基于梯度显著性评分的方法来评估参数的重要性，Zhang 提出了灵敏度平滑作为计算参数重要性的方法。此外，剪枝过程经常被纳入作为迭代剪枝-再训练循环的一部分，以恢复模型的精度。但是微调和计算梯度代价是昂贵的。</p>
 <p>参数高效调优方法：LoRA插入一组可训练的并行或串行的低秩矩阵。插入的低秩矩阵中的参数数仅为模型参数的1%左右。在下游任务的微调期间，原始参数被冻结（即不更新，不计算梯度），只有插入的低秩矩阵被更新以近似参数更新。由于LoRA只更新了少量的参数，与全参数微调方法相比，它的优化难度和计算需求显著降低。然而，PEFT通常需要冻结的预训练参数，而不计算它们的梯度，依赖于预训练参数的梯度的剪枝方法不能直接应用于这些大语言模型。</p>
 <p>一个想法：是否可以利用LoRA的低秩矩阵的梯度来评估预训练参数的重要性。因此提出LoRAPrune：只使用LoRA的梯度。与下图中描述的梯度引导剪枝方法相比，LoRAPrune利用LoRA的梯度作为预先训练的参数梯度的近似值。因此，$LoRAPrune$实现了对lpm中的冻结参数进行修剪的目标。</p>
-<p><img src="/images/1.png" alt="两种剪枝方案"></p>
+<p><img src="../images/1.png" alt="两种剪枝方案"></p>
 <p>上图将LoRAPrune（左）与现有的梯度引导剪枝方法（右）进行比较： (a) LoRAPrune通过在整个过程中只计算低秩矩阵，可以对大规模模型进行高效的调优和剪枝。(b)传统的剪枝方法需要从大尺度参数中获得梯度。颜色（红色）表示可训练参数，颜色（蓝色）表示冻结参数，颜色（黄色）表示渐变。</p>
 <p><strong>本文贡献：</strong></p>
 <ul>
@@ -408,31 +408,31 @@
 <p><strong>Neural network pruning</strong>：神经网络剪枝。如何确定参数的重要性仍然需要进行研究</p>
 <h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><h3 id="初步"><a href="#初步" class="headerlink" title="初步"></a>初步</h3><p>首先重新讨论了具有结构重参数化的参数高效自适应方法。为了有效地微调神经网络的参数，目标模块（如全连接层）可以以并行或顺序的方式插入一个LoRA到预先训练好的参数中。在训练过程中，预先训练的参数被冻结，不计算其梯度，而插入的LoRA是可训练的。</p>
 <p><strong>Parallel low-rank adaption</strong>：给定两个低秩矩阵$A\in R^{r×k}$和$B\in R^{d×r}$，通过并行低秩自适应微调的目标模块的正向过程可以写为：</p>
-<p><img src="/images/2.png" alt=""></p>
+<p><img src="../images/2.png" alt=""></p>
 <p>$W_0,z\in R^{n×k},x\in R^{n×d}$表示原始目标模块的权重、输出和输入。自适应后，新的权重$W$可以重新参数化为$W = W_0 + BA$。</p>
 <p><strong>Sequential low-rank adaption</strong>:目标模块在顺序低秩自适应中的前向过程可以写为:</p>
-<p><img src="/images/3.png" alt=""></p>
+<p><img src="../images/3.png" alt=""></p>
 <p>自适应后，新的权重$W$可以重新参数化为$W = (BA+E)W_0$。</p>
 <h3 id="低秩梯度判据"><a href="#低秩梯度判据" class="headerlink" title="低秩梯度判据"></a>低秩梯度判据</h3><p>一个参数$w_{ij}∈W_0$的重要性可以通过去除它所引起的损失来量化。对于输入x和相应的标签y，$w_ij$的诱导误差可以被测量为有无参数的预测误差的平方差：</p>
-<p><img src="/images/4.png" alt=""></p>
+<p><img src="../images/4.png" alt=""></p>
 <p>为每个参数计算成本很高。使用一阶泰勒展开式来近似重要性：</p>
-<p><img src="/images/5.png" alt=""></p>
+<p><img src="../images/5.png" alt=""></p>
 <p>在LPM中获取$W_0$的梯度是困难的，因为它需要大量的计算能力和存储空间。在本文中，作者讨论了如何通过在下游任务自适应中插入可学习矩阵$A$和$B$来修剪预先训练好的参数$w0$。如上所述，$A$和$B$可以以平行或顺序的方式插入到预先训练好的模型中。因此，文章分别讨论了这两种情况下相应的剪枝方法。</p>
 <p><strong>Pruning for parallel adapter</strong>：在并行的情况下，如果删除元素$w_{ij}∈W$，可以设置元素$（BA）_{ij} =−w_{ij}$。等式（3）中每个参数的重要性可以重新表述如下：</p>
-<p><img src="/images/6.png" alt=""></p>
-<p>利用$（BA）_{ij} =−w_{ij}$的一阶泰勒展开式来近似等式(5)，参数$w_{ij}$的估计重要性可以表示为:<br><img src="/images/7.png" alt=""></p>
+<p><img src="../images/6.png" alt=""></p>
+<p>利用$（BA）_{ij} =−w_{ij}$的一阶泰勒展开式来近似等式(5)，参数$w_{ij}$的估计重要性可以表示为:<br><img src="../images/7.png" alt=""></p>
 <p>接下来只保存并使用两个低秩矩阵A和B的梯度来近似：</p>
-<p><img src="/images/8.png" alt=""></p>
-<p><img src="/images/9.png" alt=""></p>
+<p><img src="../images/8.png" alt=""></p>
+<p><img src="../images/9.png" alt=""></p>
 <p><strong>在(8)中，是否可以改变系数？</strong></p>
 <p>下所示，LoRA梯度准则只需要计算A和B的梯度，与预训练的总权值W0的梯度相比，节省了内存和计算量。</p>
-<p><img src="/images/10.png" alt=""></p>
+<p><img src="../images/10.png" alt=""></p>
 <h3 id="LORA剪枝"><a href="#LORA剪枝" class="headerlink" title="LORA剪枝"></a>LORA剪枝</h3><p>使用移动平均值来评估参数的重要性。具体来说，第t次迭代时的参数重要性计算如下（它允许在模型训练的早期阶段就开始剪枝操作，而不必等待整个模型完全收敛，从而节省了时间和计算资源）：</p>
-<p><img src="/images/11.png" alt=""></p>
+<p><img src="../images/11.png" alt=""></p>
 <p>插入一个二进制掩模$\beta∈\{0,1\}^{d×k}$作为参数，然后使用<strong>修剪-微调-修剪</strong>方法进行修剪。考虑到每个参数的重要性，在每次剪枝迭代中通过设置相应的掩码为1，并将其余参数设置为0来保留Top-k个重要参数。形式上，每一个修剪层的正向过程可以写成:</p>
-<p><img src="/images/12.png" alt=""></p>
+<p><img src="../images/12.png" alt=""></p>
 <p>算法如下：</p>
-<p><img src="/images/13.png" alt=""></p>
+<p><img src="../images/13.png" alt=""></p>
 <h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><p>在3090GPU上运行实验，采用修剪-微调-修剪操作。证明了将微调和剪枝过程相结合具有一定的时间效率，且不会影响plm的性能。</p>
 <h1 id="结论和未来工作"><a href="#结论和未来工作" class="headerlink" title="结论和未来工作"></a>结论和未来工作</h1>
                 
