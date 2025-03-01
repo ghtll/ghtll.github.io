@@ -354,7 +354,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-07-30
+                    2024-08-19
                 </div>
                 
 
@@ -363,7 +363,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    39 分
+                    68 分
                 </div>
                 
 
@@ -426,28 +426,28 @@
 <li>提出自适用LoRARounding技术：用于精确的量化权重</li>
 </ul>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>量化和反量化处理表示：</p>
-<p><img src="/images/2024714/1.png" alt=""></p>
+<p><img src="../images/2024714/1.png" alt=""></p>
 <p>$\Delta w$表示权重的量化舍入矩阵。</p>
 <h3 id="Cross-block-reconstruction"><a href="#Cross-block-reconstruction" class="headerlink" title="Cross-block reconstruction"></a>Cross-block reconstruction</h3><p>同时优化K个transfomers块：</p>
-<p><img src="/images/2024714/2.png" alt=""></p>
+<p><img src="../images/2024714/2.png" alt=""></p>
 <h5 id="Cross-block-dependency"><a href="#Cross-block-dependency" class="headerlink" title="Cross-block dependency"></a>Cross-block dependency</h5><p>逐块重建可以有效地节省计算内存，但它只考虑每个块内的局部信息，忽略了不同块之间的依赖性。文章引入了使用滑动窗口方法的跨块依赖（CBD）方案。该方案能够同时优化窗口内的多个块。此外，两个相邻的滑动窗具有<strong>重叠</strong>的块，确保窗口之间的块也相互连接。CBD 方案的优化表述为：</p>
-<p><img src="/images/2024714/3.png" alt=""></p>
+<p><img src="../images/2024714/3.png" alt=""></p>
 <p>尽管CBD技术有助于降低重建难度，但需要注意的是，它不能完全消除累积的误差，并且每个窗口内的优化仍然是局部的。为了解决这个限制并在确保稳定性的同时进一步增强重建过程，文章引入了一种额外的<strong>同源重建</strong>方案，如下图所示。在该方案中，将量化模型的前一个块的输出输入到全精度模型的当前块中。这会生成与量化模型的输出同源的附加输出。</p>
-<p><img src="/images/2024714/4.png" alt=""></p>
+<p><img src="../images/2024714/4.png" alt=""></p>
 <p>优化目标变为：</p>
-<p><img src="/images/2024714/5.png" alt=""></p>
+<p><img src="../images/2024714/5.png" alt=""></p>
 <p>对于距离度量，结合 L2 和 KullbackLeibler 散度 (KLD) 损失来测量重建误差。 它倾向于抑制特征空间中的异常值并增强优化过程的鲁棒性。通过合并这两个术语，捕获了空间距离和分布差异，从而实现了更全面、更稳健的优化过程。那么距离度量可以表示为：</p>
-<p><img src="/images/2024714/6.png" alt=""></p>
+<p><img src="../images/2024714/6.png" alt=""></p>
 <h3 id="Coarse-to-fine-pre-processing"><a href="#Coarse-to-fine-pre-processing" class="headerlink" title="Coarse-to-fine pre-processing"></a>Coarse-to-fine pre-processing</h3><p>先粗粒度，再细粒度：对于权重异常值直接截断，<strong>对于激活异常值，每个channel进行缩放。</strong></p>
-<p><img src="/images/2024714/7.png" alt=""></p>
+<p><img src="../images/2024714/7.png" alt=""></p>
 <h3 id="LoRA-Rounding-for-weight-quantization"><a href="#LoRA-Rounding-for-weight-quantization" class="headerlink" title="LoRA-Rounding for weight quantization"></a>LoRA-Rounding for weight quantization</h3><p>当将模型压缩为低位宽时，权重量化引起的性能下降是不可忽略的。权重的量化误差来自于舍入误差和裁剪误差，但之前针对LLM的PTQ方法只关注后者的优化而没有考虑考虑舍入误差。 文章通过可学习矩阵 V 和修正 sigmoid 函数获得权重舍入矩阵 ΔW：</p>
-<p><img src="/images/2024714/8.png" alt=""></p>
+<p><img src="../images/2024714/8.png" alt=""></p>
 <p>考虑到对于大模型V太大，这里文章提出了lora的方法即：</p>
-<p><img src="/images/2024714/9.png" alt=""></p>
+<p><img src="../images/2024714/9.png" alt=""></p>
 <p>并带有正则化损失：</p>
-<p><img src="/images/2024714/10.png" alt=""></p>
+<p><img src="../images/2024714/10.png" alt=""></p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>所有实验在单卡GPU实现：</p>
-<p><img src="/images/2024714/11.png" alt=""></p>
+<p><img src="../images/2024714/11.png" alt=""></p>
 <h1 id="2-（图像编码不要用2）"><a href="#2-（图像编码不要用2）" class="headerlink" title="2 （图像编码不要用2）"></a>2 （图像编码不要用2）</h1><h2 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -505,6 +505,111 @@
 </tbody>
 </table>
 </div>
+<h2 id="摘要-2"><a href="#摘要-2" class="headerlink" title="摘要"></a>摘要</h2><p>基于梯度的优化会导致一种隐式正则化形式，即倾向于低”复杂性“的模型。文章研究了用于矩阵分解和补全感知的深度线性神经网络上的梯度下降的隐式正则化，这种模型被称为深度矩阵分解。文章发现，深度增强了对低秩解的隐式倾向：</p>
+<ul>
+<li>研究者们发现，通过在矩阵分解中增加深度，可以增强隐式倾向于低秩解的趋势。这意味着深度网络在处理矩阵补全和感知任务时，更倾向于找到低秩的解决方案。</li>
+<li>这种低秩解的倾向通常会导致更准确的恢复结果，即深度网络能够更好地重建或预测缺失的数据。</li>
+</ul>
+<h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><ul>
+<li>传统观点认为小批量随机优化引入的噪声有助于防止模型收敛到不具备泛化能力的尖锐最小值，从而实现隐式正则化。然而，最近的研究表明，即使是确定性的基于梯度的算法也能实现良好的泛化能力，这表明传统的噪声解释可能不够全面，需要新的解释来理解隐式正则化在深度学习中的作用。</li>
+<li>文章关注于矩阵补全问题，从给定未知矩阵$W^*$中随机选择条目子集，任务是恢复未见过的条目。</li>
+<li>然而，大量的工作表明，如果$W^*$是低秩的，满足某些技术假设（例如“不连贯”）并且观察到足够多的条目，那么各种算法可以实现近似甚至精确恢复。</li>
+</ul>
+<ol>
+<li><p><strong>矩阵分解方法</strong>：</p>
+<ul>
+<li>矩阵补全问题可以通过矩阵分解来解决，即将目标矩阵 $W$ 表示为两个矩阵 $W_1$和$ W_2$的乘积。</li>
+<li>这种表示形式可以看作是训练一个深度为2的线性神经网络。</li>
+</ul>
+</li>
+<li><p><strong>显式约束秩</strong>：</p>
+<ul>
+<li>可以通过限制$ W_1$ 和$ W_2$ 的共享维度来显式地约束生成的解的秩。</li>
+</ul>
+</li>
+<li><p><strong>隐式低秩解</strong>：</p>
+<ul>
+<li>在实践中，即使没有显式地约束秩，使用小学习率（步长）和接近零的初始化运行梯度下降，往往会产生低秩的解。</li>
+<li>如果真实的矩阵 $W^*$ 是低秩的，这种隐式的低秩解可以允许准确的重建。</li>
+</ul>
+</li>
+<li><p><strong>Gunasekar等人的猜想</strong>：</p>
+<ul>
+<li>基于上述观察，Gunasekar等人提出了一个猜想，即在矩阵分解上进行梯度下降会隐式地最小化核范数（nuclear norm）。</li>
+<li>猜想1（非正式表述）：如果学习率足够小且初始化足够接近原点，矩阵分解上的梯度下降会收敛到最小核范数解。</li>
+</ul>
+<p>最小核范数解（Minimum Nuclear Norm Solution）是指在矩阵补全或矩阵恢复问题中，通过最小化矩阵的核范数（Nuclear Norm）来找到的解。核范数是矩阵奇异值的和，通常用来度量矩阵的低秩性质。</p>
+<p>具体来说，对于一个矩阵 $X$ ，其核范数定义为：$|X|_* = \sum_{i} \sigma_i(X) $<br>其中$ \sigma_i(X)$  是矩阵 $X$ 的第 $i$ 个奇异值。</p>
+<p>在矩阵补全问题中，给定一个部分观测的矩阵$ Y$ ，目标是找到一个完整的矩阵 $X$ ，使得 $X$   在观测位置上的值与 $Y $  一致，并且 $X$ 的核范数最小。这种最小化核范数的方法可以看作是一种正则化技术，它倾向于选择低秩的解，因为低秩矩阵的奇异值之和较小。</p>
+</li>
+</ol>
+<h5 id="Deep-matrix-factorization"><a href="#Deep-matrix-factorization" class="headerlink" title="Deep matrix factorization"></a>Deep matrix factorization</h5><p>深度矩阵分解表达式为，其中$W \in \mathbb{R}^{d,d^{‘}}$：</p>
+<p><img src="../images/2024714/301.png" alt=""></p>
+<ol>
+<li><strong>隐式正则化的强度</strong>：<ul>
+<li>作者提出了一个问题：深度矩阵分解的隐式正则化是否比浅层矩阵分解的隐式正则化更强？</li>
+<li>实验结果（如下图所示）表明，当观测到的矩阵条目数量较少时，深度矩阵分解确实能够更准确地完成低秩矩阵的补全。</li>
+</ul>
+</li>
+<li><strong>研究目的</strong>：<ul>
+<li>作者在当前论文中的目的是从数学上分析这种更强的隐式正则化形式。</li>
+<li>他们想要探讨这种更强的正则化是否可以继续沿用猜想1中的矩阵范数（或拟范数）来描述，或者是否需要一个新的理论框架。</li>
+</ul>
+</li>
+<li><strong>理论框架的探讨</strong>：<ul>
+<li>作者在思考是否现有的矩阵范数（或拟范数）足以描述深度矩阵分解中的隐式正则化，或者是否需要一个新的理论范式来解释这种现象。</li>
+</ul>
+</li>
+</ol>
+<p><img src="../images/2024714/302.png" alt="图1"></p>
+<p><img src="../images/2024714/303.png" alt=""></p>
+<h2 id="Can-the-implicit-regularization-be-captured-by-norms"><a href="#Can-the-implicit-regularization-be-captured-by-norms" class="headerlink" title="Can the implicit regularization be captured by norms?"></a>Can the implicit regularization be captured by norms?</h2><p>文章扩展猜想1来解释深度矩阵分解中隐式正则化的可能，鉴于图1的实验证据，可以假设在深度为$N$的矩阵分解上的梯度下降隐式最小化了近似秩的某些范数，$N$越大近似值越准确。一个候选者是Schatten-p 准范数的$p$次方，定义为：</p>
+<p><img src="../images/2024714/304.png" alt=""></p>
+<p>文章讨论更普遍的矩阵感知问题。给定$m$个测量矩阵$A_1,\cdots,A_m$对应标签为$y_1,\cdots,y_m$由$y_i=\langle A_i,W^<em>\rangle$生成。目标是重建未知矩阵$W^</em>$，如果未知矩阵是低秩的，给出足够的观测值，则可以恢复$W^*$。</p>
+<h3 id="Current-theory-does-not-distinguish-depth-N-from-depth-2"><a href="#Current-theory-does-not-distinguish-depth-N-from-depth-2" class="headerlink" title="Current theory does not distinguish depth-N from depth-2"></a>Current theory does not distinguish depth-N from depth-2</h3><p><del>核范数（nuclear norm）能够捕捉到矩阵分解中的隐式正则化效应</del></p>
+<p>通过对称测量，从传感在中恢复半正定矩阵（$A_i \in \mathbb{R}^{d,d}$是对称且线性无关，$S_+^d$表示$\mathbb{R}^{d,d}$的正半定矩阵集合）：</p>
+<p><img src="../images/2024714/305.png" alt=""></p>
+<p>研究对称满秩矩阵分解上运行梯度流所带来的隐式偏差，即目标：</p>
+<p><img src="../images/2024714/306.png" alt=""></p>
+<p>对于$\alpha &gt;0$,用$W_{sha,\infty}(\alpha)$表示通过初始化$\alpha I$在$\psi(\cdot)$运行梯度流获得的$ZZ^T$的最终解。形式上，$W_{sha,\infty}(\alpha):=lim_{t\to \infty}Z(t)Z(T)^T$这里$Z(0)=\alpha I$且$\dot{Z}(t)=-\frac{d\psi}{dZ}(Z{t})$表示对时间的导数，$|\cdot|_*$表示矩阵核范数，之前的文献证明以下结果：</p>
+<p><img src="../images/2024714/307.png" alt="定理1"></p>
+<p>其实对易条件是不必要的，即使测量矩阵是任意对称且线性无关的，上述结论任然成立。虽然杉树分析仅涵盖了$ZZ^T$形式的对称矩阵分解，但是可以扩展到非对称矩阵分解：</p>
+<p><img src="../images/2024714/308.png" alt=""></p>
+<p>接下来证明定义1可以扩展到任意深度的分解，考虑目标上的梯度流（下面式子仍然符合定理1）：</p>
+<p><img src="../images/2024714/309.png" alt=""></p>
+<p><img src="../images/2024714/310.png" alt=""></p>
+<p><strong>命题1</strong></p>
+<p><img src="../images/2024714/311.png" alt=""></p>
+<h3 id="Experiments-challenging-Conjecture-1"><a href="#Experiments-challenging-Conjecture-1" class="headerlink" title="Experiments challenging Conjecture 1"></a>Experiments challenging Conjecture 1</h3><p>文章通过实验对猜想1进行质疑：表明深度对隐式正则化的影响可能比理论预期的更为复杂，需要进一步的研究来澄清。我拿着将最小核范数解与通过对不同深度的矩阵分解运行梯度下降而得出的解进行比较。实验结果如下图：<br><img src="../images/2024714/312.png" alt=""></p>
+<p>可以看出，如果观察的条目相对于要恢复的矩阵的秩足够大，所有深度的因式分解允许趋向于最小核范数的解。但是，当观察条目很小是，因式分解都不会最小化核范数，相反，他们更强调降低有效秩等级。<strong>effective rank</strong>:</p>
+<p><img src="../images/2024714/313.png" alt=""></p>
+<p>隐式正则化在矩阵分解中的效果不仅仅是最小化核范数，更重要的是它倾向于低秩解。这种低秩偏向在数据稀少的情况下尤为明显，而在数据足够多的情况下，最小核范数和最小秩会重合。因此，理解隐式正则化需要考虑到这种低秩倾向，而不仅仅是核范数最小化。</p>
+<h2 id="Dynamical-analysis"><a href="#Dynamical-analysis" class="headerlink" title="Dynamical analysis"></a>Dynamical analysis</h2><p>文章描述了深度矩阵分解上的梯度流轨迹。推导了乘积矩阵$W$的奇异值和奇异值向量动态的微分方程。奇异值的演化率与其大小成正比，指数大小为$2-2/N$,$N$表示深度。对于奇异向量，如果它保持静止，那么意味着与他们与梯度的特定形式对齐，通过理论和实证演示，作者解释了他们的发现如何意味着趋向于低秩解的倾向，并且这种倾向随着深度的增加而增强。</p>
+<p>文章最小化方程：</p>
+<p><img src="../images/2024714/314.png" alt=""></p>
+<p>梯度流为：</p>
+<p><img src="../images/2024714/315.png" alt=""></p>
+<p>初始化为：</p>
+<p><img src="../images/2024714/316.png" alt=""></p>
+<p><strong>引理1</strong>：$W(t)$可以表示为：</p>
+<p><img src="../images/2024714/317.png" alt=""></p>
+<ul>
+<li>对角矩阵$ S(t)$的对角元素$ \sigma_1(t), \ldots, \sigma_{\min\{d,d’\}}(t)$是 $W(t)$的带符号的奇异值。</li>
+<li>矩阵 $U(t)$ 的列向量 $u_1(t)$, $\ldots, u_{\min\{d,d’\}}$(t)是与这些奇异值对应的左奇异向量。</li>
+<li>矩阵$ V(t)$的列向量$ v_1(t)$, $\ldots, v_{\min\{d,d’\}}(t)$是与这些奇异值对应的右奇异向量。</li>
+</ul>
+<p><strong>定理3：</strong>乘积矩阵$W(t)$的奇异值由下列公式演化而来：</p>
+<p><img src="../images/2024714/318.png" alt=""></p>
+<p>奇异值的演化对$N$的依赖因取决于：</p>
+<p><img src="../images/2024714/320.png" alt=""></p>
+<p>当$N$大于等于2，这个因子会增强大奇异值的运动，减少小奇异值的运动，随着$N$的增加，增强衰减更明显。</p>
+<p><strong>引理2</strong>：奇异值向量的演化为：</p>
+<p><img src="../images/2024714/321.png" alt=""></p>
+<p><strong>推理1</strong>：</p>
+<p><img src="../images/2024714/322.png" alt=""></p>
+<h3 id="Implicit-regularization-towards-low-rank"><a href="#Implicit-regularization-towards-low-rank" class="headerlink" title="Implicit regularization towards low rank"></a>Implicit regularization towards low rank</h3><p>下图展示了对定理3和推论1的经验证明：</p>
+<p><img src="../images/2024714/323.png" alt=""></p>
+<p>总体而言，增加矩阵分解的深度会导致乘积矩阵的奇异值之间的差距更大，即对低秩的隐式偏差更强。</p>
 <h1 id="4"><a href="#4" class="headerlink" title="4"></a>4</h1><h2 id="简介-3"><a href="#简介-3" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -533,13 +638,13 @@
 </tbody>
 </table>
 </div>
-<h2 id="摘要-2"><a href="#摘要-2" class="headerlink" title="摘要"></a>摘要</h2><p>量化大语言模型的挑战来自跨channel的不同范围，文章引入RPTQ量化方法，基于重新排序的方法，重新排列各个channel并按照簇进行量化。</p>
-<h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><p>概括图：</p>
-<p><img src="/images/2024714/41.png" alt=""></p>
+<h2 id="摘要-3"><a href="#摘要-3" class="headerlink" title="摘要"></a>摘要</h2><p>量化大语言模型的挑战来自跨channel的不同范围，文章引入RPTQ量化方法，基于重新排序的方法，重新排列各个channel并按照簇进行量化。</p>
+<h2 id="方法-2"><a href="#方法-2" class="headerlink" title="方法"></a>方法</h2><p>概括图：</p>
+<p><img src="../images/2024714/41.png" alt=""></p>
 <h3 id="Channel的重新排序和聚类"><a href="#Channel的重新排序和聚类" class="headerlink" title="Channel的重新排序和聚类"></a>Channel的重新排序和聚类</h3><p>采用k-mean聚类然后讲统一集群中的channel聚类在一起，每个簇使用相同的缩放因子S和零点Z。</p>
 <h3 id="Avoid-Explicit-Reordering-and-Misalignment"><a href="#Avoid-Explicit-Reordering-and-Misalignment" class="headerlink" title="Avoid Explicit Reordering and Misalignment"></a>Avoid Explicit Reordering and Misalignment</h3><p>重排序操作融合到层规范操作中：</p>
-<p><img src="/images/2024714/42.png" alt=""></p>
-<h2 id="实验-1"><a href="#实验-1" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/2024714/43.png" alt=""></p>
+<p><img src="../images/2024714/42.png" alt=""></p>
+<h2 id="实验-1"><a href="#实验-1" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/2024714/43.png" alt=""></p>
 <h1 id="5"><a href="#5" class="headerlink" title="5"></a>5</h1><h2 id="简介-4"><a href="#简介-4" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -568,24 +673,24 @@
 </tbody>
 </table>
 </div>
-<h2 id="摘要-3"><a href="#摘要-3" class="headerlink" title="摘要"></a>摘要</h2><p>通过矩阵分解将大语言模型量化到1位。</p>
-<h2 id="方法-2"><a href="#方法-2" class="headerlink" title="方法"></a>方法</h2><h3 id="1-bit-Linear-Layer-Architecture"><a href="#1-bit-Linear-Layer-Architecture" class="headerlink" title="1-bit Linear Layer Architecture"></a>1-bit Linear Layer Architecture</h3><p>文章(BitNet: Scaling 766 1-bit transformers for large language models)从零开始训练1位模型，在W1A16模型中，线性层被设计为：</p>
-<p><img src="/images/2024714/51.png" alt=""></p>
+<h2 id="摘要-4"><a href="#摘要-4" class="headerlink" title="摘要"></a>摘要</h2><p>通过矩阵分解将大语言模型量化到1位。</p>
+<h2 id="方法-3"><a href="#方法-3" class="headerlink" title="方法"></a>方法</h2><h3 id="1-bit-Linear-Layer-Architecture"><a href="#1-bit-Linear-Layer-Architecture" class="headerlink" title="1-bit Linear Layer Architecture"></a>1-bit Linear Layer Architecture</h3><p>文章(BitNet: Scaling 766 1-bit transformers for large language models)从零开始训练1位模型，在W1A16模型中，线性层被设计为：</p>
+<p><img src="../images/2024714/51.png" alt=""></p>
 <p>受到启发，使用$Sign$函数对权重进行量化，但是$\mathbf{W}_{\pm1}$缺少浮点数，减少了精度，因此文章引入两个FP16的两个向量：</p>
-<p><img src="/images/2024714/52.png" alt=""></p>
+<p><img src="../images/2024714/52.png" alt=""></p>
 <h3 id="Sign-Value-Independent-Decomposition"><a href="#Sign-Value-Independent-Decomposition" class="headerlink" title="Sign-Value-Independent Decomposition"></a>Sign-Value-Independent Decomposition</h3><p>对$\mathbf{W}$进行秩为1的矩阵分解：</p>
-<p><img src="/images/2024714/53.png" alt=""></p>
+<p><img src="../images/2024714/53.png" alt=""></p>
 <p>由于$\mathbf{W}$被提取了符号，因此对$\mathbf{W}$的绝对值进行分解可以采用SVD分解和非负矩阵分解NMF。SVID将线性层重新表述为（这样做比上式占用内存更小）：</p>
-<p><img src="/images/2024714/54.png" alt=""></p>
+<p><img src="../images/2024714/54.png" alt=""></p>
 <p>文章提出，SVID更近似与原始权重矩阵：</p>
-<p><img src="/images/2024714/55.png" alt=""></p>
+<p><img src="../images/2024714/55.png" alt=""></p>
 <h3 id="Knowledge-Transfer"><a href="#Knowledge-Transfer" class="headerlink" title="Knowledge Transfer"></a>Knowledge Transfer</h3><p>采用量化感知知识蒸馏进行训练：</p>
-<p><img src="/images/2024714/56.png" alt=""></p>
+<p><img src="../images/2024714/56.png" alt=""></p>
 <p>隐藏层的误差定义为：</p>
-<p><img src="/images/2024714/57.png" alt=""></p>
+<p><img src="../images/2024714/57.png" alt=""></p>
 <p>最终的损失函数为：</p>
-<p><img src="/images/2024714/58.png" alt=""></p>
-<h2 id="实验-2"><a href="#实验-2" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/2024714/59.png" alt=""></p>
+<p><img src="../images/2024714/58.png" alt=""></p>
+<h2 id="实验-2"><a href="#实验-2" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/2024714/59.png" alt=""></p>
 <h1 id="6"><a href="#6" class="headerlink" title="6"></a>6</h1><h2 id="简介-5"><a href="#简介-5" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -614,41 +719,41 @@
 </tbody>
 </table>
 </div>
-<h2 id="摘要-4"><a href="#摘要-4" class="headerlink" title="摘要"></a>摘要</h2><p>目前的权重量化大多采用rank-1的码本进行量化，当压缩比例较高时，精度低，文章提出了一种基于低秩码本的量化方法。</p>
-<h2 id="方法-3"><a href="#方法-3" class="headerlink" title="方法"></a>方法</h2><p>有校准数据集，每个校准数据$\mathbf{X}_i\in \R^{L\times D} $的sequence length为$L$,feature dimension 为$D$：</p>
-<p><img src="/images/2024714/61.png" alt=""></p>
+<h2 id="摘要-5"><a href="#摘要-5" class="headerlink" title="摘要"></a>摘要</h2><p>目前的权重量化大多采用rank-1的码本进行量化，当压缩比例较高时，精度低，文章提出了一种基于低秩码本的量化方法。</p>
+<h2 id="方法-4"><a href="#方法-4" class="headerlink" title="方法"></a>方法</h2><p>有校准数据集，每个校准数据$\mathbf{X}_i\in \R^{L\times D} $的sequence length为$L$,feature dimension 为$D$：</p>
+<p><img src="../images/2024714/61.png" alt=""></p>
 <p>在一些工作比如AWQ、OminiQuant中，采用分组量化，具体而言。对于一个线性层有$N_W$个权重，将所有权重分成$N_V$个子集，每个子集有$N_W/N_V$个权重。对于每一个子集，将其分成$N_G$个组。指定每个子集的权重为：$\mathbf{W}\in \R^{N_{G}\times G}$,其中$G$表示组大小并且$N_G=\frac{N_W}{N_V\times G}$表示每个子集的权重组数量。需要为每组权重维护一个包含量化值的量化码本。</p>
 <p>对于$b$比特量化，每组权重的所有量化值个数为:$N_Q=2^b$。定义所有组的量化码本为：$\mathbf{C}\in \R^{N_G\times N_Q}$,第$i$行是第$i$组权重对应的码本。量化函数以逐元素的方式对权重进行操作，将每个权重量化为码本中最接近的量化值。令$\mathbf{Z}\in[0,1, \dots,N_Q]^{N_G \times G}$表示权重的量化索引，即$Z_{i,j}$表示$W_{i,j}$的量化索引：</p>
-<p><img src="/images/2024714/62.png" alt=""></p>
+<p><img src="../images/2024714/62.png" alt=""></p>
 <p>量化函数被定义为：</p>
-<p><img src="/images/2024714/63.png" alt=""></p>
-<p><img src="/images/2024714/64.png" alt=""></p>
+<p><img src="../images/2024714/63.png" alt=""></p>
+<p><img src="../images/2024714/64.png" alt=""></p>
 <h3 id="Low-Rank-Codebook"><a href="#Low-Rank-Codebook" class="headerlink" title="Low-Rank Codebook"></a>Low-Rank Codebook</h3><p>在AWQ、GPTQ中，量化值的间隔是相等的，因此不需要显式存储量化码本$\mathbf{C}$,具体来说$\mathbf{C}$可以被两个向量表示，一个缩放向量$\mathbf{S}_1\in \R^{1\times N_G} $（根据$\mathbf{W}$自适应计算）和一个固定点集向量$\mathbf{V}_1\in \R^{1\times N_Q} $（在-1到1之间均匀分布的向量）。</p>
-<p><img src="/images/2024714/65.png" alt=""></p>
+<p><img src="../images/2024714/65.png" alt=""></p>
 <p>然后通过计算$\mathbf{S}_1$和$\mathbf{V}_1$的外积得到码本。然后为了由于权重的不对称分布，引入一个量化偏移$\mathbf{B}\in \R^{N_G \times 1} $，每组权重有他们各自的偏移。最终的量化码本被表示为：</p>
-<p><img src="/images/2024714/66.png" alt=""></p>
+<p><img src="../images/2024714/66.png" alt=""></p>
 <p>因此存储为rank-1。为了提升表示能力，这里使用low-rank表示，引入两个矩阵：</p>
-<p><img src="/images/2024714/67.png" alt=""></p>
-<p><img src="/images/2024714/68.png" alt=""></p>
+<p><img src="../images/2024714/67.png" alt=""></p>
+<p><img src="../images/2024714/68.png" alt=""></p>
 <p>量化码本被表示为：</p>
-<p><img src="/images/2024714/69.png" alt=""></p>
-<p><img src="/images/2024714/610.png" alt=""></p>
+<p><img src="../images/2024714/69.png" alt=""></p>
+<p><img src="../images/2024714/610.png" alt=""></p>
 <h3 id="Objective-Function"><a href="#Objective-Function" class="headerlink" title="Objective Function"></a>Objective Function</h3><p>使用Transformer块的输出重建误差作为目标函数：</p>
-<p><img src="/images/2024714/611.png" alt=""></p>
-<p><img src="/images/2024714/612.png" alt=""></p>
+<p><img src="../images/2024714/611.png" alt=""></p>
+<p><img src="../images/2024714/612.png" alt=""></p>
 <h3 id="Gradient-based-Optimization"><a href="#Gradient-based-Optimization" class="headerlink" title="Gradient-based Optimization"></a>Gradient-based Optimization</h3><h5 id="Gradient-Approximation-for-Quantization-Function"><a href="#Gradient-Approximation-for-Quantization-Function" class="headerlink" title="Gradient Approximation for Quantization Function"></a>Gradient Approximation for Quantization Function</h5><p>$argmin(·)$函数无法反向传播，根据Nonuniform-to-Uniform Quantization: Towards Accurate Quantization via Generalized Straight-Through Estimation这篇文章，</p>
 <p>将量化函数重写为多个片段相加的形式，每个片段对应两个相邻量化值之间的间隔：</p>
-<p><img src="/images/2024714/613.png" alt=""></p>
+<p><img src="../images/2024714/613.png" alt=""></p>
 <p>训练过程：这里训练过程中W不变。</p>
-<p><img src="/images/2024714/616.png" alt=""></p>
+<p><img src="../images/2024714/616.png" alt=""></p>
 <h5 id="Reparameterization-of-Quantization-Parameters"><a href="#Reparameterization-of-Quantization-Parameters" class="headerlink" title="Reparameterization of Quantization Parameters"></a>Reparameterization of Quantization Parameters</h5><p>在梯度下降中，直接学习S很难，主要原因是这些值在不同层之间会有很大的变化，直接学习S导致某些权重梯度更新过多。</p>
 <p>根据OmniQuant文章，提出了重新参数化策略：</p>
-<p><img src="/images/2024714/614.png" alt=""></p>
+<p><img src="../images/2024714/614.png" alt=""></p>
 <h5 id="Initialization-of-Quantization-Parameters"><a href="#Initialization-of-Quantization-Parameters" class="headerlink" title="Initialization of Quantization Parameters"></a>Initialization of Quantization Parameters</h5><p>使用AWQ方法来初始化S、B、V。</p>
 <h3 id="Double-Quantization"><a href="#Double-Quantization" class="headerlink" title="Double Quantization"></a>Double Quantization</h3><p>由于rank高，存储高了，这里对S、b、v进行了二次量化：</p>
-<p><img src="/images/2024714/615.png" alt=""></p>
+<p><img src="../images/2024714/615.png" alt=""></p>
 <h2 id="实验-3"><a href="#实验-3" class="headerlink" title="实验"></a>实验</h2><p>RTX A6000 GPU card of 48GB</p>
-<p><img src="/images/2024714/617.png" alt=""></p>
+<p><img src="../images/2024714/617.png" alt=""></p>
 <h1 id="7（一般）"><a href="#7（一般）" class="headerlink" title="7（一般）"></a>7（一般）</h1><h2 id="简介-6"><a href="#简介-6" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -677,10 +782,10 @@
 </tbody>
 </table>
 </div>
-<h2 id="摘要-5"><a href="#摘要-5" class="headerlink" title="摘要"></a>摘要</h2><p>文章提出四位权重和8位激活的量化方法</p>
-<h2 id="方法-4"><a href="#方法-4" class="headerlink" title="方法"></a>方法</h2><p>采用smoothquant那种方法，只对异常通道进行缩放。采用GPTQ方法对权重进行量化</p>
+<h2 id="摘要-6"><a href="#摘要-6" class="headerlink" title="摘要"></a>摘要</h2><p>文章提出四位权重和8位激活的量化方法</p>
+<h2 id="方法-5"><a href="#方法-5" class="headerlink" title="方法"></a>方法</h2><p>采用smoothquant那种方法，只对异常通道进行缩放。采用GPTQ方法对权重进行量化</p>
 <p>但是文章设计了W4A8加速内核：</p>
-<p><img src="/images/2024714/71.png" alt=""></p>
+<p><img src="../images/2024714/71.png" alt=""></p>
 <h1 id="8"><a href="#8" class="headerlink" title="8"></a>8</h1><h2 id="简介-7"><a href="#简介-7" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -709,13 +814,13 @@
 </tbody>
 </table>
 </div>
-<h2 id="摘要-6"><a href="#摘要-6" class="headerlink" title="摘要"></a>摘要</h2><p>以GPTQ为基础，个根据GPTQ的最优解来寻找量化网格。</p>
-<h2 id="方法-5"><a href="#方法-5" class="headerlink" title="方法"></a>方法</h2><h3 id="Revisiting-the-Loss-Error"><a href="#Revisiting-the-Loss-Error" class="headerlink" title="Revisiting the Loss Error"></a>Revisiting the Loss Error</h3><p>文章发现以GPTQ方法的最优误差正比于海森矩阵的逆的倒数和量化的均方误差：</p>
-<p><img src="/images/2024714/81.png" alt=""></p>
+<h2 id="摘要-7"><a href="#摘要-7" class="headerlink" title="摘要"></a>摘要</h2><p>以GPTQ为基础，个根据GPTQ的最优解来寻找量化网格。</p>
+<h2 id="方法-6"><a href="#方法-6" class="headerlink" title="方法"></a>方法</h2><h3 id="Revisiting-the-Loss-Error"><a href="#Revisiting-the-Loss-Error" class="headerlink" title="Revisiting the Loss Error"></a>Revisiting the Loss Error</h3><p>文章发现以GPTQ方法的最优误差正比于海森矩阵的逆的倒数和量化的均方误差：</p>
+<p><img src="../images/2024714/81.png" alt=""></p>
 <h3 id="Loss-Error-Aware-Network-Quantization"><a href="#Loss-Error-Aware-Network-Quantization" class="headerlink" title="Loss-Error-Aware Network Quantization"></a>Loss-Error-Aware Network Quantization</h3><p>一般来说均匀量化网格是均匀间隔的，无法保持异常权重的量化精度，文章提出了非均匀的损失误差量化，根据以下目标来学习b位量化的网格线集合：</p>
-<p><img src="/images/2024714/82.png" alt=""></p>
+<p><img src="../images/2024714/82.png" alt=""></p>
 <p>文章的方法是采用k-means方法来学习网格线集合。</p>
-<h2 id="实验-4"><a href="#实验-4" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/2024714/83.png" alt=""></p>
+<h2 id="实验-4"><a href="#实验-4" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/2024714/83.png" alt=""></p>
 <h1 id="9"><a href="#9" class="headerlink" title="9"></a>9</h1><h2 id="简介-8"><a href="#简介-8" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -744,36 +849,36 @@
 </tbody>
 </table>
 </div>
-<h2 id="摘要-7"><a href="#摘要-7" class="headerlink" title="摘要"></a>摘要</h2><p>文章提出新的二值化方法，在微观层面，同时考虑了2位宽的精度优势和二值化的效率优势，将二位量化权重拆分为两个独立的二进制，然后提出偏差感知蒸馏方法。</p>
-<h2 id="方法-6"><a href="#方法-6" class="headerlink" title="方法"></a>方法</h2><h3 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h3><p>对于b位均匀量化，量化和反量化可以表示为：</p>
-<p><img src="/images/2024714/91.png" alt=""></p>
+<h2 id="摘要-8"><a href="#摘要-8" class="headerlink" title="摘要"></a>摘要</h2><p>文章提出新的二值化方法，在微观层面，同时考虑了2位宽的精度优势和二值化的效率优势，将二位量化权重拆分为两个独立的二进制，然后提出偏差感知蒸馏方法。</p>
+<h2 id="方法-7"><a href="#方法-7" class="headerlink" title="方法"></a>方法</h2><h3 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h3><p>对于b位均匀量化，量化和反量化可以表示为：</p>
+<p><img src="../images/2024714/91.png" alt=""></p>
 <p>权重二值化可以表示为：</p>
-<p><img src="/images/2024714/92.png" alt=""></p>
+<p><img src="../images/2024714/92.png" alt=""></p>
 <h3 id="Flexible-Dual-Binarization"><a href="#Flexible-Dual-Binarization" class="headerlink" title="Flexible Dual Binarization"></a>Flexible Dual Binarization</h3><p>研究人员发现语言模型的权重呈对称高斯分布，并且一小部分显著权重对量化性能至关重要。文章对多低位视角的优化进行了深入研究（图4）。二值化表示能力较差，其余两个水平向 0 收敛（图 3 ），忽略了显着权重并归因于最高损失值。2 位量化自然地克服了表示瓶颈（表达跨度超过图 3 中二值化的两倍）。最小损失点显着降低，但损失面依然陡峭，给优化带来了难度。</p>
-<p><img src="/images/2024714/93.png" alt="图三：第一个输出投影矩阵 (LLaMA-1-7B) 的分布。彩色级别表示网格搜索的最佳解决方案，最大限度地减少二值化、2 位量化和 FDB 的代理量化误差（输出的 MSE 损失）。受权值分布正态性的影响，二值化由于不存在代表0的级别，将两个级别压缩得更接近0，从而阻碍了大量数值较高的重要权值的精确表示，其表达跨度还不到2位的一半量化"></p>
-<p><img src="/images/2024714/94.png" alt="图四：基于二值化 (a)、2 位量化 (b) 和我们的 FDB (c) 的单个量化线性层的损失情况。对于(a)、(b)和(c)，我们扰动单层的训练参数并计算MSE损失，将量化层的输出与全精度模型的输出进行比较。 (d) 通过将三个表面并置在一个坐标框架内来突出它们之间的差异。"></p>
+<p><img src="../images/2024714/93.png" alt="图三：第一个输出投影矩阵 (LLaMA-1-7B) 的分布。彩色级别表示网格搜索的最佳解决方案，最大限度地减少二值化、2 位量化和 FDB 的代理量化误差（输出的 MSE 损失）。受权值分布正态性的影响，二值化由于不存在代表0的级别，将两个级别压缩得更接近0，从而阻碍了大量数值较高的重要权值的精确表示，其表达跨度还不到2位的一半量化"></p>
+<p><img src="../images/2024714/94.png" alt="图四：基于二值化 (a)、2 位量化 (b) 和我们的 FDB (c) 的单个量化线性层的损失情况。对于(a)、(b)和(c)，我们扰动单层的训练参数并计算MSE损失，将量化层的输出与全精度模型的输出进行比较。 (d) 通过将三个表面并置在一个坐标框架内来突出它们之间的差异。"></p>
 <p>为了结合二值化固有的效率和2位量化的灵活表示能力，提出了FDB，首先从高位llm中继承高性能获得初始化，然后微调增强表示能力。将2位llm拆分为两个独立的1位：</p>
-<p><img src="/images/2024714/95.png" alt=""></p>
+<p><img src="../images/2024714/95.png" alt=""></p>
 <p>为了实现等式4中量化级别之间的等距步长，将二值化调整为{0，1}。$\alpha_1$和$\alpha_2$初始值表示为：</p>
-<p><img src="/images/2024714/96.png" alt=""></p>
+<p><img src="../images/2024714/96.png" alt=""></p>
 <p>微调阶段，量化参数$\alpha_1$和$\alpha_2$会被优化，从而导致非等距量化水平。目标是比较图5中值和水平中心之间的大小（<strong>这里公式6为什么不和$\alpha_1 /2$比大小呢？解释如下</strong>）：</p>
-<p><img src="/images/2024714/910.png" alt=""></p>
-<p><img src="/images/2024714/97.png" alt=""></p>
-<p><img src="/images/2024714/99.png" alt="图五"></p>
+<p><img src="../images/2024714/910.png" alt=""></p>
+<p><img src="../images/2024714/97.png" alt=""></p>
+<p><img src="../images/2024714/99.png" alt="图五"></p>
 <p>$\mathbf{H}(.)$表示单位阶跃函数，复制定义为0，正值定义为1。FDP前向过程表示为：</p>
-<p><img src="/images/2024714/98.png" alt=""></p>
+<p><img src="../images/2024714/98.png" alt=""></p>
 <h3 id="Discussion-on-compression-and-acceleration"><a href="#Discussion-on-compression-and-acceleration" class="headerlink" title="Discussion on compression and acceleration."></a>Discussion on compression and acceleration.</h3><p>这样做会产生大量的稀疏性（约百分之60）潜在增加了计算速度。</p>
 <h3 id="Discussion-on-flexibility"><a href="#Discussion-on-flexibility" class="headerlink" title="Discussion on flexibility."></a>Discussion on flexibility.</h3><p>从图四可以看到，FDB具有更平坦的优化表面。</p>
 <h3 id="Deviation-aware-Distillation"><a href="#Deviation-aware-Distillation" class="headerlink" title="Deviation-aware Distillation"></a>Deviation-aware Distillation</h3><p>·文章观察到全精度llm的同一侧偏好服从下图的长尾分布，并表现出增加的失真。文章探究失真原因，对失效预测进行探讨，利用信息熵衡量相应的不确定性：</p>
-<p><img src="/images/2024714/911.png" alt=""></p>
+<p><img src="../images/2024714/911.png" alt=""></p>
 <p>如下图所示，师生模型的熵于任务损失（交叉熵是一致的），文章假设处理模糊样本时，量化模型有效性会下降，导致倾向于更保守的预测。文章提出偏差感知蒸馏：</p>
-<p><img src="/images/2024714/912.png" alt=""></p>
+<p><img src="../images/2024714/912.png" alt=""></p>
 <p>利用一对熵即师生熵作为难度指标来优先考虑不确定样本：</p>
-<p><img src="/images/2024714/913.png" alt=""></p>
+<p><img src="../images/2024714/913.png" alt=""></p>
 <p>总损失为：</p>
-<p><img src="/images/2024714/914.png" alt=""></p>
+<p><img src="../images/2024714/914.png" alt=""></p>
 <h2 id="实验-5"><a href="#实验-5" class="headerlink" title="实验"></a>实验</h2><p>8 NVIDIA A800 GPUs with 80 GB memory. Compressing a 7B model approximately requires 20 GPU hours.</p>
-<p><img src="/images/2024714/915.png" alt=""></p>
+<p><img src="../images/2024714/915.png" alt=""></p>
 <h1 id="10"><a href="#10" class="headerlink" title="10"></a>10</h1><h2 id="简介-9"><a href="#简介-9" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
@@ -801,21 +906,21 @@
 </tbody>
 </table>
 </div>
-<h2 id="摘要-8"><a href="#摘要-8" class="headerlink" title="摘要"></a>摘要</h2><p>提出BitNet，可扩展和稳定的1为transformer架构模型，目的时从0开始训练1位权重</p>
-<h2 id="方法-7"><a href="#方法-7" class="headerlink" title="方法"></a>方法</h2><p>BitNet架构如下图：使用BitLinear代替传统的矩阵乘法，采用二值化模型权重。保留其他组件的高精度</p>
-<p><img src="/images/2024714/101.png" alt=""></p>
+<h2 id="摘要-9"><a href="#摘要-9" class="headerlink" title="摘要"></a>摘要</h2><p>提出BitNet，可扩展和稳定的1为transformer架构模型，目的时从0开始训练1位权重</p>
+<h2 id="方法-8"><a href="#方法-8" class="headerlink" title="方法"></a>方法</h2><p>BitNet架构如下图：使用BitLinear代替传统的矩阵乘法，采用二值化模型权重。保留其他组件的高精度</p>
+<p><img src="../images/2024714/101.png" alt=""></p>
 <h3 id="BitLinear"><a href="#BitLinear" class="headerlink" title="BitLinear"></a>BitLinear</h3><p>首先使用Sign函数将权重二值化为$±1$,在二值化之前将权重集中为零均值，二值化之后采用比例因子$\beta$来减少实值和二值化后的误差：</p>
-<p><img src="/images/2024714/102.png" alt=""></p>
+<p><img src="../images/2024714/102.png" alt=""></p>
 <p>文章进一步将激活量化到b位精度，使用absmax量化方法，缩放激活到$<a href="Q_b=2^{b-1}">-Q_b,Q_b</a>$，通过与$Q_b$相乘并除以矩阵的绝对最大值:</p>
-<p><img src="/images/2024714/103.png" alt=""></p>
+<p><img src="../images/2024714/103.png" alt=""></p>
 <p>对于非线性函数之前的激活，例如（ReLU）,通过减去输入最小值将其缩放到$[0,Q_b]$以便所有值都是非负的：</p>
-<p><img src="/images/2024714/104.png" alt=""></p>
+<p><img src="../images/2024714/104.png" alt=""></p>
 <p>文章将激活量化为8位，为了稳定性和效率，在训练期间执行每张量量化，在推理期间执行每token量化，矩阵乘法为：</p>
-<p><img src="/images/2024714/105.png" alt=""></p>
+<p><img src="../images/2024714/105.png" alt=""></p>
 <p>假设$W$和$x$互相独立，则输出的估计方差为：</p>
-<p><img src="/images/2024714/106.png" alt=""></p>
+<p><img src="../images/2024714/106.png" alt=""></p>
 <p>对于全精度计算，使用标准初始化方法（例如 Kaiming 初始化或 Xavier 初始化），输出 Var(y) 的方差为 1，这对训练稳定性有很大好处。为了保留量化后的方差，我们在激活量化之前引入了 LayerNorm [BKH16] 函数。这样，输出 y 的方差估计为 Var(y) ≈ E[LN(ex)2] = 1，其与全精度对应项 Var(y) 具有相同的幅度，因此BitLinear公式为：</p>
-<p><img src="/images/2024714/107.png" alt=""></p>
+<p><img src="../images/2024714/107.png" alt=""></p>
 <h3 id="Model-Training"><a href="#Model-Training" class="headerlink" title="Model Training"></a>Model Training</h3><p>直通估计器。为了训练我们的 1 位模型，我们使用直通估计器 (STE)[BLC13] 来近似反向传播期间的梯度。此方法在向后传递过程中绕过不可微函数，例如 Sign（等式 2）和 Clip（等式 5）函数。 STE 允许梯度流过网络，而不受这些不可微函数的影响，从而可以训练我们的量化模型。</p>
 <ol>
 <li><strong>低精度量化</strong>：在训练过程中，权重（weights）和激活（activations）被量化为低精度格式。低精度通常指的是16位浮点数（例如FP16）或者更低的精度，如8位整数（INT8）。这样做可以减少内存占用和加速计算，因为低精度数值需要的存储空间和计算资源更少。</li>
@@ -824,8 +929,8 @@
 <li><strong>前向传播中的二值化</strong>：在模型的前向传播过程中，潜在权重会被即时二值化（binarized），即转换为二进制形式（通常是1位，即-1或+1）。这种二值化可以进一步减少计算复杂度和内存需求。</li>
 <li><strong>推理过程</strong>：值得注意的是，这些二值化的权重并不用于模型的推理过程。推理时，模型通常使用全精度的权重，以确保输出的准确性。</li>
 </ol>
-<h2 id="实验-6"><a href="#实验-6" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/2024714/108.png" alt=""></p>
-<h1 id="11"><a href="#11" class="headerlink" title="11"></a>11</h1><h2 id="简介-10"><a href="#简介-10" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
+<h2 id="实验-6"><a href="#实验-6" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/2024714/108.png" alt=""></p>
+<h1 id="11"><a href="#11" class="headerlink" title="11"></a>11</h1><h2 id="简介ICML-2024-Oral-Deep-LoRA-基于子空间不变性的模型压缩与优化-qq-com"><a href="#简介ICML-2024-Oral-Deep-LoRA-基于子空间不变性的模型压缩与优化-qq-com" class="headerlink" title="简介ICML 2024 Oral || Deep LoRA: 基于子空间不变性的模型压缩与优化 (qq.com)"></a>简介<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/BIM2ikLAj_R5ao5GKFtsdA">ICML 2024 Oral || Deep LoRA: 基于子空间不变性的模型压缩与优化 (qq.com)</a></h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -852,7 +957,56 @@
 </tbody>
 </table>
 </div>
-<h1 id="12"><a href="#12" class="headerlink" title="12"></a>12</h1><h2 id="简介-11"><a href="#简介-11" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
+<h2 id="摘要-10"><a href="#摘要-10" class="headerlink" title="摘要"></a>摘要</h2><p>文章利用模型参数固有的低维数据结构和可压缩动力学，实现在不增加计算负担的情况下获得过参数化的好处。文章方法基于深度过参数化低秩矩阵恢复的理论发现，表明每个权重矩阵的学习动态局限于不变的低维子空间。</p>
+<p>以低秩矩阵恢复为例，与经典的两层因式分解方法相比，更深层次的因式分解可以更好地促进低秩解作为深度地函数，从而减轻过度参数化的过拟合，见下图左。另一方面，增加每个层的宽度大大减少了达到相同训练误差的迭代次数，见下图右</p>
+<p><img src="../images/2024714/1101.png" alt=""></p>
+<p>过度参数化带来了显著的好处，但是也带来了计算挑战，能否在大幅度降低计算成本的情况下获得过参数化的好处？</p>
+<p>文章表明可以利用数据的地位结构和模型权重中的可压缩学习动态来实现这个目标。文章发现：对于 每个权重矩阵，学习动态仅发生在所有迭代中近似不变的低维子空间之内。因此可以构建和训练一个几乎等效但是小得多的压缩因式分解，而不会牺牲其过度参数化对应的缺点。</p>
+<h2 id="方法-9"><a href="#方法-9" class="headerlink" title="方法"></a>方法</h2><h3 id="Warm-up-Study-Deep-Matrix-Factorization"><a href="#Warm-up-Study-Deep-Matrix-Factorization" class="headerlink" title="Warm-up Study: Deep Matrix Factorization"></a>Warm-up Study: Deep Matrix Factorization</h3><h4 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h4><p>给定一个低秩矩阵$\Phi \in \mathbb{R}^{d_x \times d_y}$，它的秩为$rank(\Phi)=r^*$，通过$L$-层深度矩阵分解近似这个矩阵：</p>
+<p><img src="../images/2024714/3014.png" alt=""></p>
+<p>其中$\Theta=(\mathbf{W}_l)_{l=1}^L$是权重为$\mathbf{W}_l\in \mathbb{R}^{d_l \times d_{l-1}}$的参数。考虑权重都是方阵即：$d_0=d_1=\cdots=d_L=d$，然后通过下列目标函数求解参数：</p>
+<p><img src="../images/2024714/3015.png" alt=""></p>
+<p>通过缩放正交初始化来初始化$\Theta(0)$(缩放正交初始化（scaled orthogonal initialization）是一种初始化神经网络权重的方法，它结合了正交初始化和缩放因子。正交初始化是一种特殊的初始化方法，它确保初始权重矩阵是正交矩阵，而缩放因子则用于控制初始权重的规模。理论依据<strong>正交初始化的优点</strong>：<strong>避免梯度消失和爆炸</strong>：正交初始化在多层神经网络中具有保持梯度范数的性质，从而可以在一定程度上避免梯度消失和梯度爆炸的问题。这是因为正交矩阵的特性使得在前向传播和反向传播过程中，信号能更稳定地传递。<strong>更好的信号传播</strong>：正交矩阵可以确保输入信号在每一层中不失真地传播，从而有助于训练深层网络。<strong>缩放因子的作用</strong>：<strong>控制初始权重的规模</strong>：缩放因子用于调整初始权重的规模，以适应不同的网络结构和激活函数。适当的缩放因子可以进一步帮助稳定训练过程。):</p>
+<p><img src="../images/2024714/1102.png" alt=""></p>
+<p>对于每个权重矩阵，梯度下降迭代可以写成（这里引入了权重衰减参数）：</p>
+<p><img src="../images/2024714/1103.png" alt=""></p>
+<h4 id="主要理论"><a href="#主要理论" class="headerlink" title="主要理论"></a>主要理论</h4><p>文章证明学习仅发生在权重矩阵的不变低维子空间之内。其维数取决于$rank(\Phi)$</p>
+<p><strong>Theorem 2.1</strong>.令$\mathbf{W}_l(t)$满足初始化方程3和更新方程4，假设$\Phi\in \mathbb{R}^{d\times d}$的秩最多为$r$,令$m:=d-2r&gt;0$。于是存在正交矩阵$(\mathbf{U}_l)_{l=1}^L \subset \mathcal{O}^{d\times d}$和$(\mathbf{V}_l)_{l=1}^L \subset \mathcal{O}^{d\times d}$(仅取决于$\Theta(0)、\Phi$)对于$l\in [L-1]$满足$\mathbf{V}_{l+1}=\mathbf{U}_{l}$，并且$\mathbf{W}_l(t)$满足分解：</p>
+<p><img src="../images/2024714/1104.png" alt=""></p>
+<p>其中$\widetilde{\mathbf{W}}_l\in \mathbb{R}^{2r\times 2r}$满足$\widetilde{\mathbf{W}}_l(0)=\epsilon_l \mathbf{I}_{2r}$,并且：<br><img src="../images/2024714/1105.png" alt=""></p>
+<ul>
+<li><p>权重矩阵的 SVD 动力学：分解5与SVD分解密切相关。具体令$U_l=[U_{l,1}\ U_{l,2}]$,$V_l=[V_{l,1}\ V_{l,2}]$,满足：</p>
+<p><img src="../images/2024714/1106.png" alt=""></p>
+<p>令$\widetilde{W}_l(t)=\widetilde{U}_l(t)\widetilde{\Sigma}_l(t)\widetilde{V}_l^{T}(t)$为SVD分解，其中:</p>
+<p><img src="../images/2024714/1107.png" alt=""></p>
+<p>公式5可以写成：</p>
+<p><img src="../images/2024714/1108.png" alt=""></p>
+<p><img src="../images/2024714/1109.png" alt=""></p>
+</li>
+</ul>
+<p><img src="../images/2024714/1110.png" alt=""></p>
+<ul>
+<li><strong>Low-rank bias</strong>:每个权重矩阵的GD轨迹保持或趋向于秩至多为2r的解</li>
+<li><strong>Comparison to prior arts</strong>：与一些类似工作的不同</li>
+</ul>
+<h4 id="过度参数化因式分解的压缩"><a href="#过度参数化因式分解的压缩" class="headerlink" title="过度参数化因式分解的压缩"></a>过度参数化因式分解的压缩</h4><p>根据定理 2.1 ，可以在极少的参数上运行 GD，以实现与原始（全宽）分解几乎相同的端到端轨迹：</p>
+<p><img src="../images/2024714/1111.png" alt=""></p>
+<p><strong>构造等价的压缩分解</strong>：从定理2.1 文章观察到：</p>
+<p><img src="../images/2024714/1112.png" alt=""></p>
+<p>当使用小的初始化时（$(\epsilon)_{l=1}^{L}$），因此可以表示为：</p>
+<p><img src="../images/2024714/1113.png" alt=""></p>
+<p><strong>构建$(U_l,V_l)$</strong>:之前解释了$(U_l,V_l)$的存在，文章设计了一种方案来构建$(U_l,V_l)$（详细的构造方法参考原文）</p>
+<p><strong>优化、复杂性和近似误差。</strong>现在，可以通过梯度下降来求解公式9。这样需要优化的参数量更少，并且实现了与全参数相同的压缩轨迹。见图4.并且推导了误差：</p>
+<p><img src="../images/2024714/1114.png" alt=""></p>
+<h3 id="Application-I-Deep-Matrix-Completion"><a href="#Application-I-Deep-Matrix-Completion" class="headerlink" title="Application I: Deep Matrix Completion"></a>Application I: Deep Matrix Completion</h3><p>可以将文章的方法从普通矩阵分解推广到解决低秩矩阵补全的问题通过深度矩阵分解。给定一个真实值$\Phi\in \mathbb{R}^{d \times d}$，它的rank为$r^*≪d$，目标是从掩码$\Omega \in \{0,1\}^{d\times d}$的少量观测中恢复真实值.最小化目标：</p>
+<p><img src="../images/2024714/1115.png" alt=""></p>
+<p>其中$f(\Theta)$是公式1中的深度矩阵分解。</p>
+<p>文章发现，深度也就是分解的层数可以减轻过拟合。宽度增加可以提高收敛性，迭代加速收敛</p>
+<h4 id="Compression-for-deep-matrix-completion"><a href="#Compression-for-deep-matrix-completion" class="headerlink" title="Compression for deep matrix completion."></a>Compression for deep matrix completion.</h4><p>可以将10转化为：</p>
+<p><img src="../images/2024714/1116.png" alt=""></p>
+<h3 id="Application-II-Model-Fine-tuning"><a href="#Application-II-Model-Fine-tuning" class="headerlink" title="Application II: Model Fine-tuning"></a>Application II: Model Fine-tuning</h3><p>提出deep Lora微调方法，在有限样本范围内始终由于普通lora。</p>
+<h4 id="Deep-Low-Rank-Adaptation-Deep-LoRA-："><a href="#Deep-Low-Rank-Adaptation-Deep-LoRA-：" class="headerlink" title="Deep Low-Rank Adaptation (Deep LoRA)："></a>Deep Low-Rank Adaptation (Deep LoRA)：</h4><p><img src="../images/2024714/1117.png" alt=""></p>
+<h2 id="方法-10"><a href="#方法-10" class="headerlink" title="方法"></a>方法</h2><h1 id="12"><a href="#12" class="headerlink" title="12"></a>12</h1><h2 id="简介-10"><a href="#简介-10" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -867,7 +1021,7 @@
 </tr>
 <tr>
 <td>发表时间</td>
-<td>2024</td>
+<td>2021</td>
 </tr>
 <tr>
 <td>代码</td>
@@ -879,7 +1033,44 @@
 </tbody>
 </table>
 </div>
-<h1 id="13"><a href="#13" class="headerlink" title="13"></a>13</h1><h2 id="简介-12"><a href="#简介-12" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
+<h2 id="摘要-11"><a href="#摘要-11" class="headerlink" title="摘要"></a>摘要</h2><p>Bert中的矩阵不是低秩的，规范的矩阵分解无法找到有效的近似。文章观察到每层的学习表示位于低维空间中，基于这个观察，文章提出了DRONE（数据感知低秩压缩），这是一种可证明的最优低秩权重分解方法。</p>
+<p>在本文中，我们提出了一种新颖的低秩近似算法来压缩权重矩阵，即使它们不是低秩的。主要思想是利用数据分布。在 NLP 应用中，潜在特征（表示从自然句子中提取的一些信息）通常位于内在维度较低的子空间中。因此，在大多数矩阵向量乘积中，即使权重矩阵不是低秩的，输入向量也位于低维子空间中，从而允许在性能下降最小的情况下进行降维。</p>
+<h2 id="方法-11"><a href="#方法-11" class="headerlink" title="方法"></a>方法</h2><p>模型线性层可以描述为：</p>
+<p><img src="../images/2024714/1201.png" alt=""></p>
+<p>这里$W\in \mathbb{R}^{d_2 \times d_1}$，$b\in \mathbb{R}^{d_2}$。$x\in \mathbb{R}^{d_1}$是token的潜在表示，$h\in \mathbb{R}^{d_2}$是输出。假设序列长度是$L$，所有的token 示$x_1,\cdots,x_L \in \mathbb{R}^{d_1}$将经过相同的操作，因此实际上整个$\mathbf{FF}$层可以通过矩阵乘积：</p>
+<p><img src="../images/2024714/1202.png" alt=""></p>
+<p>偏置项$b$将被广播到所有输入token中。事实上，一般有$L \ll max{d_1,d_2}$例如$L=128,d_2=3072$.</p>
+<p>可以将权重进行SVD分解来进行加速：</p>
+<p><img src="../images/2024714/1203.png" alt=""></p>
+<p>这里酉矩阵$U\in \mathbb{R}^{d_2\times d_2},V\in \mathbb{R}^{d_1\times d_1}$,对角矩阵$S\in \mathbb{R}^{d_2\times d_1}$.$U_{W,k}\in \mathbb{R}^{d_2\times k}$,$V_{W,k}\in \mathbb{R}^{d_1\times k}$是$k$阶近似矩阵：</p>
+<p><img src="../images/2024714/1204.png" alt=""></p>
+<p>然后方程1可以表示为：</p>
+<p><img src="../images/2024714/1205.png" alt=""></p>
+<p>但是bert模型权重并没有表现出低秩，因此权重分解不高效：</p>
+<p><img src="../images/2024714/1206.png" alt=""></p>
+<p>尽管模型中矩阵不是低秩的，但是文章提供了一个实例来表明，当数据分布位于较低内在空间时，低秩计算仍然存在：</p>
+<p><img src="../images/2024714/1207.png" alt=""></p>
+<p>这种情况下，$W$是一个满秩矩阵，因此不会有权重的无损低秩近似。输入数据位于二维子空间。因此可以构造一下计算：</p>
+<p><img src="../images/2024714/1208.png" alt=""></p>
+<p>给出一个rank-2矩阵$UV^T$，这里$Wx=UV^Tx$对于任何$x$都成立。这表明即使无法逼近$W$，也可以构造良好的低秩矩阵分解。</p>
+<h3 id="DRONE-DATA-AWARE-LOW-RANK-COMPRESSION"><a href="#DRONE-DATA-AWARE-LOW-RANK-COMPRESSION" class="headerlink" title="DRONE: DATA-AWARE LOW-RANK COMPRESSION"></a>DRONE: DATA-AWARE LOW-RANK COMPRESSION</h3><p>假设$FF$层的输入$x$遵循某种分布，文章希望最小化输出的近似误差。令$X$表示$\mathbb{R}^{d_1\times n}$的矩阵，其中$X$的列捕获 输入的经验分布。目标是找到一个投影矩阵$V_{X,k}\in \mathbb{R}^{d_1\times k}$和一个恢复矩阵$U_{X,k}\in \mathbb{R}^{d_2\times k}$，来近似输出结果：</p>
+<p><img src="../images/2024714/1209.png" alt=""></p>
+<p>其中$W_{X,k}=WU_{x,k}$，当$X$位于低维子空间时，可以通过对$X$进行PCA分解来找到这样一个对，将$X$投影到解释$X$大部分方法的子空间中。但是最好可以同时考虑$X$和$W$,可以通过以下优化问题来表达这个目标：</p>
+<p><img src="../images/2024714/1210.png" alt=""></p>
+<p>这里$M$时所需的rank-k变化，它可以在计算中最大限度保留矩阵乘法的结果。接下来证明上述优化问题存在一个封闭形式的最优解。</p>
+<p>假设$rank(W)=r,rank(X)=t$,可以将$W=U_WS_WV^T_W$和$X^T=U_XS_XV_X^T$写成：</p>
+<p><img src="../images/2024714/1212.png" alt=""></p>
+<p>这里的$W$和$X$都是无损SVD分解。$U_{W,r},V_{W,r},U_{X,t},V_{X,t}$表示对应的行空间和列空间。$\bar{U}_{W,r},\bar{V}_{W,r},\bar{U}_{X,t},\bar{V}_{X,t}$表示零空间。</p>
+<p><strong>定理1</strong>：假设$rank(W)=r,rank(X)=t$,则方程2的封闭解为：</p>
+<p><img src="../images/2024714/1213.png" alt=""></p>
+<p>其中$Z_k$是$Z=S_{W,r}V_{W,r}^TV_{X,t}S_{X,t}$的rank-k截断。可以写成$Z_k=U_{Z,k}V_{Z,k}^T$,因此原始计算可以写成：</p>
+<p><img src="../images/2024714/1214.png" alt=""></p>
+<p>可以将$W$替换成$U^<em>V^</em>$</p>
+<p><strong><u><em>正交矩阵的引入和移除不会改变矩阵的范数</em></u></strong></p>
+<h3 id="点积注意力的扩展"><a href="#点积注意力的扩展" class="headerlink" title="点积注意力的扩展"></a>点积注意力的扩展</h3><p>将方法扩展到注意力，注意力层计算可以描述为：</p>
+<p><img src="../images/2024714/1215.png" alt=""></p>
+<p><img src="../images/2024714/1216.png" alt=""></p>
+<h1 id="13"><a href="#13" class="headerlink" title="13"></a>13</h1><h2 id="简介-11"><a href="#简介-11" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -906,7 +1097,61 @@
 </tbody>
 </table>
 </div>
-<h1 id="14"><a href="#14" class="headerlink" title="14"></a>14</h1><h2 id="简介-13"><a href="#简介-13" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
+<h2 id="摘要-12"><a href="#摘要-12" class="headerlink" title="摘要"></a>摘要</h2><p>文章从多码本量化（MCQ）重新审视量化问题，结合加法量化。通过两项创新来实现量化</p>
+<ul>
+<li>对权重矩阵进行输入自适应的加性量化，这意味着量化过程会根据输入数据的不同而调整，从而更有效地压缩模型</li>
+<li>跨整个层块联合优化码本参数，这有助于在整个模型中保持一致性和高效性</li>
+</ul>
+<h2 id="相关技术"><a href="#相关技术" class="headerlink" title="相关技术"></a>相关技术</h2><p><strong>vector quantization</strong></p>
+<p><img src="../images/2024714/1301.png" alt=""></p>
+<p><strong>product quantization</strong></p>
+<p><img src="../images/2024714/1302.png" alt=""></p>
+<h2 id="AQLM-Additive-Quantization-for-LLMs"><a href="#AQLM-Additive-Quantization-for-LLMs" class="headerlink" title="AQLM: Additive Quantization for LLMs"></a>AQLM: Additive Quantization for LLMs</h2><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>对于具有$d_{in}$输入和$d_{out}$输出特征的线性层，给定其权重$\mathbf{W}\in \mathbb{R}^{d_{out}×d_{in}}$和一组校准数据输入$\mathbf{X}\in \mathbb{R}^{d_{in}×d_{n}}$，最小化：</p>
+<p><img src="../images/2024714/1303.png" alt=""></p>
+<p>接下来假设$\widehat{\mathbf{W}}$采用AQ量化，将权重分成$g$个连续元素的组（组大小是g），并将每组权重表示为从多个可学习码本$C_1,\cdots,C_m$选择的$M$个向量的总和，对于$B$位量化，每个码本包括$2^B$个向量。从每个码本中选择单个编码并将让他们相加来对权重进行编码。将这个选择表示为一个单热量向量$b_m$（一个值为1，其余为0），每个组的表示为：</p>
+<p><img src="../images/2024714/1304.png" alt=""></p>
+<p>与PTQ类似，不过每组使用了更复杂的编码，为了表示完整的权重，只需要连接：</p>
+<p><img src="../images/2024714/1305.png" alt=""></p>
+<p>这里$\oplus$表示串联，$b_ijm\in \mathbb{R}^{2^B}$表示第$i$个输出单元，第$j$组输入维度和第$m$个码本的单一热向量编码。可视化如下：</p>
+<p><img src="../images/2024714/1306.png" alt=""></p>
+<p>文章将学习码本$C_m \in \mathbb{R}^{g×2^B}$和编码$b\in\mathbb{R}^{d_{out}×d_{in/g}×M×2^B}$，所得方案使用$M\cdot B$位编码每组权重。目标函数变为：</p>
+<p><img src="../images/2024714/1307.png" alt=""></p>
+<p>方法：</p>
+<ol>
+<li><strong>初始化</strong>：首先，通过运行残差K-means算法来初始化两个关键变量：代码本（codebooks）$C$和代码（codes）$b$。</li>
+<li><strong>迭代优化</strong>：接着，通过交替更新代码和代码本来进行优化，直到损失函数不再改进，或者改进幅度小于指定的容差。</li>
+<li><strong>优化过程的特性</strong>：由于代码是离散的，而代码本是连续的，并且是在优化多个相互作用的层，因此这种方法分为三个阶段。</li>
+</ol>
+<h3 id="Phase-1-Beam-search-for-codes"><a href="#Phase-1-Beam-search-for-codes" class="headerlink" title="Phase 1: Beam search for codes"></a>Phase 1: Beam search for codes</h3><p>首先文章更新编码$b_{i,j,m}$来最小化目标公式3，类似于先前工作（见原文）,AQLM将目标函数重新表述为一个完全连接的离散MRF(马尔可夫随机场（Markov Random Field，简称MRF）是一种概率图模型，用于表示随机变量之间的依赖关系。MRF基于图论，其中节点代表随机变量，边代表变量之间的依赖关系。MRF的一个重要特性是马尔可夫性质，即一个变量的状态只与其相邻变量的状态有关，而与其他变量无关。)</p>
+<p>为了简化推导，首先考虑单个输出单元（$d_{out}=1$）和单个量化组（$g=d_{in}$）的特殊情况，来摆脱串联符号，重写目标公式为：</p>
+<p><img src="../images/2024714/1308.png" alt=""></p>
+<p>接下来考虑三个组成部分，首先注意$|\mathbf{W}\mathbf{X}|2^2$在$b$中是常数，可以忽略，第二个分量可以进一步扩展成点对积：</p>
+<p><img src="../images/2024714/1309.png" alt=""></p>
+<p><img src="../images/2024714/1310.png" alt=""></p>
+<p>可以将公式5重新写成：</p>
+<p><img src="../images/2024714/1311.png" alt=""></p>
+<p>因此可以提前计算出$XX^T\in \mathbb{R}^{d_{in}×d_{in}}$，文章定义：<img src="../images/2024714/1312.png" alt=""></p>
+<p>公式4可以写成：</p>
+<p><img src="../images/2024714/1313.png" alt=""></p>
+<p>最后，我们将该方程推广到多个输出单元 ($d_{out} &gt; 1$) 和量化组 。对于$d_{out} &gt; 1$，请注意，原始目标 (3) 相对于输出单位是可加的：因此，我们可以独立地将 (7) 应用于每个输出维度并对结果求和。为了支持多个输入组 ，我们可以将每个组视为一个单独的码本，其中只有活动组的代码不为零。因此，我们需要重复每个码本 $d_{in}/g$ 次，并根据活动组用零填充。</p>
+<p><strong>文章采用beam search方法来计算</strong></p>
+<h3 id="Phase-2-Codebook-update"><a href="#Phase-2-Codebook-update" class="headerlink" title="Phase 2: Codebook update"></a>Phase 2: Codebook update</h3><p>第二阶段寻找最佳码本，将$b$视为常熟，最小化目标三即变成了$C_m$的最小二乘问题，文章采用Adam来近似解决这个问题，目标为：</p>
+<p><img src="../images/2024714/1314.png" alt=""></p>
+<p>通过迭代（非随机）全批量梯度下降来优化这个目标。对于每个更新阶段，运行 100 Adam 步骤，学习率为 1e-4。然而发现最终结果对这些参数都不敏感：用较少的步数或学习率进行训练可以达到相同的损失，但需要更长的时间才能收敛。</p>
+<h3 id="Phase-3-Fine-tuning-for-intra-layer-cohesion"><a href="#Phase-3-Fine-tuning-for-intra-layer-cohesion" class="headerlink" title="Phase 3: Fine-tuning for intra-layer cohesion"></a>Phase 3: Fine-tuning for intra-layer cohesion</h3><p>文章选择一次微调一个transfomer块来减少内存。</p>
+<ol>
+<li><strong>使用PyTorch自动微分引擎</strong>：这里提到使用PyTorch的自动微分引擎来计算损失函数，即$||block(X_{block}) − Y_{block}||^2$。这里的$block(X_{block})$表示一个Transformer块对输入激活Xblock的处理结果，而Yblock是量化前记录的该块的输出激活。</li>
+<li><strong>训练参数</strong>：在优化过程中，训练的是码本（codebooks）Cm、尺度向量（scale vectors）s以及所有非量化的参数（如RMSNorm的尺度和偏置）。码本和尺度向量是量化过程中使用的参数，用于将连续的权重值映射到离散的量化值。</li>
+<li><strong>冻结代码</strong>：在训练过程中，保持量化后的代码（codes）bi,j,m不变，即不对其进行更新。</li>
+<li><strong>使用Adam优化器</strong>：为了最小化量化前后的输出差异（即均方误差MSE），使用Adam优化器来训练上述参数。Adam是一种常用的优化算法，能够自适应地调整学习率。</li>
+<li><strong>使用相同的校准数据</strong>：这个优化阶段使用与单个层量化相同的校准数据集。校准数据集通常是一小部分代表性的数据，用于在量化过程中调整模型参数。</li>
+</ol>
+<p>算法流程：</p>
+<p><img src="../images/2024714/1315.png" alt=""></p>
+<p><img src="../images/2024714/1316.png" alt=""></p>
+<h2 id="实验-7"><a href="#实验-7" class="headerlink" title="实验"></a>实验</h2><p>1-8A100</p>
+<p><img src="../images/2024714/1317.png" alt=""></p>
+<h1 id="14"><a href="#14" class="headerlink" title="14"></a>14</h1><h2 id="简介-12"><a href="#简介-12" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -933,7 +1178,7 @@
 </tbody>
 </table>
 </div>
-<h1 id="15"><a href="#15" class="headerlink" title="15"></a>15</h1><h2 id="简介-14"><a href="#简介-14" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
+<h1 id="15"><a href="#15" class="headerlink" title="15"></a>15</h1><h2 id="简介-13"><a href="#简介-13" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -960,7 +1205,7 @@
 </tbody>
 </table>
 </div>
-<h1 id="16"><a href="#16" class="headerlink" title="16"></a>16</h1><h2 id="简介-15"><a href="#简介-15" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
+<h1 id="16"><a href="#16" class="headerlink" title="16"></a>16</h1><h2 id="简介-14"><a href="#简介-14" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -987,7 +1232,7 @@
 </tbody>
 </table>
 </div>
-<h1 id="17"><a href="#17" class="headerlink" title="17"></a>17</h1><h2 id="简介-16"><a href="#简介-16" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
+<h1 id="17"><a href="#17" class="headerlink" title="17"></a>17</h1><h2 id="简介-15"><a href="#简介-15" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1014,7 +1259,7 @@
 </tbody>
 </table>
 </div>
-<h1 id="18"><a href="#18" class="headerlink" title="18"></a>18</h1><h2 id="简介-17"><a href="#简介-17" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
+<h1 id="18"><a href="#18" class="headerlink" title="18"></a>18</h1><h2 id="简介-16"><a href="#简介-16" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1041,9 +1286,9 @@
 </tbody>
 </table>
 </div>
-<h2 id="摘要-9"><a href="#摘要-9" class="headerlink" title="摘要"></a>摘要</h2><p>训练后量化在低位量化中失效，文章提出了一种无数据蒸馏方法，利用预训练模型产生的输出，保留了原始输出的分布。文章量化了权重激活和KV缓存。</p>
-<h2 id="方法-8"><a href="#方法-8" class="headerlink" title="方法"></a>方法</h2><p>概述：</p>
-<p><img src="/images/2024714/181.png" alt="图1"></p>
+<h2 id="摘要-13"><a href="#摘要-13" class="headerlink" title="摘要"></a>摘要</h2><p>训练后量化在低位量化中失效，文章提出了一种无数据蒸馏方法，利用预训练模型产生的输出，保留了原始输出的分布。文章量化了权重激活和KV缓存。</p>
+<h2 id="方法-12"><a href="#方法-12" class="headerlink" title="方法"></a>方法</h2><p>概述：</p>
+<p><img src="../images/2024714/181.png" alt="图1"></p>
 <p>量化感知训练存在的挑战：</p>
 <ul>
 <li>选择合适的微调数据很重要，微调数据太窄，或者与原始的预训练分布不同，可能会损害模型性能，</li>
@@ -1069,19 +1314,19 @@
 </li>
 </ol>
 <h3 id="Quantization-Aware-Training"><a href="#Quantization-Aware-Training" class="headerlink" title="Quantization-Aware Training"></a>Quantization-Aware Training</h3><h5 id="Preliminaries-1"><a href="#Preliminaries-1" class="headerlink" title="Preliminaries"></a>Preliminaries</h5><p>对于最小最大量化，公式可以表述为：</p>
-<p><img src="/images/2024714/182.png" alt=""></p>
+<p><img src="../images/2024714/182.png" alt=""></p>
 <p>对于对称量化：</p>
-<p><img src="/images/2024714/183.png" alt=""></p>
+<p><img src="../images/2024714/183.png" alt=""></p>
 <p>对于非对称量化：</p>
-<p><img src="/images/2024714/184.png" alt=""></p>
+<p><img src="../images/2024714/184.png" alt=""></p>
 <p>现在的工作一般采用剪切的量化：</p>
-<p><img src="/images/2024714/185.png" alt=""></p>
-<h5 id="Quantization-for-Large-Language-Models"><a href="#Quantization-for-Large-Language-Models" class="headerlink" title="Quantization for Large Language Models"></a>Quantization for Large Language Models</h5><p><img src="/images/2024714/186.png" alt="图2"></p>
+<p><img src="../images/2024714/185.png" alt=""></p>
+<h5 id="Quantization-for-Large-Language-Models"><a href="#Quantization-for-Large-Language-Models" class="headerlink" title="Quantization for Large Language Models"></a>Quantization for Large Language Models</h5><p><img src="../images/2024714/186.png" alt="图2"></p>
 <p>上图为量化的模型，由于权重和激活中存在显著的异常值，他们对量化精度有影响，在量化过程中修剪这些异常值会导致精度下降，因此文章选择保留这些异常值，而且文章发现激活权重大多是对称分布的，因此选择MinMax量化：</p>
-<p><img src="/images/2024714/187.png" alt=""></p>
+<p><img src="../images/2024714/187.png" alt=""></p>
 <p>为了确保高效的量化，文章采用per-token激活量化和per-channel权重量化。同时对KV缓存采用激活量化的类似方法</p>
 <p>文章使用交叉熵的蒸馏训练量化网络：</p>
-<p><img src="/images/2024714/188.png" alt=""></p>
+<p><img src="../images/2024714/188.png" alt=""></p>
 <p><em><u>QAT的关键思想是在模型训练过程中引入量化的操作，让模型“意识”到量化过程，并通过反向传播优化模型参数，以适应量化带来的影响。具体来说，QAT遵循以下步骤：</u></em></p>
 <ol>
 <li><em><u>模拟量化：在模型的前向传播过程中，将权重和激活值通过量化和反量化的过程，模拟量化在实际部署中的效果。这意味着，权重和激活值先被量化到低位宽的整数表示，然后再被反量化回浮点数，以供后续的计算使用。</u></em></li>
@@ -1094,9 +1339,9 @@
 <li><em><u>提高模型兼容性：QAT使模型适应了量化后的权重和激活值的分布，从而提高了模型在特定硬件上的兼容性和运行效率。</u></em></li>
 <li><em><u>灵活性和适应性：QAT允许开发者根据目标平台的特定需求，调整量化方案（如量化位宽、量化策略等），优化模型的性能。</u></em></li>
 </ol>
-<h2 id="实验-7"><a href="#实验-7" class="headerlink" title="实验"></a>实验</h2><p>All of our experiments are conducted using a single 8-gpu training node.</p>
-<p><img src="/images/2024714/189.png" alt=""></p>
-<h1 id="19"><a href="#19" class="headerlink" title="19"></a>19</h1><h2 id="简介-18"><a href="#简介-18" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
+<h2 id="实验-8"><a href="#实验-8" class="headerlink" title="实验"></a>实验</h2><p>All of our experiments are conducted using a single 8-gpu training node.</p>
+<p><img src="../images/2024714/189.png" alt=""></p>
+<h1 id="19"><a href="#19" class="headerlink" title="19"></a>19</h1><h2 id="简介-17"><a href="#简介-17" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1123,7 +1368,7 @@
 </tbody>
 </table>
 </div>
-<h1 id="20"><a href="#20" class="headerlink" title="20"></a>20</h1><h2 id="简介-19"><a href="#简介-19" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
+<h1 id="20"><a href="#20" class="headerlink" title="20"></a>20</h1><h2 id="简介-18"><a href="#简介-18" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1150,15 +1395,15 @@
 </tbody>
 </table>
 </div>
-<h2 id="摘要-10"><a href="#摘要-10" class="headerlink" title="摘要"></a>摘要</h2><p>一般的非均匀量化忽略了复杂的投影过程，这在硬件部署中会产生不可忽略的时间和开销，文章提出了非均匀到均匀量化N2UQ方法。通过学习灵活的不等距输入阈值来拟合底层分布，同时i将这些实值输入量化为等距输出水平。为了训练具有可学习输入阈值的量化网络，文章提出了G-STE。此外文章考虑保持熵的正则化，进一步减少权值量化中的信息损失。</p>
+<h2 id="摘要-14"><a href="#摘要-14" class="headerlink" title="摘要"></a>摘要</h2><p>一般的非均匀量化忽略了复杂的投影过程，这在硬件部署中会产生不可忽略的时间和开销，文章提出了非均匀到均匀量化N2UQ方法。通过学习灵活的不等距输入阈值来拟合底层分布，同时i将这些实值输入量化为等距输出水平。为了训练具有可学习输入阈值的量化网络，文章提出了G-STE。此外文章考虑保持熵的正则化，进一步减少权值量化中的信息损失。</p>
 <p>(a) 先前的非均匀量化函数以等距级别输出权重和激活，这需要将浮点级别映射到二进制数字的后处理，以获得量化的加速效果[1,13,50] 。 (b) 所提出的 N2UQ 学习输入阈值以提供更大的灵活性，同时输出统一的量化值，从而实现硬件友好的线性映射和高效的按位运算。棘手的梯度计算输入阈值通过提出的广义直通估计器（G-STE）来解决</p>
-<p><img src="/images/2024714/201.png" alt="图1"></p>
-<h2 id="方法-9"><a href="#方法-9" class="headerlink" title="方法"></a>方法</h2><h3 id="Preliminaries-2"><a href="#Preliminaries-2" class="headerlink" title="Preliminaries"></a>Preliminaries</h3><p>均匀量化实现矩阵乘法加速：</p>
-<p><img src="/images/2024714/202.png" alt=""></p>
+<p><img src="../images/2024714/201.png" alt="图1"></p>
+<h2 id="方法-13"><a href="#方法-13" class="headerlink" title="方法"></a>方法</h2><h3 id="Preliminaries-2"><a href="#Preliminaries-2" class="headerlink" title="Preliminaries"></a>Preliminaries</h3><p>均匀量化实现矩阵乘法加速：</p>
+<p><img src="../images/2024714/202.png" alt=""></p>
 <h3 id="Nonuniform-to-Uniform-Quantization"><a href="#Nonuniform-to-Uniform-Quantization" class="headerlink" title="Nonuniform-to-Uniform Quantization"></a>Nonuniform-to-Uniform Quantization</h3><ul>
 <li>量化网络加速的前提是量化后的权重和激活可以用二进制表示</li>
 </ul>
-<p><img src="/images/2024714/203.png" alt=""></p>
+<p><img src="../images/2024714/203.png" alt=""></p>
 <ol>
 <li><strong>均匀量化与非均匀量化</strong>：<ul>
 <li><strong>均匀量化</strong>：当激活$ a_q$和权重$ w_q$ 被均匀量化时，它们可以很容易地通过线性映射转换为二进制表示。这意味着每个量化级别之间的间隔是相等的。</li>
@@ -1181,52 +1426,52 @@
 </ol>
 <p>总结来说，这段话强调了量化器设计的一个关键点：即使输出是均匀量化的，输入的量化范围也可以是非均匀的。这表明量化器的设计具有一定的灵活性，可以根据具体需求来调整输入和输出的量化特性。</p>
 <h5 id="Forward-Pass-Threshold-Learning-Quantization"><a href="#Forward-Pass-Threshold-Learning-Quantization" class="headerlink" title="Forward Pass: Threshold Learning Quantization"></a>Forward Pass: Threshold Learning Quantization</h5><p>基于上述观察，文章开发了用于激活量化的非均匀到均匀量化器，其前向传递函数为：</p>
-<p><img src="/images/2024714/204.png" alt=""></p>
+<p><img src="../images/2024714/204.png" alt=""></p>
 <h5 id="Backward-Pass-Generalized-Straight-Through-Estimator-G-STE"><a href="#Backward-Pass-Generalized-Straight-Through-Estimator-G-STE" class="headerlink" title="Backward Pass: Generalized Straight-Through Estimator (G-STE)"></a>Backward Pass: Generalized Straight-Through Estimator (G-STE)</h5><p>反向传播的困难：</p>
 <ol>
 <li>上述公式对于输入$x_r$的倒数都是0</li>
 <li>关于阈值参数的梯度计算是难以处理的</li>
 </ol>
 <p>对于问题1，以前的量化工作采用直通估计器STE来近似量化函数的反向梯度：</p>
-<p><img src="/images/2024714/205.png" alt=""></p>
+<p><img src="../images/2024714/205.png" alt=""></p>
 <p>这个简单的近似函数非常适合均匀量化器。然而，STE 在量化器的输入和输出间隔中隐式强制执行等轴纵横比，因为它将量化函数视为向后传递中的恒等函数。这阻碍了量化器设计在固定输出电平的同时允许可学习的输入阈值。STE在均匀量化中效果良好，但它隐含地强制了输入和输出区间在量化函数中具有相同的轴向比例。因为在反向传播时，STE将量化函数视为恒等函数，这阻碍了量化器设计中允许学习输入阈值同时固定输出水平的能力。因此文章提出了广义直通估计器（原文推导）</p>
 <p><strong>引理1</strong>.在二值化中，前向确定性二值化函数的梯度近似的直通估计（STE）可以从随机二值化函数的期望中导出[19]。</p>
 <p>在随机二值化中，实值变量根据与-1和1的距离随机二值化：</p>
-<p><img src="/images/2024714/206.png" alt=""></p>
+<p><img src="../images/2024714/206.png" alt=""></p>
 <p>这里$\tilde{x}_{i,l}^{b}$表示随机的二元变量，为了更新$W_{ij,l}$，通过随机二值化函数计算预期梯度：</p>
-<p><img src="/images/2024714/207.png" alt=""></p>
+<p><img src="../images/2024714/207.png" alt=""></p>
 <p><em><u>推导</u></em>：</p>
-<p><img src="/images/2024714/209.png" alt=""></p>
+<p><img src="../images/2024714/209.png" alt=""></p>
 <p>这里$\mathbb{E}$,$\mathbb{E}_{\tilde{x}_{i,l}^{b}}$和$\mathbb{E}_{/\tilde{x}_{i,l}^{b}}$分别表示对整个网络，仅随机二元量化和除随机二元变量之外的期望，有：</p>
-<p><img src="/images/2024714/208.png" alt=""></p>
+<p><img src="../images/2024714/208.png" alt=""></p>
 <p>这里得到了二值化函数的估计，在阈值附件相同地传递梯度，在实值输入距离阈值太远时忽略梯度。而且，采用确定性二值化函数可以在等式1中设置概率阈值p=0.5来获得：</p>
-<p><img src="/images/2024714/210.png" alt=""></p>
+<p><img src="../images/2024714/210.png" alt=""></p>
 <p>为此，我们证明 STE 将随机二值化的期望编码为前向确定性二值化函数的后向近似。</p>
 <p><strong>引理 2</strong>. 量化函数$x^q$ 可以被视为具有不同阈值的二值化函数$x_b$的求和,如下图所示：</p>
-<p><img src="/images/2024714/211.png" alt=""></p>
-<p><img src="/images/2024714/212.png" alt=""></p>
+<p><img src="../images/2024714/211.png" alt=""></p>
+<p><img src="../images/2024714/212.png" alt=""></p>
 <p>从第一个量化段开始，将初始点表示为$s$，它的长度表示为$a_1$。遵循随机二值化的概念，在$[s,s+a_1]$范围内，真实值变量可以随机量化为0/1，概率与其到$s/(s+a_1)$的距离称正比（这里将$s=-1,a_1=2$带入，正好为公式4）：</p>
-<p><img src="/images/2024714/213.png" alt=""></p>
+<p><img src="../images/2024714/213.png" alt=""></p>
 <p>类似于公式6，该量化段的推导可以根据等式6的期望来计算：</p>
-<p><img src="/images/2024714/214.png" alt="公式9"></p>
+<p><img src="../images/2024714/214.png" alt="公式9"></p>
 <p>这样，阈值参数$a_1$对网络的影响很好的被编码在后向逼近公式9中，在前向传播中，不需要随机种子，而是采用确定性量化，将概率阈值设为0.5：</p>
-<p><img src="/images/2024714/215.png" alt=""></p>
+<p><img src="../images/2024714/215.png" alt=""></p>
 <p><strong>定理1</strong>:Generalized straight-through estimator:</p>
-<p><img src="/images/2024714/216.png" alt=""></p>
+<p><img src="../images/2024714/216.png" alt=""></p>
 <p>非均匀到均匀量化器的后向梯度近似函数:</p>
-<p><img src="/images/2024714/217.png" alt=""></p>
+<p><img src="../images/2024714/217.png" alt=""></p>
 <p>并且：</p>
-<p><img src="/images/2024714/218.png" alt=""></p>
+<p><img src="../images/2024714/218.png" alt=""></p>
 <h5 id="Entropy-Preserving-Weight-Regularization"><a href="#Entropy-Preserving-Weight-Regularization" class="headerlink" title="Entropy Preserving Weight Regularization"></a>Entropy Preserving Weight Regularization</h5><p>文章提出了权重正则化，鼓励量化权重具有更多的信息承载能力。一个重要的观察是，真实网络中的权重数量级小，但是量化后的权重通常会在$[-1,1]$范围内扩展，这种幅度上的不匹配将导致量化权重崩溃到接近于零的几个量化级别。如下图所示，导致信息损失：</p>
-<p><img src="/images/2024714/219.png" alt=""></p>
+<p><img src="../images/2024714/219.png" alt=""></p>
 <p>从信息论的角度来看，当权重包含更多熵时，可以保留更多信息，文章因此在量化器之前对真实权重进行正则化，来获得量化权重的最大熵：</p>
-<p><img src="/images/2024714/220.png" alt=""></p>
+<p><img src="../images/2024714/220.png" alt=""></p>
 <p>这里$p_i$时被量化到第$i$个量化级别的真实权重的比例，N是总的量化级别的数量。基于朗格朗日乘数：</p>
-<p><img src="/images/2024714/221.png" alt=""></p>
+<p><img src="../images/2024714/221.png" alt=""></p>
 <p>当实值权重被量化到多个量化级别的比例相等时，量化后的权重中的信息熵达到最大值。</p>
-<p><img src="/images/2024714/222.png" alt=""></p>
-<h2 id="实验-8"><a href="#实验-8" class="headerlink" title="实验"></a>实验</h2><p>卷积神经网络上的实验</p>
-<h1 id="21"><a href="#21" class="headerlink" title="21"></a>21</h1><h2 id="简介-20"><a href="#简介-20" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
+<p><img src="../images/2024714/222.png" alt=""></p>
+<h2 id="实验-9"><a href="#实验-9" class="headerlink" title="实验"></a>实验</h2><p>卷积神经网络上的实验</p>
+<h1 id="21-OMNIQUANT"><a href="#21-OMNIQUANT" class="headerlink" title="21 OMNIQUANT"></a>21 OMNIQUANT</h1><h2 id="简介-19"><a href="#简介-19" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1253,37 +1498,37 @@
 </tbody>
 </table>
 </div>
-<h2 id="摘要-11"><a href="#摘要-11" class="headerlink" title="摘要"></a>摘要</h2><p>训练后量化在低bit量化性能低，文章提出了OmniQuant，包括两个组件：</p>
+<h2 id="摘要-15"><a href="#摘要-15" class="headerlink" title="摘要"></a>摘要</h2><p>训练后量化在低bit量化性能低，文章提出了OmniQuant，包括两个组件：</p>
 <ul>
 <li>可学习权重裁剪（LWC）:通过优化裁剪阈值来调节权重极值</li>
 <li>可学习等效变换（LET）：将量化挑战从激活转移到权重来解决激活异常</li>
 </ul>
 <p>OmniQuant在逐块误差最小化的可微框架中运行，可以有效优化仅权重量化和权重激活量化的量化过程。</p>
-<h2 id="方法-10"><a href="#方法-10" class="headerlink" title="方法"></a>方法</h2><p>大语言模型量化的两个困难：</p>
+<h2 id="方法-14"><a href="#方法-14" class="headerlink" title="方法"></a>方法</h2><p>大语言模型量化的两个困难：</p>
 <ul>
 <li>异常channel的存在，导致激活很难量化，考虑到激活是平坦且均匀的，可以将激活量化难度转移到权重量化熵；</li>
 <li>权重的量化误差：可以以全精度保留这些权重</li>
 </ul>
 <p>文章提出可微分量化技术，学习量化参数。</p>
 <h3 id="BLOCK-WISE-QUANTIZATION-ERROR-MINIMIZATION"><a href="#BLOCK-WISE-QUANTIZATION-ERROR-MINIMIZATION" class="headerlink" title="BLOCK-WISE QUANTIZATION ERROR MINIMIZATION"></a>BLOCK-WISE QUANTIZATION ERROR MINIMIZATION</h3><p>之前基于梯度的PTQ量化方法误差应用到数十亿模型中，文章提出了逐块量化误差最小化的设计，目标为：</p>
-<p><img src="/images/2024714/2101.png" alt=""></p>
+<p><img src="../images/2024714/2101.png" alt=""></p>
 <p>这里$\mathcal{F}$表示transformer块的映射函数，$\Theta_{1,2}$分别是LWC和LET中的量化参数，逐块量化一个变压器的参数然后进入下一个。</p>
 <h3 id="LEARNABLE-WEIGHT-CLIPPING"><a href="#LEARNABLE-WEIGHT-CLIPPING" class="headerlink" title="LEARNABLE WEIGHT CLIPPING"></a>LEARNABLE WEIGHT CLIPPING</h3><p>传统方法中，剪切阈值是直接学习的，而在LWC中，剪切强度被视为一个可学习的参数，通过训练过程来优化。这意味着LWC方法可能会更加灵活，能够根据数据和任务的特性来自适应地调整剪切强度，以获得更好的性能：</p>
-<p><img src="/images/2024714/2102.png" alt=""></p>
+<p><img src="../images/2024714/2102.png" alt=""></p>
 <p>其中$\gamma \in[0,1]$和$\beta \in[0,1]$属于可学习系数。文章通过sigmoid函数实例化$\gamma$和$\beta $。且$\Theta_1 ={\gamma,\beta}$</p>
-<p><img src="/images/2024714/2103.png" alt=""></p>
+<p><img src="../images/2024714/2103.png" alt=""></p>
 <h3 id="LEARNABLE-EQUIVALENT-TRANSFORMATION"><a href="#LEARNABLE-EQUIVALENT-TRANSFORMATION" class="headerlink" title="LEARNABLE EQUIVALENT TRANSFORMATION"></a>LEARNABLE EQUIVALENT TRANSFORMATION</h3><p>一个线性层可以表示为：</p>
-<p><img src="/images/2024714/2104.png" alt=""></p>
+<p><img src="../images/2024714/2104.png" alt=""></p>
 <p>最后，对变换后的激活和权重进行量化，如下所示</p>
-<p><img src="/images/2024714/2105.png" alt=""></p>
+<p><img src="../images/2024714/2105.png" alt=""></p>
 <p>$Q_a$表示普通的MinMax量化，$Q_w$是具有LEC的MinMax量化。文章在 LLM 的所有线性层中都采用了这种等效变换，除了 FFN 的第二个线性层，如下图 所示。这可能是因为非线性层之后特征的高度稀疏性导致应用可学习的等效变换时梯度不稳定。</p>
-<p><img src="/images/2024714/2106.png" alt=""></p>
+<p><img src="../images/2024714/2106.png" alt=""></p>
 <p>除了线性层之外，注意力操作也占计算的很大一部分。此外，LLM 的自回归模式需要为每个令牌存储键值 (KV) 缓存，这会导致长序列需要大量内存。因此，文章还在权重激活量化设置中将 Q/K/V 矩阵量化为低位。具体来说，自注意力亲和力矩阵的可学习等效变换可以写为：</p>
-<p><img src="/images/2024714/2107.png" alt=""></p>
+<p><img src="../images/2024714/2107.png" alt=""></p>
 <p>$\Theta_2 ={\delta,s,s_a}$</p>
-<h2 id="实验-9"><a href="#实验-9" class="headerlink" title="实验"></a>实验</h2><p>Single A100-40G GPU，1-16h</p>
-<p><img src="/images/2024714/2108.png" alt=""></p>
-<h1 id="22"><a href="#22" class="headerlink" title="22"></a>22</h1><h2 id="简介-21"><a href="#简介-21" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
+<h2 id="实验-10"><a href="#实验-10" class="headerlink" title="实验"></a>实验</h2><p>Single A100-40G GPU，1-16h</p>
+<p><img src="../images/2024714/2108.png" alt=""></p>
+<h1 id="22"><a href="#22" class="headerlink" title="22"></a>22</h1><h2 id="简介-20"><a href="#简介-20" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1310,7 +1555,7 @@
 </tbody>
 </table>
 </div>
-<h1 id="23"><a href="#23" class="headerlink" title="23"></a>23</h1><h2 id="简介-22"><a href="#简介-22" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
+<h1 id="23"><a href="#23" class="headerlink" title="23"></a>23</h1><h2 id="简介-21"><a href="#简介-21" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1337,7 +1582,7 @@
 </tbody>
 </table>
 </div>
-<h1 id="摘要-12"><a href="#摘要-12" class="headerlink" title="摘要"></a>摘要</h1><p>文章引入一种新的量化与非相干处理（QuIP）方法其原理是，量化过程可以从非相干的权重和Hessian矩阵中获益。具体来说，这意味着权重的大小是均匀的，并且需要精确舍入的方向与坐标轴不对齐。</p>
+<h1 id="摘要-16"><a href="#摘要-16" class="headerlink" title="摘要"></a>摘要</h1><p>文章引入一种新的量化与非相干处理（QuIP）方法其原理是，量化过程可以从非相干的权重和Hessian矩阵中获益。具体来说，这意味着权重的大小是均匀的，并且需要精确舍入的方向与坐标轴不对齐。</p>
 <p>“非相干性”（incoherence）通常指的是两个或多个信号或向量在相位、方向或频率上的随机分布，它们之间没有固定的相位关系或对齐。在QuIP（Quantization with Incoherence Processing）的上下文中，权重的非相干性和海森矩阵的非相干性可以这样理解：</p>
 <ol>
 <li><strong>权重的非相干性</strong>：<ul>
@@ -1356,47 +1601,47 @@
 <li>自适应舍入过程：一个自适应舍入来最小化损失函数</li>
 <li>高效的预处理和后处理：通过随机正交矩阵的乘法确保权重和hessian不相干性</li>
 </ol>
-<h2 id="方法-11"><a href="#方法-11" class="headerlink" title="方法"></a>方法</h2><p>问题定义：</p>
+<h2 id="方法-15"><a href="#方法-15" class="headerlink" title="方法"></a>方法</h2><p>问题定义：</p>
 <p>遵循现有得到训练后量化方法，最小化代理目标来舍入权重：</p>
-<p><img src="/images/2024714/2301.png" alt="公式1"></p>
+<p><img src="../images/2024714/2301.png" alt="公式1"></p>
 <p>这个公式中$W$是权重矩阵，这样可是让量化在神经元之间并行运算。</p>
 <h3 id="LDLQ-An-Optimal-Adaptive-Rounding-Method"><a href="#LDLQ-An-Optimal-Adaptive-Rounding-Method" class="headerlink" title="LDLQ: An Optimal Adaptive Rounding Method"></a>LDLQ: An Optimal Adaptive Rounding Method</h3><p>文章定义一系列自适应舍入策略来优化目标方程，针对$k=1,2,\dots,n$次迭代，对权重进行更新：</p>
-<p><img src="/images/2024714/2302.png" alt=""></p>
+<p><img src="../images/2024714/2302.png" alt=""></p>
 <p>这里$W_k$表示第$k$列，$W_{1:(k-1)}$表示前$k-1$列，$\mathcal{Q}$表示最近舍入或者标准无偏舍入到整数（即$\mathbf{E}[\mathcal{Q}(z)=z]$），$a_k\in \R^{k-1}$是一些向量序列。</p>
 <p>该设计方案一次对一列进行四舍五入，每一步中，都会添加一个校正项，最终可以表示为：</p>
-<p><img src="/images/2024714/2303.png" alt=""></p>
+<p><img src="../images/2024714/2303.png" alt=""></p>
 <p>这里$U$是严格的上三角矩阵，它的列向量是$a_k$，$\mathcal{Q}$按元素进行操作。</p>
 <p>令$\eta$表示$\mathcal{Q}$的量化误差：</p>
-<p><img src="/images/2024714/2304.png" alt=""></p>
+<p><img src="../images/2024714/2304.png" alt=""></p>
 <p>可以推导出（把公式（2）带入即可）：</p>
-<p><img src="/images/2024714/2305.png" alt=""></p>
+<p><img src="../images/2024714/2305.png" alt=""></p>
 <p>可以将目标公式重写为：</p>
-<p><img src="/images/2024714/2306.png" alt=""></p>
+<p><img src="../images/2024714/2306.png" alt=""></p>
 <p><strong>The LDLQ Method</strong> 如何选择$U$？如果选择对$H$进行LDL分解：</p>
-<p><img src="/images/2024714/2307.png" alt=""></p>
-<p><img src="/images/2024714/2308.png" alt=""></p>
+<p><img src="../images/2024714/2307.png" alt=""></p>
+<p><img src="../images/2024714/2308.png" alt=""></p>
 <h3 id="Deriving-the-Optimality-of-the-LDLQ-Adaptive-Rounding-Procedure"><a href="#Deriving-the-Optimality-of-the-LDLQ-Adaptive-Rounding-Procedure" class="headerlink" title="Deriving the Optimality of the LDLQ Adaptive Rounding Procedure"></a>Deriving the Optimality of the LDLQ Adaptive Rounding Procedure</h3><p>文章推理了LDLQ的最优性，考虑代理损失的最差和平均情况，令$\mathcal{A}$表示舍入方法，令$\mathcal{A}(W,H)$表示量化的结果，则最坏和平均代理损失定义为：</p>
-<p><img src="/images/2024714/2309.png" alt=""></p>
+<p><img src="../images/2024714/2309.png" alt=""></p>
 <p><strong>定理1</strong>LDLQ在舍入方法中是最差和平均情况下最优的：</p>
-<p><img src="/images/2024714/2310.png" alt=""></p>
+<p><img src="../images/2024714/2310.png" alt=""></p>
 <p>对于非QuIP框架的，设置$U=0$则比较$tr(D)$和$tr(H)$实验发现：</p>
-<p><img src="/images/2024714/2311.png" alt=""></p>
+<p><img src="../images/2024714/2311.png" alt=""></p>
 <h3 id="Incoherence-Optimality-with-a-Spectral-Bound"><a href="#Incoherence-Optimality-with-a-Spectral-Bound" class="headerlink" title="Incoherence: Optimality with a Spectral Bound"></a>Incoherence: Optimality with a Spectral Bound</h3><p>文章观察到H为低秩，是否可以使用H的频谱来限制LQLQ的行为，从而限制$tr(D)$</p>
-<p><img src="/images/2024714/2312.png" alt=""></p>
-<p><img src="/images/2024714/2313.png" alt=""></p>
+<p><img src="../images/2024714/2312.png" alt=""></p>
+<p><img src="../images/2024714/2313.png" alt=""></p>
 <p><strong>定理2</strong></p>
-<p><img src="/images/2024714/2314.png" alt=""></p>
+<p><img src="../images/2024714/2314.png" alt=""></p>
 <p>文章通过不相干处理来获得$tr(D)$的界限，该界限取决于H频谱。根据下列公式可以发现，H的秩k越小，LDLQ损失越小：</p>
-<p><img src="/images/2024714/2315.png" alt=""></p>
+<p><img src="../images/2024714/2315.png" alt=""></p>
 <h2 id="Quantization-With-Incoherence-Processing-Incoherence-Processing-Step"><a href="#Quantization-With-Incoherence-Processing-Incoherence-Processing-Step" class="headerlink" title="Quantization With Incoherence Processing: Incoherence Processing Step"></a>Quantization With Incoherence Processing: Incoherence Processing Step</h2><p>经过上述分析，不相干有利于降低精度，文章接下来预处理权重和hession矩阵，确保不相干属性。使对称矩阵不相干的一种直接方法是通过均匀随机正交矩阵将其共轭。令$U\in \R^{m×m}$,$V\in \R^{n×n}$通过随机正交乘法确保权重和海森矩阵不相干：</p>
-<p><img src="/images/2024714/2316.png" alt=""></p>
+<p><img src="../images/2024714/2316.png" alt=""></p>
 <p>注意这种变化没有改变目标函数的形式：</p>
-<p><img src="/images/2024714/2317.png" alt=""></p>
+<p><img src="../images/2024714/2317.png" alt=""></p>
 <h3 id="Incoherence-via-Efficient-Orthogonal-Multiplication"><a href="#Incoherence-via-Efficient-Orthogonal-Multiplication" class="headerlink" title="Incoherence via Efficient Orthogonal Multiplication"></a>Incoherence via Efficient Orthogonal Multiplication</h3><p>上述对于存储不会引入开销，但是如果对于推理则会产生额外的开销。文章将 $n$ 分解为两个近似相等的因子 $p$和 $q$，其中 $p$ 和 $q$都近似等于 $n$的平方根。然后设置 $U$ 为 $U_L$ 和 $U_R$的克罗内克积（Kronecker product），其中 $U_L$是从 $p \times p$正交矩阵中均匀采样的，$U_R$是从 $q \times q$正交矩阵中均匀采样的。通过将向量$x$重塑为一个$p \times q$的矩阵，可以完成$ x$与矩阵 $U$的乘法。左侧乘以 $U_L$，在右侧乘以 $U_R$的转置$ U^T_R$，然后再重塑回来。</p>
-<p><img src="/images/2024714/2318.png" alt=""></p>
-<h2 id="Additional-Heuristics"><a href="#Additional-Heuristics" class="headerlink" title="Additional Heuristics"></a>Additional Heuristics</h2><p><img src="/images/2024714/2319.png" alt=""></p>
-<h2 id="实验-10"><a href="#实验-10" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/2024714/2320.png" alt=""></p>
-<h1 id="24"><a href="#24" class="headerlink" title="24"></a>24</h1><h2 id="简介-23"><a href="#简介-23" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
+<p><img src="../images/2024714/2318.png" alt=""></p>
+<h2 id="Additional-Heuristics"><a href="#Additional-Heuristics" class="headerlink" title="Additional Heuristics"></a>Additional Heuristics</h2><p><img src="../images/2024714/2319.png" alt=""></p>
+<h2 id="实验-11"><a href="#实验-11" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/2024714/2320.png" alt=""></p>
+<h1 id="24"><a href="#24" class="headerlink" title="24"></a>24</h1><h2 id="简介-22"><a href="#简介-22" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1423,22 +1668,22 @@
 </tbody>
 </table>
 </div>
-<h2 id="摘要-13"><a href="#摘要-13" class="headerlink" title="摘要"></a>摘要</h2><p>为了提高量化精度，文章专注于权重的异常值。文章提出范围限制损失，通过在预训练期间从权重中删除异常值来构建低位量化。在训练期间提出了三种不同的损失作为辅助损失。文章指出：$L_{\infty}$损失和$Margin \ R^2$损失对于对称量化非常有效，而$Soft-Min-Max \ R^2$损失显示出更好的模型压缩性能 。</p>
-<h2 id="方法-12"><a href="#方法-12" class="headerlink" title="方法"></a>方法</h2><p><img src="/images/2024714/2405.png" alt=""></p>
+<h2 id="摘要-17"><a href="#摘要-17" class="headerlink" title="摘要"></a>摘要</h2><p>为了提高量化精度，文章专注于权重的异常值。文章提出范围限制损失，通过在预训练期间从权重中删除异常值来构建低位量化。在训练期间提出了三种不同的损失作为辅助损失。文章指出：$L_{\infty}$损失和$Margin \ R^2$损失对于对称量化非常有效，而$Soft-Min-Max \ R^2$损失显示出更好的模型压缩性能 。</p>
+<h2 id="方法-16"><a href="#方法-16" class="headerlink" title="方法"></a>方法</h2><p><img src="../images/2024714/2405.png" alt=""></p>
 <p>文章引入范围限制损失作为辅助损失，以减少每一层权重的范围，以获得更好的预训练模型来进一步的压缩或者量化。与传统的$L_1$或$L_2$正则化不同，Range Restriction Loss专门针对权重中的异常值（outliers），通过惩罚这些异常值来限制它们的范围。文章从$L_{\infty}$损失扩展到margin 损失，最后引入soft-min-max损失将$R^2$损失。</p>
 <p>$L_{\infty}\ R^2 \ \text{loss}$：该方法通过在训练过程中添加$L_{\infty}(W)$作为模型中每一层辅助损失，以迭代方式惩罚离群值：</p>
-<p><img src="/images/2024714/2401.png" alt=""></p>
+<p><img src="../images/2024714/2401.png" alt=""></p>
 <p>$\text{Margin} \ R^2 \ \text{loss}$：这是上面的扩展，文章对允许的权重范围定义了一个余量，任何超出此界限的权重都会受到处罚，文章还对边距的宽度进行处罚，来确保整体权重分布范围较小：</p>
-<p><img src="/images/2024714/2402.png" alt=""></p>
+<p><img src="../images/2024714/2402.png" alt=""></p>
 <p>$\text{Soft-min-max} \ R^2 \ \text{loss}$：这是不对称的损失，消除对全权重大小的约束并严格执行权重范围：</p>
-<p><img src="/images/2024714/2403.png" alt=""></p>
+<p><img src="../images/2024714/2403.png" alt=""></p>
 <p>其中温度$\alpha$是可学习参数。这种损失不仅会平滑地惩罚离群值，而且还会惩罚接近离群值的权重。</p>
 <p>各种损失的可视化如下：</p>
-<p><img src="/images/2024714/2404.png" alt=""></p>
-<h2 id="实验-11"><a href="#实验-11" class="headerlink" title="实验"></a>实验</h2><p>卷积神经网络</p>
+<p><img src="../images/2024714/2404.png" alt=""></p>
+<h2 id="实验-12"><a href="#实验-12" class="headerlink" title="实验"></a>实验</h2><p>卷积神经网络</p>
 <p>eight GPUs</p>
-<p><img src="/images/2024714/2406.png" alt=""></p>
-<h1 id="25"><a href="#25" class="headerlink" title="25"></a>25</h1><h2 id="简介-24"><a href="#简介-24" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
+<p><img src="../images/2024714/2406.png" alt=""></p>
+<h1 id="25"><a href="#25" class="headerlink" title="25"></a>25</h1><h2 id="简介-23"><a href="#简介-23" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1465,7 +1710,7 @@
 </tbody>
 </table>
 </div>
-<h1 id="26"><a href="#26" class="headerlink" title="26"></a>26</h1><h2 id="简介-25"><a href="#简介-25" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
+<h1 id="26"><a href="#26" class="headerlink" title="26"></a>26</h1><h2 id="简介-24"><a href="#简介-24" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1492,30 +1737,30 @@
 </tbody>
 </table>
 </div>
-<h2 id="摘要-14"><a href="#摘要-14" class="headerlink" title="摘要"></a>摘要</h2><p>现有的模型量化无法同时保持精度和硬件效率，文章提出了SmoothQuant，这是一种无需训练、保持精度的训练后量化方法，SmoothQuant通过使用数字等效转化将量化难度从激活转移到权重来离线平滑激活异常值。</p>
-<h2 id="方法-13"><a href="#方法-13" class="headerlink" title="方法"></a>方法</h2><p>量化将高精度值映射到离散级别。文章研究整数均匀量化，量化过程可以表示为（这里是per-tensor量化）：</p>
-<p><img src="/images/2024714/2601.png" alt=""></p>
+<h2 id="摘要-18"><a href="#摘要-18" class="headerlink" title="摘要"></a>摘要</h2><p>现有的模型量化无法同时保持精度和硬件效率，文章提出了SmoothQuant，这是一种无需训练、保持精度的训练后量化方法，SmoothQuant通过使用数字等效转化将量化难度从激活转移到权重来离线平滑激活异常值。</p>
+<h2 id="方法-17"><a href="#方法-17" class="headerlink" title="方法"></a>方法</h2><p>量化将高精度值映射到离散级别。文章研究整数均匀量化，量化过程可以表示为（这里是per-tensor量化）：</p>
+<p><img src="../images/2024714/2601.png" alt=""></p>
 <p>通过校准样本的激活来离线计算$\Delta$即静态量化，使用激活的运行时统计来获得$\Delta$即动态量化，并且量化具有不同的粒度级别：</p>
-<p><img src="/images/2024714/2602.png" alt=""></p>
+<p><img src="../images/2024714/2602.png" alt=""></p>
 <h3 id="Review-of-Quantization-Difficulty"><a href="#Review-of-Quantization-Difficulty" class="headerlink" title="Review of Quantization Difficulty"></a>Review of Quantization Difficulty</h3><ol>
 <li>激活比权重更难量化：激活存在异常值</li>
 <li>异常值使激活量化变得困难</li>
 <li>异常值持续存在于固定渠道中：异常值出现在一小部分channel中，会持续出现在所有token中，但是跨token的给定通道的幅度之间方差很小。由于异常值存在，而在每个channel的方差很小，如果对激活执行怕per-channel量化，则量化误差很小，下表为模拟结果：</li>
 </ol>
-<p><img src="/images/2024714/2604.png" alt=""></p>
-<p><img src="/images/2024714/2603.png" alt=""></p>
+<p><img src="../images/2024714/2604.png" alt=""></p>
+<p><img src="../images/2024714/2603.png" alt=""></p>
 <p>但是per-channel量化无法很好的映射到硬件加速的GEMM内核。在这些内核中，只能沿着矩阵乘法的外部维度（激活的token维度，权重的输出通道）进行缩放。</p>
-<p><img src="/images/2024714/2605.png" alt=""></p>
+<p><img src="../images/2024714/2605.png" alt=""></p>
 <p>可以用下式表示：</p>
-<p><img src="/images/2024714/2606.png" alt=""></p>
+<p><img src="../images/2024714/2606.png" alt=""></p>
 <h3 id="SmoothQuant"><a href="#SmoothQuant" class="headerlink" title="SmoothQuant"></a>SmoothQuant</h3><p>对激活进行缩放，对权重进行反缩放：</p>
-<p><img src="/images/2024714/2607.png" alt=""></p>
+<p><img src="../images/2024714/2607.png" alt=""></p>
 <p>选择缩放因子，平滑权重量化和激活量化：</p>
-<p><img src="/images/2024714/2608.png" alt=""></p>
+<p><img src="../images/2024714/2608.png" alt=""></p>
 <p>应用位置：</p>
-<p><img src="/images/2024714/2609.png" alt=""></p>
-<h2 id="实验-12"><a href="#实验-12" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/2024714/2610.png" alt=""></p>
-<h1 id="27"><a href="#27" class="headerlink" title="27"></a>27</h1><h2 id="简介-26"><a href="#简介-26" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
+<p><img src="../images/2024714/2609.png" alt=""></p>
+<h2 id="实验-13"><a href="#实验-13" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/2024714/2610.png" alt=""></p>
+<h1 id="27"><a href="#27" class="headerlink" title="27"></a>27</h1><h2 id="简介-25"><a href="#简介-25" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1542,11 +1787,11 @@
 </tbody>
 </table>
 </div>
-<h2 id="摘要-15"><a href="#摘要-15" class="headerlink" title="摘要"></a>摘要</h2><p>文章提出系数量化表示（SpQR）：识别和隔离导致特别大的量化误差的离群权重，并高精度存储他们，同时将其他权重压缩为3-4位。</p>
-<h2 id="方法-14"><a href="#方法-14" class="headerlink" title="方法"></a>方法</h2><p><img src="/images/2024714/2701.png" alt=""></p>
+<h2 id="摘要-19"><a href="#摘要-19" class="headerlink" title="摘要"></a>摘要</h2><p>文章提出系数量化表示（SpQR）：识别和隔离导致特别大的量化误差的离群权重，并高精度存储他们，同时将其他权重压缩为3-4位。</p>
+<h2 id="方法-18"><a href="#方法-18" class="headerlink" title="方法"></a>方法</h2><p><img src="../images/2024714/2701.png" alt=""></p>
 <p>识别异常值，对非常异常值采用小分组量化，对小分组量化的系数采用二次量化。</p>
-<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p><img src="/images/2024714/2702.png" alt=""></p>
-<h1 id="28"><a href="#28" class="headerlink" title="28"></a>28</h1><h2 id="简介-27"><a href="#简介-27" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p><img src="../images/2024714/2702.png" alt=""></p>
+<h1 id="28"><a href="#28" class="headerlink" title="28"></a>28</h1><h2 id="简介-26"><a href="#简介-26" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1573,13 +1818,13 @@
 </tbody>
 </table>
 </div>
-<h2 id="摘要-16"><a href="#摘要-16" class="headerlink" title="摘要"></a>摘要</h2><p>将权重变为三元组{-1，0，1}，从头开始训练语言模型</p>
-<h2 id="方法-15"><a href="#方法-15" class="headerlink" title="方法"></a>方法</h2><p>文章基于BitNet方法，相对于BitNet修改有：</p>
+<h2 id="摘要-20"><a href="#摘要-20" class="headerlink" title="摘要"></a>摘要</h2><p>将权重变为三元组{-1，0，1}，从头开始训练语言模型</p>
+<h2 id="方法-19"><a href="#方法-19" class="headerlink" title="方法"></a>方法</h2><p>文章基于BitNet方法，相对于BitNet修改有：</p>
 <h3 id="Quantization-Function"><a href="#Quantization-Function" class="headerlink" title="Quantization Function"></a>Quantization Function</h3><p>为了将权重限制在-1,0,1。文章采用$absmean$量化方法，首先按权重矩阵的平均绝对值缩放，然后将每个值舍入为{-1，0，1}中最接近的整数：</p>
-<p><img src="/images/2024714/2801.png" alt=""></p>
+<p><img src="../images/2024714/2801.png" alt=""></p>
 <p>激活量化函数遵循Bitnet中的相同实现，文章没有将非线性函数之前的激活缩放到范围$[0,Q_b]$，而是每个激活都缩放为$[-Q_b,Q_b]$，以消除零点量化</p>
-<h2 id="实验-13"><a href="#实验-13" class="headerlink" title="实验"></a>实验</h2><p><img src="/images/2024714/2802.png" alt=""></p>
-<h1 id="29"><a href="#29" class="headerlink" title="29"></a>29</h1><h2 id="简介-28"><a href="#简介-28" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
+<h2 id="实验-14"><a href="#实验-14" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/2024714/2802.png" alt=""></p>
+<h1 id="29"><a href="#29" class="headerlink" title="29"></a>29</h1><h2 id="简介-27"><a href="#简介-27" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1606,6 +1851,98 @@
 </tbody>
 </table>
 </div>
+<h2 id="摘要-21"><a href="#摘要-21" class="headerlink" title="摘要"></a>摘要</h2><p>文章提出一个量化新视角，将量化视为添加到LLM权重和激活的扰动，研究结果解释了扰动特性于LLM性能之间的多种联系，分析了均匀量化失败的原因，并提出了一个简单的非均匀量化方法。</p>
+<h2 id="方法-20"><a href="#方法-20" class="headerlink" title="方法"></a>方法</h2><h3 id="Uniform-Quantization"><a href="#Uniform-Quantization" class="headerlink" title="Uniform Quantization"></a>Uniform Quantization</h3><p>量化和反量化可表示为：</p>
+<p><img src="../images/2024714/2901.png" alt=""></p>
+<p>均匀量化的量化函数定义为对缩放输入进行最近舍入操作：</p>
+<p><img src="../images/2024714/2902.png" alt=""></p>
+<p>相关的反量化为：</p>
+<p><img src="../images/2024714/2903.png" alt=""></p>
+<h3 id="The-Lens-of-Perturbation"><a href="#The-Lens-of-Perturbation" class="headerlink" title="The Lens of Perturbation"></a>The Lens of Perturbation</h3><p>反量化后的值于初始值存在偏差可以表示为：</p>
+<p><img src="../images/2024714/2904.png" alt=""></p>
+<h3 id="The-Choice-of-the-Scale-Factor"><a href="#The-Choice-of-the-Scale-Factor" class="headerlink" title="The Choice of the Scale Factor"></a>The Choice of the Scale Factor</h3><p>文章分析了比例因子如何影响均匀量化，并分析了扰动强度和比例因子之间的粗略关系：</p>
+<p><img src="../images/2024714/2905.png" alt=""></p>
+<p><img src="../images/2024714/2906.png" alt=""></p>
+<p>通过扰动透镜，得到以下观察结果：（1）扰动强度与尺度因子正相关（上图所示，尺度因子越大，扰动强度越大）； (2) 由于间隔均匀，扰动的大小不依赖于被量化的值的大小。</p>
+<h3 id="Looking-into-LLM-Quantization-through-the-Lens-of-Perturbation"><a href="#Looking-into-LLM-Quantization-through-the-Lens-of-Perturbation" class="headerlink" title="Looking into LLM Quantization through the Lens of Perturbation"></a>Looking into LLM Quantization through the Lens of Perturbation</h3><p>文章研究各种类型的扰动之间的关系和对性能下降的影响，目标是确定那种类型的扰动更适合量化。</p>
+<h5 id="What-Kind-of-Perturbation-Is-More-Quantization-Friendly"><a href="#What-Kind-of-Perturbation-Is-More-Quantization-Friendly" class="headerlink" title="What Kind of Perturbation Is More Quantization-Friendly?"></a>What Kind of Perturbation Is More Quantization-Friendly?</h5><p>文章手动构造扰动，而不是量化引起的自然扰动，这件简单方便：</p>
+<ul>
+<li>扰动的分布</li>
+<li>扰动的大小</li>
+</ul>
+<p>人工产生三个类型的扰动：</p>
+<ul>
+<li>高斯扰动：$\Delta_{G} \sim\mathcal{N}({\mu,\sigma^2})$</li>
+<li>均匀扰动：$\Delta_{U}\sim\mathcal{U}({-c,c})$</li>
+<li>Rademacher 扰动：$\Delta_R \sim \mathcal{R}$:具有恒定的大小但随机的符号</li>
+</ul>
+<p>这里考虑扰动的大小：</p>
+<ul>
+<li>正相关扰动：与扰动幅度正相关，权重越高，扰动越大</li>
+<li>负相关扰动</li>
+</ul>
+<p>为了模拟W8A8量化，在实验中向权重和激活添加扰动，将每个量化的扰动控制为$L2$正则化相同</p>
+<p>观察结果扰动的结果如下图 所示。扰动会导致性能出现不可忽略的下降，无论扰动或主干模型的属性如何。不同型号系列的性能下降程度各不相同。就 BLOOM 模型系列而言，人工扰动表现出与标准均匀量化相似的性能，而 LLAMA 模型的性能却显着下降。这种对比凸显了不同LLM模式家族的独特特征，值得进一步研究。关于我们的主要目标是在扰动特性和性能退化之间建立联系，我们有了一个有趣的发现。我们发现采样分布对性能影响很小，因为我们测试的所有三个分布都表现出相当的性能。另一方面，扰动的大小起着至关重要的作用。具体来说，正相关扰动 ΔM+（值越大，扰动越大）在所有模型上表现出优于所有扰动的显着优势，而负相关扰动 ΔM+（值越小，扰动越大）几乎完全破坏性能。这种现象使我们得到了一个重要的发现：LLM 激活和权重的值越大，对扰动的鲁棒性越强，而值越小，对扰动的影响越敏感。</p>
+<p><img src="../images/2024714/2907.png" alt=""></p>
+<h5 id="Clipping-as-a-Special-Perturbation"><a href="#Clipping-as-a-Special-Perturbation" class="headerlink" title="Clipping as a Special Perturbation"></a>Clipping as a Special Perturbation</h5><p>文章讨论由裁剪引起的扰动：裁剪扰动$\Delta_C$:超过阈值的大值被剪切到阈值，将阈值设置为：$\mu_X+k\cdot \sigma_X $。下图说明了裁剪对性能的影响，裁剪对模型的影响更大</p>
+<h3 id="Improving-LLM-Quantization"><a href="#Improving-LLM-Quantization" class="headerlink" title="Improving LLM Quantization"></a>Improving LLM Quantization</h3><p>出发点：张量中较小的值应该受到较小的扰动，而较大的值可以处理更大的扰动，并且应该限制扰动的大小并避免剪切。</p>
+<p>文章目标是确保张量中较小的值受到较小的扰动，而较大的值承受更多的扰动。通过在量化之前应用非线性变换来实现这一点，该变换会放大零附近的较小值并缩小较大值。该方法很简单：在量化之前执行非线性变换，并在量化之后将其反变换回来，如下图 所示。为简单起见，选择 f (x) = $x^{1/3}$ 作为非线性变换，因为它有效地放大了接近零的值并缩小较大的值。</p>
+<p><img src="../images/2024714/2908.png" alt=""></p>
+<h1 id="30-BiLLM"><a href="#30-BiLLM" class="headerlink" title="30 BiLLM"></a>30 BiLLM</h1><h2 id="简介-28"><a href="#简介-28" class="headerlink" title="简介"></a>简介</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>BiLLM: Pushing the Limit of Post-Training Quantization for LLMs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>期刊</td>
+<td></td>
+</tr>
+<tr>
+<td>发表时间</td>
+<td></td>
+</tr>
+<tr>
+<td>代码</td>
+<td></td>
+</tr>
+<tr>
+<td>技术</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="摘要-22"><a href="#摘要-22" class="headerlink" title="摘要"></a>摘要</h2><p>文章提出BiLLM，为预训练llm量身定做的开创性的1位训练后量化方法。基于llm权值分布，首先对显著权值进行识别和结构选择，通过有效的二值残差逼近策略使压缩损失最小化。考虑到非显著权值的钟形分布，文章提出了一种最优分割搜索，准确对其进行分组和二值化</p>
+<h2 id="方法-21"><a href="#方法-21" class="headerlink" title="方法"></a>方法</h2><p><img src="../images/2024714/3001.png" alt=""></p>
+<p><strong>网络二值化</strong>：</p>
+<p><img src="../images/2024714/3002.png" alt=""></p>
+<p>一般采用channel缩放，因此$\alpha \in \mathbb{R}^n$。</p>
+<h3 id="Salient-Weight-Binarization-for-LLMs"><a href="#Salient-Weight-Binarization-for-LLMs" class="headerlink" title="Salient Weight Binarization for LLMs"></a>Salient Weight Binarization for LLMs</h3><p>计算每个参数的重要性：</p>
+<p><img src="../images/2024714/3003.png" alt=""></p>
+<p>大部分重要权值在某些特定行或列，因此文章通过对权值每列分割来确定显著性。</p>
+<p>二值化目标函数：</p>
+<p><img src="../images/2024714/3004.png" alt=""></p>
+<p>这里$\mathbf{B}\in \{-1,+1\}^{n\times k}$，$k$表示被选择的列的数目。$\alpha$和$\mathbf{B}$可以通过$\alpha=\frac{|\mathbf{W}|_}{n\times k}$；$\mathbf{B}=\text{sign}(\mathbf{W})$，然后优化的目标为：</p>
+<p><img src="../images/2024714/3005.png" alt=""></p>
+<h5 id="Binary-Residual-Approximation"><a href="#Binary-Residual-Approximation" class="headerlink" title="Binary Residual Approximation"></a>Binary Residual Approximation</h5><p>对于敏感权值，文章采用残差二值化来逼近：</p>
+<p><img src="../images/2024714/3006.png" alt=""></p>
+<p>于是得到近似值：</p>
+<p><img src="../images/2024714/3007.png" alt=""></p>
+<h5 id="Bell-shaped-Distribution-Splitting-for-Binarization"><a href="#Bell-shaped-Distribution-Splitting-for-Binarization" class="headerlink" title="Bell-shaped Distribution Splitting for Binarization"></a>Bell-shaped Distribution Splitting for Binarization</h5><p>非显著权值保持钟形分布：</p>
+<p><img src="../images/2024714/3008.png" alt=""></p>
+<p>设置阈值，将权重分为稀疏区域和集中区域，分别对集中区域和稀疏区域进行二值化，则均方误差定义为：</p>
+<p><img src="../images/2024714/3009.png" alt=""></p>
+<p>断点将非显著权重分成两部分，得到新的量化误差：</p>
+<p><img src="../images/2024714/3010.png" alt=""></p>
+<p>并有：</p>
+<p><img src="../images/2024714/3011.png" alt=""></p>
+<p>问题函数仅与p有关，寻找最优的p的目标函数可以定义为：</p>
+<p><img src="../images/2024714/3012.png" alt=""></p>
+<p>文章采用GPTQ来补偿量化误差，可能会改变权重分布，因此文章采用百分位搜索方法来根据公式13进行搜索</p>
+<h2 id="实验-15"><a href="#实验-15" class="headerlink" title="实验"></a>实验</h2><p><img src="../images/2024714/3013.png" alt=""></p>
 
                 
             </div>
@@ -1717,30 +2054,29 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2024/07/14/2024714/">
+                <a href="/2024/10/20/Clustering/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="模型压缩总结2">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="LoraPrune">
                         
-                        <span class="card-title">模型压缩总结2</span>
+                        <span class="card-title">LoraPrune</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            总结近期的文章
+                            谱聚类
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-07-14
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-10-20
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1753,12 +2089,11 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9/">
-                        <span class="chip bg-color">模型压缩</span>
+                    <a href="/tags/%E8%B0%B1%E8%81%9A%E7%B1%BB/">
+                        <span class="chip bg-color">谱聚类</span>
                     </a>
                     
                 </div>
@@ -1901,7 +2236,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2023-2024</span>
+                <span id="year">2023-2025</span>
             
             <a href="/about" target="_blank">gaohaotian</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
